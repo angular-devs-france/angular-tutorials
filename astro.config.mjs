@@ -13,7 +13,8 @@ export default defineConfig({
       src: './src/assets/logo.png'
     },
     components: {
-      Head: './src/components/Head.astro'
+      Head: './src/components/Head.astro',
+      MarkdownContent: "./src/components/MarkdownContent.astro"
     },
     favicon: '/favicon.ico',
     social: {
