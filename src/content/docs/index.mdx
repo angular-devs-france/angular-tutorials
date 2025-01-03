@@ -1,190 +1,66 @@
 ---
-title: Welcome to Learn Angular
-description: Discover Angular in multiple interactive ways!
+title: Welcome to Angular Tutorials
+description: Discover old and new kind of Angular tutorials
 template: splash
 hero:
   title: |
-    <span class="!text-7xl block md:inline" style="font-family: Brush Script MT">Learn</span>
-    <span
-      class="font-black text-transparent !text-6xl
-        bg-clip-text bg-gradient-to-br
-        from-[#3B5772] to-[#1E2B42]
-        dark:from-[#D9E2CC] dark:to-[#517589]"
-    >
-      ANGULAR
+    <span class="!text-7xl block md:inline">
+      ANGULAR TUTORIALS
     </span>
-  tagline: <span class="!text-4xl">Discover Angular in multiple interactive ways and sharpen your skills!<span>
-  image:
-    file: ../../assets/logo.png
   actions:
+    - text: Introduction Course
+      link: /practical-course/introduction
+      icon: right-arrow
+      variant: primary
     - text: Introduction Course
       link: /practical-course/introduction
       icon: right-arrow
       variant: primary
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
-import oldAngularLogo from '../../assets/angular-logo-old.png';
-import angularLogo from '../../assets/angular-logo.png';
-import upcomingCourses from '../../assets/upcoming-courses.png';
-
-<section class="flex flex-col md:flex-row gap-8">
-    <div class="max-w-96">
-        <h2 className="!text-[#D9A21B] !text-2xl">
-            Courses
-            <span class="text-sm rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">Upcoming</span>
-        </h2>
-        <h3 class="!text-5xl !font-bold !leading-tight">Learn from scratch complete interactive <span class="bg-[#D9A21B] text-black">Angular</span> courses!</h3>
-    </div>
-
-    <ul class="flex flex-col gap-6 list-none p-12 pt-0 md:pt-12">
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col !m-0">
-                <span class="font-bold">1 step at a time</span>
-                <span>Short chapters</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Expressive snippets</span>
-                <span>Complete and highlighted snippets to guide you</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Quiz</span>
-                <span>Assert your skills on each step of your journey!</span>
-            </span>
-        </li>
-    </ul>
-</section>
+import { Icon } from "@astrojs/starlight/components";
+import { Image } from "astro:assets";
+import oldAngularLogo from "../../assets/angular-logo-old.png";
+import angularLogo from "../../assets/angular-logo.png";
 
 <ul class="flex flex-col md:flex-row md:items-stretch items-center gap-12 list-none !p-0 md:!mt-16">
-    <li class="flex flex-col justify-start items-center gap-4 p-6 max-w-80 !m-0 w-full">
-        <Image src={oldAngularLogo} alt="Legacy Angular" height={200} width={200} />
-        <h4 class="text-center !mt-0">Legacy Angular introduction course</h4>
-        <span class="rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">Free</span>
-        <p class="text-center flex-1">Crafted for people learning Angular to <span class="font-bold">onboard on professionals projects</span> using v14 or below</p>
-        <a class="!bg-zinc-300 !text-black font-bold px-4 py-2 rounded-xl uppercase no-underline" href="foo">Upcoming</a>
-    </li>
-    <hr style="border: 1px solid gray !important " class="!h-0 md:!h-60 !w-60 md:!w-0" />
-    <li class="flex flex-col justify-start items-center gap-4 p-6 max-w-80 !m-0 w-full">
-        <Image src={angularLogo} alt="Legacy Angular" height={200} width={200} />
-        <h4 class="text-center !mt-0">Modern Angular introduction course</h4>
-        <span class="rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">Free</span>
-        <p class="text-center flex-1">Discover Angular with <span class="font-bold">latest released</span> features. Maintained to keep you up to date!</p>
-        <a class="!bg-zinc-300 !text-black font-bold px-4 py-2 rounded-xl uppercase no-underline" href="foo">Upcoming</a>
-    </li>
-    <hr style="border: 1px solid gray !important " class="!h-0 md:!h-60 !w-60 md:!w-0" />
-    <li class="flex flex-col justify-start items-center gap-4 p-6 max-w-80 !m-0 w-full">
-        <Image src={upcomingCourses} alt="Legacy Angular" height={200} width={200} />
-        <h4 class="text-center !mt-0">More upcoming...</h4>
-        <p class="text-center flex-1"></p>
-    </li>
+  <li class="flex flex-col justify-start items-center gap-4 p-6 max-w-80 !m-0 w-full">
+    <Image src={oldAngularLogo} alt="Legacy Angular" height={200} width={200} />
+    <h4 class="text-center !mt-0">Legacy Angular introduction course</h4>
+    <span class="rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">
+      Free
+    </span>
+    <p class="text-center flex-1">
+      Crafted for people learning Angular to{" "}
+      <span class="font-bold">onboard on professionals projects</span> using v14
+      or below
+    </p>
+    <a
+      class="!bg-zinc-300 !text-black font-bold px-4 py-2 rounded-xl uppercase no-underline"
+      href="foo"
+    >
+      Upcoming
+    </a>
+  </li>
+  <hr
+    style="border: 1px solid gray !important "
+    class="!h-0 md:!h-60 !w-60 md:!w-0"
+  />
+  <li class="flex flex-col justify-start items-center gap-4 p-6 max-w-80 !m-0 w-full">
+    <Image src={angularLogo} alt="Legacy Angular" height={200} width={200} />
+    <h4 class="text-center !mt-0">Modern Angular introduction course</h4>
+    <span class="rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">
+      Free
+    </span>
+    <p class="text-center flex-1">
+      Discover Angular with <span class="font-bold">latest released</span>{" "}
+      features. Maintained to keep you up to date!
+    </p>
+    <a
+      class="!bg-zinc-300 !text-black font-bold px-4 py-2 rounded-xl uppercase no-underline"
+      href="foo"
+    >
+      Upcoming
+    </a>
+  </li>
 </ul>
-
-<section class="flex flex-col md:flex-row gap-8 !mt-20">
-    <div class="max-w-96">
-        <h2 className="!text-[#D9A21B] !text-2xl">
-            Quiz
-            <span class="text-sm rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">Upcoming</span>
-        </h2>
-        <h3 class="!text-5xl !font-bold !leading-tight">Assert your Angular knowledge with a curated list of <span class="bg-[#D9A21B] text-black">100+</span> questions</h3>
-    </div>
-
-    <ul class="flex flex-col gap-6 list-none p-12 pt-0 md:pt-12">
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col !m-0">
-                <span class="font-bold">Beginner - Intermediate - Expert</span>
-                <span>3 levels to improve your Angular skills</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Random order</span>
-                <span>Review whenever you want</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Quiz</span>
-                <span>Assert your skills on each step of your journey!</span>
-            </span>
-        </li>
-    </ul>
-</section>
-
-<section class="flex flex-col md:flex-row gap-8 !mt-20">
-    <div class="max-w-96">
-        <h2 className="!text-[#D9A21B] !text-2xl">
-            Blog
-            <span class="text-sm rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">Upcoming</span>
-        </h2>
-        <h3 class="!text-5xl !font-bold !leading-tight">Learn from <span class="bg-[#D9A21B] text-black">short-paced</span> Angular blog posts</h3>
-    </div>
-
-    <ul class="flex flex-col gap-6 list-none p-12 pt-0 md:pt-12">
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col !m-0">
-                <span class="font-bold">Beginner - Intermediate - Expert</span>
-                <span>3 levels to improve your Angular skills</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Random order</span>
-                <span>Review whenever you want</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Quiz</span>
-                <span>Assert your skills on each step of your journey!</span>
-            </span>
-        </li>
-    </ul>
-</section>
-
-<section class="flex flex-col md:flex-row gap-8 !mt-20">
-    <div class="max-w-96">
-        <h2 className="!text-[#D9A21B] !text-2xl">
-            Debug Quest
-            <span class="text-sm rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">Upcoming</span>
-        </h2>
-        <h3 class="!text-5xl !font-bold !leading-tight">Sharpen your skills by <span class="bg-[#D9A21B] text-black">debugging</span> common Angular errors.</h3>
-    </div>
-
-    <ul class="flex flex-col gap-6 list-none p-12 pt-0 md:pt-12">
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col !m-0">
-                <span class="font-bold">Beginner - Intermediate - Expert</span>
-                <span>3 levels to improve your Angular skills</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Random order</span>
-                <span>Review whenever you want</span>
-            </span>
-        </li>
-        <li class="flex items-start gap-4">
-            <Icon name="star" color="goldenrod" size="2rem" />
-            <span class="flex flex-col flex-1 !m-0">
-                <span class="font-bold">Quiz</span>
-                <span>Assert your skills on each step of your journey!</span>
-            </span>
-        </li>
-    </ul>
-</section>
