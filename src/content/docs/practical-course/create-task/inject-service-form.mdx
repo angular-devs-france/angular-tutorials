@@ -1,70 +1,76 @@
 ---
-title: Injectez le service dans le composant de formulaire
-description: Découvrez comment injecter un service dans votre composant de formulaire dans une application Angular.
+title: Inject the service into the form component
+description: Learn how to inject a service into your form component in an Angular application.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Utilisez TaskService pour créer une tâche', description: 'Créez une nouvelle tâche avec le composant TaskFormComponent en utilisant le service TaskService.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Use TaskService to create a task",
+      description:
+        "Create a new task with the TaskFormComponent using the TaskService.",
+    },
+  ]}
+/>
 
-## Injectez le TaskService dans le TaskFormComponent
+## Inject TaskService into TaskFormComponent
 
-La première étape est d'injecter le service dans votre composant.
+The first step is to inject the service into your component.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-form.component.ts`.
+1. Modify the file `src/app/task-form.component.ts`.
 
-    ```typescript ins={"1. Importez TaskService": 3-4} ins={"2. Injectez TaskService dans le constructeur de la classe": 17-18} ins={"3. Appelez la fonction addTask de TaskService": 20-23}
-    // task-form.component.ts
-    import { Component } from '@angular/core';
+   ```typescript ins={"1. Import TaskService": 3-4} ins={"2. Inject TaskService in the class constructor": 17-18} ins={"3. Call the addTask function from TaskService": 20-23}
+   // task-form.component.ts
+   import { Component } from "@angular/core";
 
-    import { TaskService } from '../task.service';
+   import { TaskService } from "../task.service";
 
-    @Component({
-        selector: 'app-task-form',
-        templateUrl: './task-form.component.html',
-        styleUrls: ['./task-form.component.css']
-    })
-    export class TaskFormComponent {
-        task = {
-            title: '',
-            description: ''
-        };
+   @Component({
+     selector: "app-task-form",
+     templateUrl: "./task-form.component.html",
+     styleUrls: ["./task-form.component.css"],
+   })
+   export class TaskFormComponent {
+     task = {
+       title: "",
+       description: "",
+     };
 
+     constructor(private taskService: TaskService) {}
 
-        constructor(private taskService: TaskService) { }
-
-
-        submit() {
-            this.taskService.addTask(this.task);
-        }
-    }
-    ```
+     submit() {
+       this.taskService.addTask(this.task);
+     }
+   }
+   ```
 
 </Steps>
 
-La classe **TaskFormComponent** utilise désormais **TaskService** pour ajouter une nouvelle tâche à la liste.
+The **TaskFormComponent** class now uses **TaskService** to add a new task to the list.
 
-## Testons-le
+## Let's test it
 
 <Steps>
 
-1. Retournez dans votre navigateur
-2. Cliquez sur le lien `Ajouter une nouvelle tâche`
-3. Saisissez un titre et une description dans le formulaire
-4. Cliquez sur le bouton `Créer une tâche`
-5. Cliquez sur le lien `Liste des tâches`
+1. Go back to your browser
+2. Click on the `Add new task` link
+3. Enter a title and description in the form
+4. Click the `Create task` button
+5. Click on the `Task list` link
 
 </Steps>
 
-Vous devriez voir la nouvelle tâche dans la liste.
+You should see the new task in the list.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you've learned
 
-Vous avez appris à utiliser **TaskService** une fois de plus ! Cette fois-ci pour déclencher la fonction **addTask** afin d'ajouter une nouvelle tâche à la liste des tâches. Bien joué ! 🤩
+You've learned to use **TaskService** once again! This time to trigger the **addTask** function to add a new task to the task list. Well done! 🤩

@@ -1,67 +1,74 @@
 ---
-title: Ajoutez une tâche via le service
-description: Découvrez comment ajouter une tâche avec le service `TaskService` dans votre application Angular.
+title: Add a task via the service
+description: Learn how to add a task using the `TaskService` in your Angular application.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Créez une fonction dans `TaskService`', description: 'Créez une méthode qui ajoute une nouvelle tâche au `TaskService` en fonction de l\'objet de tâche passé en paramètre.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Create a function in `TaskService`",
+      description:
+        "Create a method that adds a new task to the `TaskService` based on the task object passed as a parameter.",
+    },
+  ]}
+/>
 
-## Concevez une méthode pour ajouter une tâche
+## Design a method to add a task
 
-Le **TaskService** sera responsable de la gestion de la liste des tâches comme prévu.
-Créez une fonction pour ajouter une tâche à la liste.
+The **TaskService** will be responsible for managing the task list as planned.
+Create a function to add a task to the list.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task.service.ts`.
+1. Modify the file `src/app/task.service.ts`.
 
-    ```typescript ins={"importer le type TaskForm": 4-5} ins={"Ajoutez la fonction addTask": 26-32}
-    // task.service.ts
-    import { Injectable } from '@angular/core';
-    import { Task } from './models/task.model';
+   ```typescript ins={"import TaskForm type": 4-5} ins={"Add the addTask function": 26-32}
+   // task.service.ts
+   import { Injectable } from "@angular/core";
+   import { Task } from "./models/task.model";
 
-    import { TaskForm } from './models/task.model';
+   import { TaskForm } from "./models/task.model";
 
-    @Injectable({
-      providedIn: 'root'
-    })
-    export class TaskService {
-        tasks: Task[] = [
-                    {
-                        id: uuid(),
-                        title: 'Tâche 1',
-                        description: 'Description de la tâche 1',
-                        createdAt: new Date()
-                    },
-                    {
-                        id: uuid(),
-                        title: 'Tâche 2',
-                        description: 'Description de la tâche 2',
-                        createdAt: new Date()
-                    }
-                ];
+   @Injectable({
+     providedIn: "root",
+   })
+   export class TaskService {
+     tasks: Task[] = [
+       {
+         id: uuid(),
+         title: "Task 1",
+         description: "Description of task 1",
+         createdAt: new Date(),
+       },
+       {
+         id: uuid(),
+         title: "Task 2",
+         description: "Description of task 2",
+         createdAt: new Date(),
+       },
+     ];
 
-
-        addTask(task: TaskForm): void {
-            this.tasks.push({
-                ...task,
-                id: uuid(),
-                createdAt: new Date()
-            });
-        }
-    }
-    ```
+     addTask(task: TaskForm): void {
+       this.tasks.push({
+         ...task,
+         id: uuid(),
+         createdAt: new Date(),
+       });
+     }
+   }
+   ```
 
 </Steps>
 
-Cette nouvelle fonction sera appelée depuis votre composant **TaskFormComponent** pour ajouter une nouvelle tâche à la liste.
+This new function will be called from your **TaskFormComponent** component to add a new task to the list.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Vous avez créé une fonction dans le service **TaskService** pour isoler la logique d'ajout de tâche.
+You have created a function in the **TaskService** service to isolate the task addition logic.

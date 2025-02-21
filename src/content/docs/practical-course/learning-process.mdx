@@ -1,46 +1,67 @@
 ---
-title: Processus d'apprentissage
-description: Comprenez la structure d'apprentissage de ce cours pratique.
+title: Learning Process
+description: Understand the learning structure of this practical course.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../components/learning-objective.astro";
 
-## La structure du cours
+## Course Structure
 
-Le cours est divisé en plusieurs chapitres. Chacun se concentrant sur une fonctionnalité spécifique de l'application.
-Le cours est axé sur les fonctionnalités plutôt que sur la technologie.
+The course is divided into several chapters, each focusing on a specific application feature.
+The course is feature-driven rather than technology-driven.
 
-Les fonctionnalités Angular seront introduites selon les besoins. 
+Angular features will be introduced as needed.
 
-### Chapitres
+### Chapters
 
-- <a href="/fr/practical-course/task-listing/display-overview" target="_blank">Créez une liste de tâches</a>
-- <a href="/fr/practical-course/create-task/create-task-overview" target="_blank">Ajoutez une tâche</a>
-- <a href="/fr/practical-course/update-task/update-overview" target="_blank">Mettre à jour une tâche</a>
-- <a href="/fr/practical-course/delete-task/delete-overview" target="_blank">Supprimez une tâche</a>
-- <a href="/fr/practical-course/api-server/api-overview" target="_blank">Communiquer avec une API</a>
+- <a href="/fr/practical-course/task-listing/display-overview" target="_blank">
+    Create a task list
+  </a>
+- <a
+    href="/fr/practical-course/create-task/create-task-overview"
+    target="_blank"
+  >
+    Add a task
+  </a>
+- <a href="/fr/practical-course/update-task/update-overview" target="_blank">
+    Update a task
+  </a>
+- <a href="/fr/practical-course/delete-task/delete-overview" target="_blank">
+    Delete a task
+  </a>
+- <a href="/fr/practical-course/api-server/api-overview" target="_blank">
+    Communicate with an API
+  </a>
 
-### Leçons
+### Lessons
 
-Chaque chapitre est divisé en plusieurs leçons. Chaque leçon est une petite action à accomplir.
-Chaque leçon est introduite avec un objectif d'apprentissage et une description du résultat attendu.
+Each chapter is divided into several lessons. Each lesson is a small action to accomplish.
+Each lesson is introduced with a learning objective and a description of the expected outcome.
 
-#### Objectifs clés des chapitres
+#### Chapter Key Objectives
 
-Les objectifs clés de la leçon sont les principaux points à retenir de cette étape.
-Ils sont mis en évidence pour vous aider à vous concentrer sur les points principaux, par exemple :
+The lesson's key objectives are the main points to remember from this step.
+They are highlighted to help you focus on the main points, for example:
 
-<Objective class="drop-shadow-xl" objectives={[
-    {mainTitle: 'Objectifs de ce chapitre', title: 'Déclenchez la navigation avec le routing', description: 'Découvrez comment déclencher une navigation via le routing d\'une application Angular.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Trigger navigation with routing",
+      description:
+        "Learn how to trigger navigation via routing in an Angular application.",
+    },
+  ]}
+/>
 
 #### Instructions
 
-Après une brève explication sur les aspects techniques, une leçon vous fournira un ensemble d'instructions pour mettre à jour le code, par exemple :
+After a brief explanation of the technical aspects, a lesson will provide you with a set of instructions to update the code, for example:
 
 <Steps>
-1. Créez le modèle **Task** dans le dossier `src/app/models`.
+1. Create the **Task** model in the `src/app/models` folder.
 
     ```typescript
     // src/app/models/task.model.ts
@@ -52,34 +73,47 @@ Après une brève explication sur les aspects techniques, une leçon vous fourni
     }
     ```
 
-2. Créez un nouveau composant nommé **TaskFormComponent**.
-</Steps>
+2. Create a new component named **TaskFormComponent**.
+   </Steps>
 
 #### Terminal
 
-Certaines leçons vous demanderont d'exécuter des commandes dans le terminal.
+Some lessons will ask you to run commands in the terminal.
 
-Dans Visual Studio Code, vous pouvez ouvrir un terminal en cliquant sur le menu `Terminal` et en sélectionnant `Nouveau terminal`.
+In Visual Studio Code, you can open a terminal by clicking on the `Terminal` menu and selecting `New Terminal`.
 
-#### Extraits de code
+#### Code Snippets
 
-La plupart des leçons contiennent des extraits de code comme exemple pour vous aider à accomplir l'action.
-Le contenu du cours utilise un style spécifique pour mettre en évidence les modifications à apporter au code, par exemple :
+Most lessons contain code snippets as examples to help you accomplish the action.
+The course content uses a specific style to highlight code changes, for example:
 
-```html ins={"Ajoutez la liaison d'événement pour créer la tâche": 8-9} ins="(click)="createTask()""
+```html ins={"Add the event binding to create the task": 8-9} ins="(click)="createTask()""
 // task-form.component.html
 <form>
-    <label for="title" class="form-label">Titre:</label>
-    <input type="text" id="title" name="title" class="form-control" [(ngModel)]="task.title"/>
+  <label for="title" class="form-label">Title:</label>
+  <input
+    type="text"
+    id="title"
+    name="title"
+    class="form-control"
+    [(ngModel)]="task.title"
+  />
 
-    <label for="description" class="form-label">Description:</label>
-    <textarea id="description" name="description" class="form-control" [(ngModel)]="task.description"></textarea>
+  <label for="description" class="form-label">Description:</label>
+  <textarea
+    id="description"
+    name="description"
+    class="form-control"
+    [(ngModel)]="task.description"
+  ></textarea>
 
-    <button type="submit" class="btn btn-primary" (click)="createTask()">Créer la tâche</button>
- </form>
+  <button type="submit" class="btn btn-primary" (click)="createTask()">
+    Create Task
+  </button>
+</form>
 ```
 
-#### Apprendre encore plus: vers l'infini et au-delà ! 🚀
+#### Learn More: To Infinity and Beyond! 🚀
 
-Certaines leçons contiennent une section « En savoir plus » pour vous aider à approfondir le sujet.
-Vous n'avez pas besoin de lire la section « En savoir plus » pour terminer le cours, mais cela peut vous aider à mieux comprendre le sujet.
+Some lessons contain a "Learn More" section to help you dive deeper into the topic.
+You don't need to read the "Learn More" section to complete the course, but it can help you better understand the topic.

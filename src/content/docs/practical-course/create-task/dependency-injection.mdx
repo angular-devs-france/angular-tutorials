@@ -1,73 +1,84 @@
 ---
-title: Injection de dépendances
-description: Découvrez comment utiliser l'injection de dépendances dans une application Angular.
+title: Dependency Injection
+description: Learn how to use dependency injection in an Angular application.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Injectez TaskService', description: 'Découvrez comment injecter le TaskService dans la classe TaskListComponent.'},
-{title: 'Obtenez la référence de la liste des tâches', description: 'Découvrez comment obtenir la référence de la liste des tâches à partir du TaskService.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Inject TaskService",
+      description:
+        "Learn how to inject TaskService into the TaskListComponent class.",
+    },
+    {
+      title: "Get the tasks list reference",
+      description:
+        "Learn how to get the tasks list reference from TaskService.",
+    },
+  ]}
+/>
 
-## Supprimez la liste des tâches du TaskListComponent
+## Remove the tasks list from TaskListComponent
 
-La classe **TaskListComponent** utilise toujours sa propre liste de tâches.
-Vous avez besoin qu'il utilise la liste du service à la place. La première étape consiste à supprimer la liste des tâches de la classe **TaskListComponent**.
+The **TaskListComponent** class is still using its own tasks list.
+You need it to use the service's list instead. The first step is to remove the tasks list from the **TaskListComponent** class.
 
 :::caution
-Au fur et à mesure que vous supprimez cette liste, l'application cessera de fonctionner (elle ne compilera plus) pendant un moment car le Template HTML attend toujours une variable **tasks**.
+As you remove this list, the application will stop working (it won't compile) temporarily because the HTML Template is still expecting a **tasks** variable.
 :::
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Supprimez la variable **tasks** du fichier `src/app/task-list.component.ts`.
+1. Remove the **tasks** variable from the `src/app/task-list.component.ts` file.
 
-    ```typescript del={"Supprimez la liste des tâches": 8-22}
-    // task-list.component.ts
-    @Component({
-        selector: 'app-task-list',
-        templateUrl: './task-list.component.html',
-        styleUrls: ['./task-list.component.css']
-    })
-    export class TaskListComponent {
-
-        tasks: Task[] = [
-                    {
-                        id: uuid(),
-                        title: 'Tâche 1',
-                        description: 'Description de la tâche 1',
-                        createdAt: new Date()
-                    },
-                    {
-                        id: uuid(),
-                        title: 'Tâche 2',
-                        description: 'Description de la tâche 2',
-                        createdAt: new Date()
-                    }
-                ];
-    }
-    ```
+   ```typescript del={"Remove the tasks list": 8-22}
+   // task-list.component.ts
+   @Component({
+     selector: "app-task-list",
+     templateUrl: "./task-list.component.html",
+     styleUrls: ["./task-list.component.css"],
+   })
+   export class TaskListComponent {
+     tasks: Task[] = [
+       {
+         id: uuid(),
+         title: "Task 1",
+         description: "Description of task 1",
+         createdAt: new Date(),
+       },
+       {
+         id: uuid(),
+         title: "Task 2",
+         description: "Description of task 2",
+         createdAt: new Date(),
+       },
+     ];
+   }
+   ```
 
 </Steps>
 
-## Injectez le TaskService
+## Inject TaskService
 
-Votre classe **TaskListComponent** doit utiliser **TaskService** pour obtenir la liste des tâches.
-Angular utilise le système d'injection de dépendances pour fournir le **TaskService** à la classe **TaskListComponent**.
+Your **TaskListComponent** class needs to use **TaskService** to get the tasks list.
+Angular uses the dependency injection system to provide **TaskService** to the **TaskListComponent** class.
 
-La classe **TaskService** est préfixée par le décorateur **@Injectable()**. Ce décorateur indique à Angular que la classe **TaskService** peut être injectée dans d'autres classes.
+The **TaskService** class is prefixed with the **@Injectable()** decorator. This decorator tells Angular that the **TaskService** class can be injected into other classes.
 
-Pour ce faire, vous allez référencez la classe **TaskService** dans le constructeur de classe **TaskListComponent**.
+To do this, you will reference the **TaskService** class in the **TaskListComponent** class constructor.
 
 ```ts
 constructor(private taskService: TaskService) {}
 ```
 
-Vous pouvez maintenant utiliser la variable **taskService** pour accéder à la liste des tâches et initialiser une variable locale avec la liste des tâches.
+You can now use the **taskService** variable to access the tasks list and initialize a local variable with the tasks list.
 
 ```ts
 tasks: Task[] = this.taskService.tasks;
@@ -75,29 +86,27 @@ tasks: Task[] = this.taskService.tasks;
 
 ### 🎓 Instructions
 
-1. Modifiez le fichier `src/app/task-list.component.ts`.
+1. Modify the `src/app/task-list.component.ts` file.
 
-```typescript ins={"Importez TaskService": 3-4} ins={"Créez une variable de tâches et initialisez-la avec la liste du TaskService": 12-13} ins={"Injectez le TaskService dans le constructeur de la classe": 15-16}
+```typescript ins={"Import TaskService": 3-4} ins={"Create a tasks variable and initialize it with TaskService's list": 12-13} ins={"Inject TaskService in the class constructor": 15-16}
 // task-list.component.ts
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { TaskService } from '../task.service';
+import { TaskService } from "../task.service";
 
 @Component({
-    selector: 'app-task-list',
-    templateUrl: './task-list.component.html',
-    styleUrls: ['./task-list.component.css']
+  selector: "app-task-list",
+  templateUrl: "./task-list.component.html",
+  styleUrls: ["./task-list.component.css"],
 })
 export class TaskListComponent {
+  tasks: Task[] = this.taskService.tasks;
 
-    tasks: Task[] = this.taskService.tasks;
-
-
-    constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) {}
 }
 ```
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Vous avez appris à injecter un service dans un composant à l'aide du système d'injection de dépendances d'Angular.
-Il rend votre service accessible dans le composant et vous permet d'utiliser les méthodes et propriétés du service.
+You have learned how to inject a service into a component using Angular's dependency injection system.
+It makes your service accessible in the component and allows you to use the service's methods and properties.

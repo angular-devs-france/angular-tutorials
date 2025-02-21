@@ -1,57 +1,70 @@
 ---
-title: Affichez un message quand la liste est vide
-description: Découvrez comment afficher un message quand la liste de tâche est vide dans une application Angular.
+title: Display a message when the list is empty
+description: Learn how to display a message when the task list is empty in an Angular application.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Affichez un contenu HTML conditionné', description: 'Découvrez comment utiliser la directive *ngIf pour afficher un contenu HTML conditionné.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Display conditional HTML content",
+      description:
+        "Learn how to use the *ngIf directive to display conditional HTML content.",
+    },
+  ]}
+/>
 
-Vous venez d'apprendre comment supprimer une tâche de la liste, vous voulez maintenant afficher un message quand la liste est vide.
+You've just learned how to delete a task from the list, now you want to display a message when the list is empty.
 
+## The \*ngIf directive
 
-## La directive *ngIf
+To iterate over the task list, you used the **\*ngFor** directive.
+This is a structural directive: it allows you to add, remove, or manipulate DOM elements.
 
-Pour itérer sur la liste de tâche, vous avez utilisé la directive ***ngFor**.
-C'est une directive structurelle : elle permet d'ajouter, supprimer ou manipuler des élèments du DOM.
+Another structural directive is the **\*ngIf** directive.
+It allows you to condition the display of an element in the view.
 
-Une autre directive structurelle est la directive ***ngIf**.
-Elle permet de conditionner l'affichage d'un élèment dans la vue.
-
-En lui donnant une condition, l'élèment n'est construit et afficher que si la condition est true.
+By giving it a condition, the element is only built and displayed if the condition is true.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-list.component.html`.
+1. Modify the file `src/app/task-list.component.html`.
 
-   ```html ins={"1. Ajoutez un message quand la liste est vide": 9-10}
-    <tr *ngFor="let task of tasks">
-    <td>{{ task.title }}</td>
-    <td>{{ task.createdAt | date }}</td>
-    <td>
-            <a class="btn btn-primary" [routerLink]="['/update', task.id]">Mettre à jour</a>
-            <button class="btn btn-danger" type="button" (click)="deleteTask(task.id)">Supprimer</button>
-        </td>
-    </tr>
+   ```html ins={"1. Add a message when the list is empty": 9-10}
+   <tr *ngFor="let task of tasks">
+     <td>{{ task.title }}</td>
+     <td>{{ task.createdAt | date }}</td>
+     <td>
+       <a class="btn btn-primary" [routerLink]="['/update', task.id]">Update</a>
+       <button
+         class="btn btn-danger"
+         type="button"
+         (click)="deleteTask(task.id)"
+       >
+         Delete
+       </button>
+     </td>
+   </tr>
 
-   <p *ngIf="!tasks.length">Pas de tâche</p>
+   <p *ngIf="!tasks.length">No tasks</p>
    ```
 
 </Steps>
 
-## Testons le !
+## Let's test it!
 
 <Steps>
-1. Supprimez toutes les tâches de la liste.
-2. Le message "Pas de tâche" devrait s'afficher.
+1. Delete all tasks from the list.
+2. The message "No tasks" should appear.
 
 </Steps>
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Dans ce chapitre, vous avez appris comment utiliser la directive ***ngIf**.
+In this chapter, you learned how to use the **\*ngIf** directive.

@@ -1,128 +1,143 @@
 ---
-title: Créez votre premier composant
-description: Créez un composant de liste de tâches dans Angular
+title: Create your first component
+description: Create a task list component in Angular
 ---
 
-import { Image } from 'astro:assets';
-import creationImg from '../../../../../assets/first-component_creation.png';
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Image } from "astro:assets";
+import creationImg from "../../../../../assets/first-component_creation.png";
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-    {mainTitle: 'Objectifs de ce chapitre', title: 'Générer un composant', description: 'Découvrez comment créer un nouveau composant à l\'aide de la CLI d\'Angular.'},
-    {title: 'Afficher le composant', description: 'Découvrez comment afficher le contenu HTML du composant dans l\'application.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter objectives",
+      title: "Generate a component",
+      description: "Learn how to create a new component using the Angular CLI.",
+    },
+    {
+      title: "Display the component",
+      description:
+        "Learn how to display the component's HTML content in the application.",
+    },
+  ]}
+/>
 
-## CLI d'Angular
+## Angular CLI
 
-Vous avez déjà utilisé la CLI pour lancer notre application localement avec la commande `ng serve` dans la section <a href="/practical-course/getting-started/#running-the-application" target="_blank">Mise en route</a>. Utilisez-le maintenant pour créer un nouveau composant !
+You've already used the CLI to run our application locally with the `ng serve` command in the <a href="/practical-course/getting-started/#running-the-application" target="_blank">Getting Started</a> section. Now use it to create a new component!
 
-La CLI d'Angular fournit une commande pour générer un nouveau composant avec la commande `ng generate component nom-du-composant`.
-Vous pouvez aussi utiliser la commande raccourcie `ng g c nom-du-composant`.
+The Angular CLI provides a command to generate a new component using `ng generate component component-name`.
+You can also use the shorthand command `ng g c component-name`.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Exécutez la commande suivante dans un terminal pour générer un nouveau composant appelé `task-list`
+1. Run the following command in a terminal to generate a new component called `task-list`
 
-    ```bash
-    ng generate component task-list
-    ```
+   ```bash
+   ng generate component task-list
+   ```
 
-    ou
+   or
 
-    ```bash
-    ng g c task-list
-    ```
+   ```bash
+   ng g c task-list
+   ```
 
-2. Recherchez un nouveau dossier appelé `task-list` dans le dossier `src/app`.
+2. Look for a new folder called `task-list` in the `src/app` directory.
 
 </Steps>
 
-
 :::note
-Ce nouveau dossier contient les trois fichiers suivants :
+This new folder contains the following three files:
 
-- `task-list.component.ts` (modèle)
-- `task-list.component.html` (vue)
+- `task-list.component.ts` (model)
+- `task-list.component.html` (view)
 - `task-list.component.css` (style)
 
-C'est la même structure que le composant AppComponent.
+This is the same structure as the AppComponent.
 :::
 
-## Métadonnées des composants
+## Component Metadata
 
-En ouvrant le fichier `task-list.component.ts`, vous pouvez voir le code suivant :
+When opening the `task-list.component.ts` file, you can see the following code:
 
 ```typescript
 // task-list.component.ts
 @Component({
-  selector: 'app-task-list',
-  templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  selector: "app-task-list",
+  templateUrl: "./task-list.component.html",
+  styleUrls: ["./task-list.component.css"],
 })
-export class TaskListComponent {
-}
+export class TaskListComponent {}
 ```
 
-Le décorateur **@Component** définit les métadonnées de configuration du composant.
-C'est ici qu'on détermine comment le composant doit être traité, instancié et utilisé au moment de son exécution.
+The **@Component** decorator defines the component's configuration metadata.
+This is where we determine how the component should be processed, instantiated, and used at runtime.
 
-La propriété **selector** définit le nom balise HTML du composant.
-En utilisant ce sélecteur dans un Template HTML (vue), Angular crée et affiche une instance du composant.
+The **selector** property defines the component's HTML tag name.
+By using this selector in an HTML Template (view), Angular creates and displays an instance of the component.
 
-La propriété **templateUrl** définit l'emplacement du Template HTML (de sa vue) pour le composant.
-C'est la vue qui sera affichée lorsque le sélecteur CSS **selector** sera utilisé dans un autre Template HTML.
+The **templateUrl** property defines the location of the HTML Template (its view) for the component.
+This is the view that will be displayed when the CSS **selector** is used in another HTML Template.
 
-La propriété **styleUrls** définit les emplacements des fichiers CSS du composant.
-Ces styles seront appliqués au modèle du composant.
+The **styleUrls** property defines the locations of the component's CSS files.
+These styles will be applied to the component's template.
 
 :::note
-Un décorateur est une façon de faire de la méta-programmation. Ils peuvent modifier leur cible (classes, méthodes, ...), appeler d'autres méthodes quand la cible est appelée ou ajouter des métadonnées destinées à un framework. Ce dernier point correspond à l'utilisation que l'ont fait dans Angular.
+A decorator is a way to do meta-programming. They can modify their target (classes, methods, ...), call other methods when the target is called, or add metadata intended for a framework. This last point corresponds to how we use them in Angular.
 :::
 
-## Affichez le composant
+## Display the Component
 
-Jusqu'à présent, l'application affiche uniquement le contenu HTML du composant **app** dans le navigateur.
-Vous avez généré le nouveau composant mais vous devez afficher son contenu HTML en utilisant son sélecteur.
+So far, the application only displays the HTML content of the **app** component in the browser.
+You've generated the new component but you need to display its HTML content using its selector.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Ouvrez le fichier `src/app/app.component.html`.
+1. Open the `src/app/app.component.html` file.
 
-2. Ajoutez le sélecteur du composant de la liste de tâches comme suit :
+2. Add the task list component selector as follows:
 
-    ```html ins={"Ajoutez le sélecteur du composant (et la balise <main> pour garantir une bonne sémantique HTML et gestion CSS)": 5-8}
-    // app.component.html
-    <header class="navbar bg-body-tertiary px-4">
-        <h1 class="navbar-brand fw-bold">Angular Practical course</h1>
-    </header>
+   ```html ins={"Add the component selector (and the <main> tag for proper HTML semantics and CSS management)": 5-8}
+   // app.component.html
+   <header class="navbar bg-body-tertiary px-4">
+     <h1 class="navbar-brand fw-bold">Angular Practical course</h1>
+   </header>
 
-    <main class="container pt-4">
-      <app-task-list />
-    </main>
-    ```
+   <main class="container pt-4">
+     <app-task-list />
+   </main>
+   ```
 
-3. Vérifiez les modifications dans votre navigateur.
+3. Check the changes in your browser.
 
-    <Image class="shadow-xl rounded-xl" src={creationImg} alt="Un oiseau posé sur un nid d’œufs."/>
+   <Image
+     class="shadow-xl rounded-xl"
+     src={creationImg}
+     alt="A bird sitting on a nest of eggs."
+   />
 
 </Steps>
 
 :::tip
-`task-list works!` s'affiche dans le navigateur.
-C'est le contenu généré par défaut par la CLI d'Angular dans le Template HTML du composant. Vous le mettrez à jour dans les prochains chapitres.
+`task-list works!` appears in the browser.
+This is the default content generated by the Angular CLI in the component's HTML Template. You will update it in the upcoming chapters.
 :::
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you've learned
 
-Dans ce chapitre, vous avez appris à créer un nouveau composant à l'aide de la CLI d'Angular et à l'utiliser dans votre application.
+In this chapter, you learned how to create a new component using the Angular CLI and use it in your application.
 
-Vous avez également mémorisé que la **vue** du composant est son Template HTML et le **modèle** du composant est son fichier TypeScript.
+You also remembered that the component's **view** is its HTML Template and the component's **model** is its TypeScript file.
 
-## 🔗 Ressources
+## 🔗 Resources
 
-- <a href="https://angular.dev/cli/generate/component" target="_blank">Documentation CLI d'Angular: générer un composant</a>
+- <a href="https://angular.dev/cli/generate/component" target="_blank">
+    Angular CLI Documentation: generating a component
+  </a>

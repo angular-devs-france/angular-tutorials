@@ -1,71 +1,83 @@
 ---
 title: Interpolation
-description: Rendu des données dans une vue (Template HTML)
+description: Rendering data in a view (HTML Template)
 ---
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
 
-<Objective class="drop-shadow-xl" objectives={[
-    {mainTitle: 'Objectifs de ce chapitre', title: 'Interpolation', description: 'Découvrez comment restituer des données dans une vue (Template HTML) à l\'aide de l\'interpolation.'},
-]} />
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Interpolation",
+      description:
+        "Learn how to render data in a view (HTML Template) using interpolation.",
+    },
+  ]}
+/>
 
-Vous parcourez maintenant le tableau **tasks** mais affichons une valeur **Task** statique.
-Maintenant ? Vous souhaitez afficher dynamiquement la dernière version de la tâche à la place.
+You are now iterating through the **tasks** array but displaying a static **Task** value.
+Now what? You want to dynamically display the latest version of the task instead.
 
-## Qu'est-ce que l'interpolation ?
+## What is interpolation?
 
-L'interpolation est la solution pour évaluer une expression JavaScript dans le Template HTML.
-Bien qu'une partie de votre contenu HTML soit statique, vous souhaiterez peut-être afficher des données dynamiques dans votre vue.
-Cela nous permet d'afficher la valeur d'une propriété définie depuis le fichier `composant.ts` dans le Template HTML.
+Interpolation is the solution for evaluating a JavaScript expression in the HTML Template.
+While some of your HTML content may be static, you might want to display dynamic data in your view.
+This allows us to display the value of a property defined in the `component.ts` file in the HTML Template.
 
-Voilà votre situation souhaitée : afficher les détails de chaque tâche!
+Here's your desired situation: display the details of each task!
 
-Vous utiliserez les délimiteurs `{{ }}` pour identifier l'expression à évaluer.
-Vous pouvez utiliser n'importe quelle expression TypeScript valide entre ces délimiteurs d'interpolation.
+You'll use the `{{ }}` delimiters to identify the expression to evaluate.
+You can use any valid TypeScript expression between these interpolation delimiters.
 
 ```html
-<div>{{ name }}</div> => Gerome
-<div>{{ 1 + 1 }}</div> => 2
-<div>{{ 'Hello ' + name }}</div> => Hello Gerome
+<div>{{ name }}</div>
+=> Gerome
+<div>{{ 1 + 1 }}</div>
+=> 2
+<div>{{ 'Hello ' + name }}</div>
+=> Hello Gerome
 ```
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-list.component.html`.
+1. Modify the `src/app/task-list.component.html` file.
 
-    ```html ins={"Ajoutez une interpolation et transmettez-lui une propriété de tâche": 11-13}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Date</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let task of tasks">
+   ```html ins={"Add interpolation and pass it a task property": 11-13}
+   <table class="table">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Date</th>
+         <th>Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let task of tasks">
+         <td>{{ task.title }}</td>
+         <td>{{ task.createdAt }}</td>
+         <td></td>
+       </tr>
+     </tbody>
+   </table>
+   ```
 
-        <td>{{ task.title }}</td>
-        <td>{{ task.createdAt }}</td>
-        <td></td>
-        </tr>
-    </tbody>
-    </table>
-    ```
-
-2. Vérifiez les modifications dans votre navigateur 
+2. Check the changes in your browser
 
 </Steps>
 
-L'interpolation évalue les propriétés **task.title** et **task.createdAt** et affiche les valeurs dans le navigateur.
+The interpolation evaluates the **task.title** and **task.createdAt** properties and displays the values in the browser.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-L'interpolation est l'une des fonctionnalités Angular les plus courantes. Vous l'utiliserez dans presque tous les composants pour afficher des données dynamiques.
+Interpolation is one of Angular's most common features. You'll use it in almost every component to display dynamic data.
 
-## 🔗 Ressources
+## 🔗 Resources
 
-- <a href="https://angular.dev/guide/templates/interpolation" target="_blank">Documentation officielle Angular: interpolation</a>
+- <a href="https://angular.dev/guide/templates/interpolation" target="_blank">
+    Official Angular Documentation: interpolation
+  </a>

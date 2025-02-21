@@ -1,121 +1,130 @@
 ---
 title: Pipes
-description: Apprenez à personnaliser l'affichage des données dans les vues Angular à l'aide de pipes.
+description: Learn how to customize data display in Angular views using pipes.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-    {mainTitle: 'Objectifs de ce chapitre', title: 'Pipes', description: 'Apprenez à personnaliser l\'affichage des données dans les vues Angular à l\'aide de pipes.'}
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Pipes",
+      description:
+        "Learn how to customize data display in Angular views using pipes.",
+    },
+  ]}
+/>
 
+## Angular Pipes
 
-## Pipes Angular
+Angular provides a set of built-in pipes to transform data in HTML Templates (views).
+Pipes are simple functions that accept an input value and return a transformed value.
+They are used in the view (HTML Template) to format data before displaying it.
 
-Angular fournit un ensemble de pipes intégrés pour transformer les données dans les Templates HTML (vues).
-Les pipes sont des fonctions simples qui acceptent une valeur d'entrée et renvoient une valeur transformée.
-Ils sont utilisés dans la vue (Template HTML) pour formater les données avant de les afficher.
+Angular pipes are used with the pipe operator `|` followed by the pipe name.
+You can chain multiple pipes to transform data in the view (HTML Template).
 
-Les pipes Angular sont utilisés avec l'opérateur de pipe `|` suivi du nom de la pipe.
-Vous pouvez enchaîner plusieurs pipes pour transformer les données dans la vue (Template HTML).
+Here are the most commonly used Angular pipes:
 
-Voici les pipes Angular les plus utilisées :
+- `uppercase`: transforms a string to uppercase
+- `lowercase`: transforms a string to lowercase
+- `currency`: formats a number as currency
+- `date`: formats a date
 
-- `uppercase` : transforme une chaîne de caractères en majuscule;
-- `minuscule` : transforme une chaîne de caractères en minuscule;
-- `currency` : formate un nombre en tant que devise;
-- `date` : formate une date.
-
-Vous utiliserez cette dernière pour formater la date **createdAt** de la tâche en un format plus lisible.
+You will use the latter to format the task's **createdAt** date into a more readable format.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-list.component.html`.
+1. Modify the `src/app/task-list.component.html` file.
 
-    ```html ins={"utilisez la pipe de date": 13-14} ins="| date: 'shortdate'"
-    // task-list.component.html
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Date</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let task of tasks">
-        <td>{{ task.title }}</td>
+   ```html ins={"use the date pipe": 13-14} ins="| date: 'shortdate'"
+   // task-list.component.html
+   <table class="table">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Date</th>
+         <th>Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let task of tasks">
+         <td>{{ task.title }}</td>
 
-        <td>{{ task.createdAt | date }}</td>
-        <td></td>
-        </tr>
-    </tbody>
-    </table>
-    ```
+         <td>{{ task.createdAt | date }}</td>
+         <td></td>
+       </tr>
+     </tbody>
+   </table>
+   ```
 
-2. Vérifiez les modifications dans votre navigateur 
+2. Check the changes in your browser
 
 </Steps>
 
-La date de création de la tâche est affichée dans un format plus convivial.
+The task creation date is now displayed in a more user-friendly format.
 
-## Alternative (ne pas faire)
+## Alternative (don't do this)
 
-Une alternative courante pour transformer les données dans le Template HTML consiste à utiliser une fonction.
-Comme l'interpolation évalue l'expression JavaScript, vous pouvez lui transmettre une fonction qui renvoie une valeur.
+A common alternative for transforming data in the HTML Template is to use a function.
+Since interpolation evaluates the JavaScript expression, you can pass it a function that returns a value.
 
-Dans l'exemple suivant, nous utilisons une fonction pour formater la date de création de la tâche. La fonction prend la date de création de la tâche comme argument et renvoie une date formatée.
+In the following example, we use a function to format the task's creation date. The function takes the task's creation date as an argument and returns a formatted date.
 
 ```html ins="formatDate(task.createdAt)"
 <table class="table">
-    <thead>
+  <thead>
     <tr>
-        <th>Nom</th>
-        <th>Date</th>
-        <th>Actions</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Actions</th>
     </tr>
-    </thead>
-    <tbody>
+  </thead>
+  <tbody>
     <tr *ngFor="let task of tasks">
-    <td>{{ task.title }}</td>
+      <td>{{ task.title }}</td>
 
-    <td>{{ formatDate(task.createdAt) }}</td>
-    <td></td>
+      <td>{{ formatDate(task.createdAt) }}</td>
+      <td></td>
     </tr>
-    </tbody>
+  </tbody>
 </table>
 ```
 
-```typescript ins={"passe la date et renvoie une date formatée": 6-13}
+```typescript ins={"pass the date and return a formatted date": 6-13}
 export class TaskListComponent {
   tasks = [
-    { title: 'Tâche 1', createdAt: new Date() },
-    { title: 'Tâche 2', createdAt: new Date() }
+    { title: "Task 1", createdAt: new Date() },
+    { title: "Task 2", createdAt: new Date() },
   ];
 
   formatDate(currentDate: Date): string {
-    // Obtenez le mois, le jour et l'année à partir de l'objet Date
-    const month = currentDate.getMonth() + 1; // getMonth commence à 00 pour janvier, nous ajoutons donc 1
+    // Get month, day and year from the Date object
+    const month = currentDate.getMonth() + 1; // getMonth starts at 00 for January, so we add 1
     const day = currentDate.getDate();
     const year = currentDate.getFullYear();
-    return month + '/' + day + '/' + year;;
+    return month + "/" + day + "/" + year;
   }
 }
 ```
 
-Cela fonctionnera mais pas de façon aussi optimisée que l'utilisation de la pipe date.
-Angular utilise la **détection de changement** interne pour détecter les modifications dans le composant et mettre à jour la vue (Template HTML).
-Lors de l'utilisation d'une fonction dans le Template HTML, Angular appellera la fonction à chaque cycle de détection de changement, même si la date **createdAt** n'a pas changé.
-Les pipes mémorisent le résultat de la transformation et ne le recalculent que lorsque la valeur d'entrée change.
+This will work but not as efficiently as using the date pipe.
+Angular uses internal **change detection** to detect changes in the component and update the view (HTML Template).
+When using a function in the HTML Template, Angular will call the function on every change detection cycle, even if the **createdAt** date hasn't changed.
+Pipes memorize the transformation result and only recalculate it when the input value changes.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you've learned
 
-Les pipes Angular permettent de transformer les données dans les vues (Templates HTML).
-Bien que cela ne soit pas abordé dans cette introduction, vous pouvez également créer des pipes personnalisées pour appliquer des transformations spécifiques à vos données.
+Angular pipes allow you to transform data in views (HTML Templates).
+Although not covered in this introduction, you can also create custom pipes to apply specific transformations to your data.
 
-## 🔗 Ressources
+## 🔗 Resources
 
-- <a href="https://angular.dev/guide/pipes" target="_blank">Documentation officielle Angular: pipes</a>
+- <a href="https://angular.dev/guide/pipes" target="_blank">
+    Official Angular Documentation: pipes
+  </a>

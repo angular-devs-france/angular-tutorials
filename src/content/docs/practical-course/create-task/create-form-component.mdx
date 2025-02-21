@@ -1,54 +1,54 @@
 ---
-title: Créez un formulaire dans un composant dédié
-description: Créez un formulaire dans un composant dédié afin d'ajouter une nouvelle tâche à la liste
+title: Create a form in a dedicated component
+description: Create a form in a dedicated component to add a new task to the list
 ---
 
 import { Steps } from '@astrojs/starlight/components';
 import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Générez un nouveau composant', description: 'Utilisez la CLI Angular pour créer un nouveau composant.'},
-{title: 'Comprendre les options de la CLI Angular', description: 'Apprenez à configurer la génération de composants avec la CLI Angular.'},
+{mainTitle: 'Chapter Objectives', title: 'Generate a new component', description: 'Use the Angular CLI to create a new component.'},
+{title: 'Understand Angular CLI options', description: 'Learn how to configure component generation with the Angular CLI.'},
 ]} />
 
-## Création de composants
+## Creating Components
 
 ### 🎓 Instructions
 
 <Steps>
-1. Exécutez la commande suivante dans votre terminal :
+1. Run the following command in your terminal:
 
     ```bash
     ng generate component task-form
     ```
 
-    ou la version courte
+    or the short version
 
     ```bash
     ng g c task-form
     ```
 
-2. Vous devriez voir un nouveau dossier appelé **task-form** dans le dossier `src/app`.
+2. You should see a new folder called **task-form** in the `src/app` directory.
 </Steps>
 
-## Options de la CLI Angular
+## Angular CLI Options
 
-La CLI Angular fournit plusieurs options pour personnaliser le processus de génération de composants.
-Vous pouvez ajouter ces options lors de la commande précédente. Par exemple, pour éviter de générer un composant dans un nouveau dossier, vous pouvez exécuter la commande suivante :
+The Angular CLI provides several options to customize the component generation process.
+You can add these options when running the previous command. For example, to avoid generating a component in a new folder, you can run the following command:
 
 ```bash
 ng generate component task-form --flat
 ```
 
-ou
+or
 
 ```bash
 ng g c task-form --flat
 ```
 
-Si vous souhaitez que certaines options soient définies par défaut pour tous les composants, vous pouvez les ajouter au fichier `angular.json` situé à la racine de votre projet.
+If you want certain options to be set by default for all components, you can add them to the `angular.json` file located at the root of your project.
 
-Pour le projet actuel, nous avons déjà défini les options suivantes :
+For the current project, we have already defined the following options:
 
 ```json
 "@schematics/angular:component": {
@@ -57,17 +57,17 @@ Pour le projet actuel, nous avons déjà défini les options suivantes :
 },
 ```
 
-Cela évite de créer des fichiers de test et de désactiver la nouvelle fonctionnalité **Standalone**.
-Ces options ont été ajoutées au fichier `angular.json` lorsque vous avons créé le projet avec la CLI Angular.
+This avoids creating test files and disables the new **Standalone** feature.
+These options were added to the `angular.json` file when we created the project with the Angular CLI.
 
-> Dans cet atelier, vous n'aborderez pas les connaissances sur les tests. Ce sera un sujet important à développer ultérieurement.
+> In this workshop, you won't cover knowledge about testing. This will be an important topic to develop later.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Vous avez utilisé la CLI d'Angular pour créer un nouveau composant. C'est le deuxième composant que vous avez créé dans ce projet.
-Une telle action est courante dans le développement Angular et la CLI Angular facilite et optimise ce procédé.
-Si nécessaire, vous pouvez personnaliser le processus de génération de composants avec les options de la CLI Angular.
+You used the Angular CLI to create a new component. This is the second component you've created in this project.
+Such an action is common in Angular development, and the Angular CLI makes this process easier and more efficient.
+If needed, you can customize the component generation process with Angular CLI options.
 
-## 🔗 Ressources
+## 🔗 Resources
 
-- <a href="https://angular.dev/cli/generate/component" target="_blank">Angular CLI: documentation de la génération des composants</a>
+- <a href="https://angular.dev/cli/generate/component" target="_blank">Angular CLI: Component Generation Documentation</a>

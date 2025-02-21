@@ -1,90 +1,108 @@
 ---
 title: Event binding
-description: Apprennez à lier un événement à une fonction
+description: Learn how to bind an event to a function
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Event binding', description: 'Apprenez à lier un événement à une fonction dans Angular.'},
-]} />
-
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Event binding",
+      description: "Learn how to bind an event to a function in Angular.",
+    },
+  ]}
+/>
 
 ## Event binding
 
-L'event binding permet d'écouter les évènements et d'exécuter une fonction lorsque l'évènement est déclenché.
-Dans la situation actuelle, vous allez exécuter une fonction lorsque l'on clique sur le bouton 'Créer une tâche'.
+Event binding allows you to listen for events and execute a function when the event is triggered.
+In the current situation, you will execute a function when clicking on the 'Create task' button.
 
-Sur la balise HTML `<button>`, vous pouvez lier l'événement clic à une fonction en utilisant la syntaxe `(click)`.
-Vous lui attribuez la fonction que vous voulez exécuter lorsque l'on clique sur le bouton.
+On the HTML `<button>` tag, you can bind the click event to a function using the `(click)` syntax.
+You assign it the function you want to execute when clicking the button.
 
 ```html ins="(click)="submit()""
-<button type="submit" class="btn btn-primary" (click)="submit()">Soumettre</button>
+<button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
 ```
 
-Dans la classe du **TaskFormComponent**, vous devez créer la fonction liée. Sans cela, Angular ne compilera pas.
+In the **TaskFormComponent** class, you need to create the linked function. Without it, Angular will not compile.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-form/task-form.component.html`.
+1. Modify the file `src/app/task-form/task-form.component.html`.
 
-    ```html ins={"Ajoutez la liaison d\'évènement de soumission du formulaire": 8-9} ins="(click)="submit()""
-    // task-form.component.html
-    <form>
-      <label for="title" class="form-label">Titre:</label>
-      <input type="text" id="title" name="title" class="form-control" [(ngModel)]="task.title"/>
+   ```html ins={"Add the form submission event binding": 8-9} ins="(click)="submit()""
+   // task-form.component.html
+   <form>
+     <label for="title" class="form-label">Title:</label>
+     <input
+       type="text"
+       id="title"
+       name="title"
+       class="form-control"
+       [(ngModel)]="task.title"
+     />
 
-      <label for="description" class="form-label">Description:</label>
-      <textarea id="description" name="description" class="form-control" [(ngModel)]="task.description"></textarea>
+     <label for="description" class="form-label">Description:</label>
+     <textarea
+       id="description"
+       name="description"
+       class="form-control"
+       [(ngModel)]="task.description"
+     ></textarea>
 
-      <button type="submit" class="btn btn-primary" (click)="submit()">Soumettre</button>
-    </form>
-    ```
+     <button type="submit" class="btn btn-primary" (click)="submit()">
+       Submit
+     </button>
+   </form>
+   ```
 
 </Steps>
 
-## Fonction `submit`
+## `submit` Function
 
-Vous allez créer une fonction `submit` pour gérer la soumission du formulaire.
-Pour cette étape, vous allez seulement enregistrer la valeur du formulaire dans la console.
+You will create a `submit` function to handle form submission.
+For this step, you will only log the form value to the console.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-form/task-form.component.ts`.
+1. Modify the file `src/app/task-form/task-form.component.ts`.
 
-    ```typescript ins={"Ajoutez la méthode submit": 15-18}
-    // task-form.component.ts
-    import { Component } from '@angular/core';
+   ```typescript ins={"Add the submit method": 15-18}
+   // task-form.component.ts
+   import { Component } from "@angular/core";
 
-    @Component({
-      selector: 'app-task-form',
-      templateUrl: './task-form.component.html',
-      styleUrls: ['./task-form.component.css']
-    })
-    export class TaskFormComponent {
+   @Component({
+     selector: "app-task-form",
+     templateUrl: "./task-form.component.html",
+     styleUrls: ["./task-form.component.css"],
+   })
+   export class TaskFormComponent {
+     task: TaskForm = {
+       title: "",
+       description: "",
+     };
 
-      task: TaskForm = {
-        title: '',
-        description: ''
-      };
+     submit(): void {
+       alert("Task created", this.task);
+     }
+   }
+   ```
 
-      submit(): void {
-        alert('Tâche créée', this.task);
-      }
-    }
-    ```
-
-3. Ouvrez la console Devtools de votre navigateur.
-4. Remplissez les champs de titre et de description et cliquez sur le bouton 'create task'.
-4. En cliquant sur le bouton 'create task', vous devriez voir les données du formulaire s'afficher dans la console.
+2. Open your browser's Devtools console.
+3. Fill in the title and description fields and click the 'create task' button.
+4. When clicking the 'create task' button, you should see the form data displayed in the console.
 
 </Steps>
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Vous avez appris à écouter un événement pour déclencher une fonction.
+You have learned how to listen for an event to trigger a function.

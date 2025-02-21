@@ -1,79 +1,97 @@
 ---
-title: C'est parti !
-description: Comment démarrer avec Angular
+title: Getting Started!
+description: How to get started with Angular
 ---
 
-import { Image } from 'astro:assets';
-import boilerplateImg from '../../../../assets/getting-started_boilerplate.png';
-import headerImg from '../../../../assets/getting-started_header.png';
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import { Image } from "astro:assets";
+import boilerplateImg from "../../../../assets/getting-started_boilerplate.png";
+import headerImg from "../../../../assets/getting-started_header.png";
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-    {mainTitle: 'Objectifs de ce chapitre', title: 'Générez une application Angular', description: 'Découvrez comment utiliser la CLI Angular pour générer une application Angular.'},
-    {title: 'Exécutez l\'application', description: 'Lancez l\’application localement et consultez la page de base par défaut.'},
-    {title: 'Comprendre le rechargement à chaud', description: 'Comprenez comment fonctionne le rechargement à chaud dans les applications Angular.'}
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Generate an Angular application",
+      description:
+        "Learn how to use the Angular CLI to generate an Angular application.",
+    },
+    {
+      title: "Run the application",
+      description:
+        "Launch the application locally and view the default base page.",
+    },
+    {
+      title: "Understand hot reloading",
+      description:
+        "Understand how hot reloading works in Angular applications.",
+    },
+  ]}
+/>
 
-## Créez le projet
+## Create the project
 
-Angular fournit une interface de ligne de commande (CLI) pour générer une nouvelle application Angular, gérer le projet et exécuter l'application localement.
+Angular provides a Command Line Interface (CLI) to generate a new Angular application, manage the project, and run the application locally.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Ouvrez un terminal et exécutez la commande suivante pour créer une application Angular :
+1.  Open a terminal and run the following command to create an Angular application:
 
-    ```bash
-    npm create @angular/cli@17.0.0 angular-introduction-course --standalone=false --style=css --ssr=false --skip-tests=true
-    ```
-</Steps>
+        ```bash
+        npm create @angular/cli@17.0.0 angular-introduction-course --standalone=false --style=css --ssr=false --skip-tests=true
+        ```
+
+    </Steps>
 
 :::tip
-La commande inclut quelques options pour **faciliter le processus d'apprentissage**.
-Apprenez-en davantage sur les options dans les <a href="/practical-course/going-further#angular-cli-options" target="_blank">Options de la CLI Angular</a>.
+The command includes some options to **facilitate the learning process**.
+Learn more about the options in <a href="/practical-course/going-further#angular-cli-options" target="_blank">Angular CLI Options</a>.
 :::
 
-## Ouvrez le projet
-
-### 🎓Instructions
-
-<Steps>
-1. Ouvrez **Visual Studio Code**.
-2. Cliquez sur le menu `Fichier` et sélectionnez `Ouvrir un dossier`.
-3. Accédez au dossier `angular-introduction-course` et cliquez sur le bouton `Sélectionner un dossier`.
-</Steps>
-
-## Exécutez l'application
-
-La CLI Angular fournit une commande pour lancer l'application localement.
+## Open the project
 
 ### 🎓 Instructions
 
 <Steps>
-1. Ouvrez le terminal de Visual Studio Code.
-2. Tapez la commande suivante pour démarrer l'application :
+  1. Open **Visual Studio Code**. 2. Click on the `File` menu and select `Open
+  Folder`. 3. Navigate to the `angular-introduction-course` folder and click the
+  `Select Folder` button.
+</Steps>
+
+## Run the application
+
+The Angular CLI provides a command to launch the application locally.
+
+### 🎓 Instructions
+
+<Steps>
+1. Open Visual Studio Code's terminal.
+2. Type the following command to start the application:
 
     ```bash
     ng serve
     ```
 
-3. Ouvrez votre navigateur et accédez à `http://localhost:4200`.
-4. Vous devriez voir la page de base par défaut suivante :
+3.  Open your browser and navigate to `http://localhost:4200`.
+4.  You should see the following default base page:
 
-    <Image class="shadow-xl rounded-xl" src={boilerplateImg} alt="Un oiseau posé sur un nid d’œufs."/>
-</Steps>
+        <Image class="shadow-xl rounded-xl" src={boilerplateImg} alt="A bird sitting on a nest of eggs."/>
 
-## Rechargement à chaud
+    </Steps>
 
-Le rechargement à chaud est une fonctionnalité qui vous permet de voir les modifications que vous apportez à votre code sans avoir à actualiser manuellement la page.
+## Hot Reloading
+
+Hot reloading is a feature that allows you to see the changes you make to your code without having to manually refresh the page.
 
 ### 🎓 Instructions
 
 <Steps>
-1. Ouvrez le fichier `src/app/app.component.html`.
-2. Remplacez le contenu complet du fichier par le code suivant :
+1. Open the `src/app/app.component.html` file.
+2. Replace the entire content of the file with the following code:
 
     ```html
     // app.component.html
@@ -82,7 +100,8 @@ Le rechargement à chaud est une fonctionnalité qui vous permet de voir les mod
     </header>
     ```
 
-3. Revenez à votre navigateur pour voir la page suivante :
+3.  Return to your browser to see the following page:
 
-    <Image class="shadow-xl rounded-xl" src={headerImg} alt="Un oiseau posé sur un nid d’œufs."/>
-</Steps>
+        <Image class="shadow-xl rounded-xl" src={headerImg} alt="A bird sitting on a nest of eggs."/>
+
+    </Steps>

@@ -1,43 +1,43 @@
 ---
-title: Introduction sur les composants
-description: Les composants sont les éléments constitutifs des applications Angular.
+title: Introduction to Components
+description: Components are the building blocks of Angular applications.
 ---
 
-Les composants sont les piliers des applications Angular.
-Ils aident à organiser une application en éléments plus petits et réutilisables pour une base de code plus maintenable.
+Components are the pillars of Angular applications.
+They help organize an application into smaller, reusable elements for a more maintainable codebase.
 
-Les composants sont utilisés pour :
+Components are used to:
 
-- Diviser l'application en composants plus petits;
-- Réutiliser le même bloc dans différentes parties de l'application;
-- Dédier leur contenu à une route avec leur propre URL.
-
-:::note
-Si vous êtes familié avec les **composants** dans un autre framework, le concept est le même.
-:::
-
-## Votre premier composant
-
-Votre projet a déjà un composant par défaut appelé `app`.
-
-Il est composé de 3 fichiers :
-
-- `app.component.ts`: Le code de la classe du composant écrit en TypeScript;
-- `app.component.html`: Le Template du composant écrit en HTML;
-- `app.component.css`: Les styles CSS dédiés au composant.
-
-Pensez au corps humain :
-
-- Le fichier HTML représente les os: c'est la structure;
-- Le fichier TypeScript représente le cerveau et les muscles: c'est la logique;
-- Le fichier CSS est l'apparence de la personne: à quoi il ressemblera.
-
-Chacun de ces fichiers fait partie du composant.
+- Break down the application into smaller components;
+- Reuse the same block in different parts of the application;
+- Dedicate their content to a route with their own URL.
 
 :::note
-Il y a souvent une incompréhension sur le terme Template. Le fichier HTML est le Template HTML de votre composant. Il représente la **vue** de votre composant.
-Le fichier TypeScript représente quant à lui le modèle de votre composant.
+If you are familiar with **components** in another framework, the concept is the same.
 :::
 
-Les applications d'entreprise sont constituées de nombreux composants. Chaque composant est un élément de l'application qui contrôle une partie de l'écran.
-Vous apprendrez comment créer un nouveau composant à l'étape suivante.
+## Your First Component
+
+Your project already has a default component called `app`.
+
+It consists of 3 files:
+
+- `app.component.ts`: The component class code written in TypeScript;
+- `app.component.html`: The component Template written in HTML;
+- `app.component.css`: The CSS styles dedicated to the component.
+
+Think of the human body:
+
+- The HTML file represents the bones: it's the structure;
+- The TypeScript file represents the brain and muscles: it's the logic;
+- The CSS file is the person's appearance: how it will look.
+
+Each of these files is part of the component.
+
+:::note
+There is often a misunderstanding about the term Template. The HTML file is the HTML Template of your component. It represents the **view** of your component.
+The TypeScript file represents the model of your component.
+:::
+
+Enterprise applications are made up of many components. Each component is an element of the application that controls a part of the screen.
+You will learn how to create a new component in the next step.

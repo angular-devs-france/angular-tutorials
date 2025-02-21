@@ -1,60 +1,68 @@
 ---
-title: Formulaire HTML
-description: Apprenez à créer un formulaire en HTML
+title: HTML Form
+description: Learn how to create a form in HTML
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Créez un formulaire HTML', description: 'Découvrez comment créer un formulaire en HTML à l\'aide de la balise <form>.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Create an HTML Form",
+      description: "Learn how to create an HTML form using the <form> tag.",
+    },
+  ]}
+/>
 
-## Structure d'un formulaire
+## Form Structure
 
-Pour créer un formulaire en HTML, vous devez utiliser la balise `<form>`.
+To create a form in HTML, you need to use the `<form>` tag.
 
-La balise `<form>` est utilisée pour créer un formulaire HTML pour la saisie de l'utilisateur.
+The `<form>` tag is used to create an HTML form for user input.
 
-Le formulaire peut contenir des éléments de saisie tels que des champs de texte, des cases à cocher, des boutons radio, des boutons de soumission, etc.
+The form can contain input elements such as text fields, checkboxes, radio buttons, submit buttons, etc.
 
-Le formulaire pour créer une tâche comportera les champs suivants :
+The form to create a task will have the following fields:
 
-- Titre de la tâche
-- Description de la tâche
+- Task title
+- Task description
 
 :::note
-L'interface **Task** comprend 2 propriétés supplémentaires : **id** et **createdAt**.
-Leurs valeurs seront générées ultérieurement lors de la soumission du formulaire par l'application et non par l'utilisateur.
+The **Task** interface includes 2 additional properties: **id** and **createdAt**.
+Their values will be generated later when the form is submitted by the application and not by the user.
 :::
 
-Le formulaire comprend également un bouton de soumission pour créer la nouvelle tâche en fonction des valeurs du formulaire.
+The form also includes a submit button to create the new task based on the form values.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-form/task-form.component.html`.
+1. Modify the file `src/app/task-form/task-form.component.html`.
 
-    ```html ins={"Ajoutez un input pour le titre de la tâche avec sa légende <label>": 3-5} ins={"Ajoutez un champ <textarea> pour la description de la tâche avec sa légende": 7-9} ins={"Ajoutez un bouton de soumission": 11-12}
-    // task-form.component.html
-    <form>
+   ```html
+   // task-form.component.html
+   <form>
+     <label for="title" class="form-label">Title</label>
+     <input type="text" id="title" name="title" class="form-control" />
 
-        <label for="title" class="form-label">Titre</label>
-        <input type="text" id="title" name="title" class="form-control"/>
+     <label for="description" class="form-label">Description</label>
+     <textarea
+       id="description"
+       name="description"
+       class="form-control"
+     ></textarea>
 
-
-            <label for="description" class="form-label">Description</label>
-            <textarea id="description" name="description" class="form-control"></textarea>
-
-
-            <button type="submit" class="btn btn-primary">Soumettre</button>
-    </form>
-    ```
+     <button type="submit" class="btn btn-primary">Submit</button>
+   </form>
+   ```
 
 </Steps>
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Dans ce chapitre, vous avez appris à créer un formulaire de base en HTML.
-Après cette interlude purement HTML, vous verrez dans les prochaines étapes comment lier ce formulaire dans Angular.
+In this chapter, you learned how to create a basic HTML form.
+After this purely HTML interlude, you will see in the next steps how to bind this form in Angular.

@@ -56,16 +56,6 @@ export default defineConfig({
                 fr: "Liste des tâches",
               },
               items: [
-                //   {
-                //   label: '🚀 Display overview',
-                //   link: '/practical-course/task-listing/display-overview',
-                //   attrs: {
-                //     style: 'font-weight: bold'
-                //   },
-                //   translations: {
-                //     fr: 'Aperçu du chapitre'
-                //   }
-                // },
                 {
                   label: "Add an UI Library",
                   link: "/practical-course/task-listing/add-ui-library",
@@ -118,10 +108,6 @@ export default defineConfig({
                 fr: "Créer une tâche",
               },
               items: [
-                //   {
-                //   label: '🚀 Create task overview',
-                //   link: '/practical-course/create-task/create-task-overview'
-                // },
                 {
                   label: "Create form component",
                   link: "/practical-course/create-task/create-form-component",
@@ -199,13 +185,6 @@ export default defineConfig({
                     fr: "Destruction du composant",
                   },
                 },
-                // ,{
-                //   label: '🏁 Form review',
-                //   link: '/practical-course/create-task/create-task-review',
-                //   attrs: {
-                //     style: 'font-weight: bold'
-                //   }
-                // }
               ],
             },
             {
@@ -213,10 +192,6 @@ export default defineConfig({
               collapsed: true,
               translations: { fr: "Mettre à jour une tâche" },
               items: [
-                //   {
-                //   label: '🚀 Update overview',
-                //   link: '/practical-course/update-task/update-overview'
-                // },
                 {
                   label: "Update task route",
                   link: "/practical-course/update-task/update-task-route",
@@ -234,13 +209,6 @@ export default defineConfig({
                     fr: "Soumettez le formulaire de mise à jour",
                   },
                 },
-                // ,{
-                //   label: '🏁 Update review',
-                //   link: '/practical-course/update-task/update-review',
-                //   attrs: {
-                //     style: 'font-weight: bold'
-                //   }
-                // }
               ],
             },
             {
@@ -250,10 +218,6 @@ export default defineConfig({
                 fr: "Supprimer une tâche",
               },
               items: [
-                //   {
-                //   label: '🚀 Delete overview',
-                //   link: '/practical-course/delete-task/delete-overview'
-                // },
                 {
                   label: "Add delete function",
                   link: "/practical-course/delete-task/add-delete-function",
@@ -275,13 +239,6 @@ export default defineConfig({
                     fr: "Si liste vide",
                   },
                 },
-                // ,{
-                //   label: '🏁 Delete review',
-                //   link: '/practical-course/delete-task/delete-review',
-                //   attrs: {
-                //     style: 'font-weight: bold'
-                //   }
-                // }
               ],
             },
             {
@@ -289,10 +246,6 @@ export default defineConfig({
               collapsed: true,
               translations: { fr: "Utilisez les APIs" },
               items: [
-                //   {
-                //   label: '🚀 API overview',
-                //   link: '/practical-course/api-server/api-overview'
-                // },
                 {
                   label: "JSON server installation",
                   link: "/practical-course/api-server/json-server-installation",
@@ -323,13 +276,6 @@ export default defineConfig({
                   link: "/practical-course/api-server/delete-task",
                   translations: { fr: "Modifiez la suppression" },
                 },
-                // ,{
-                //   label: '🏁 API review',
-                //   link: '/practical-course/api-server/api-review',
-                //   attrs: {
-                //     style: 'font-weight: bold'
-                //   }
-                // }
               ],
             },
             // {

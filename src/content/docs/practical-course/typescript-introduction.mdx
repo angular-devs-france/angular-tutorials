@@ -1,46 +1,53 @@
 ---
-title: Introduction à Typescript
-description: Créez votre premier modèle Typescript
+title: Introduction to TypeScript
+description: Create your first TypeScript model
 ---
 
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from "../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Discover TypeScript', description: 'Découvrez comment créer votre premier modèle TypeScript.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Discover TypeScript",
+      description: "Learn how to create your first TypeScript model.",
+    },
+  ]}
+/>
 
-## Qu'est-ce que TypeScript ?
+## What is TypeScript?
 
-TypeScript est un sur-ensemble typé de JavaScript qui se compile en JavaScript simple. TypeScript est purement orienté objet avec des classes, des interfaces et typé statiquement comme C# ou Java.
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. TypeScript is purely object-oriented with classes, interfaces and is statically typed like C# or Java.
 
-## Pourquoi utiliser TypeScript ?
+## Why use TypeScript?
 
-L'utilisation de TypeScript présente plusieurs avantages :
+Using TypeScript offers several advantages:
 
-- **Sécurité via le typage** : TypeScript fournit un typage statique, ce qui vous aide à détecter les erreurs au moment de la compilation plutôt qu'au moment de l'exécution. Cela peut vous aider à détecter les bugs plus tôt et à améliorer la qualité de votre code.
-- **Outils** : TypeScript fournit un riche ensemble d'outils pour créer et maintenir des applications à grande échelle. Cela inclut des fonctionnalités telles que la complétion du code, la refactorisation et la navigation.
-- **Lisibilité** : TypeScript fournit un moyen d'ajouter des annotations de type à votre code, ce qui peut le rendre plus facile à comprendre et à maintenir.
+- **Type Safety**: TypeScript provides static typing, which helps you catch errors at compile time rather than runtime. This can help you detect bugs earlier and improve your code quality.
+- **Tools**: TypeScript provides a rich set of tools for building and maintaining large-scale applications. This includes features such as code completion, refactoring, and navigation.
+- **Readability**: TypeScript provides a way to add type annotations to your code, which can make it easier to understand and maintain.
 
-Prenez un objet **car**, en Javascript, on accepte le format suivant :
+Take a **car** object, in Javascript, we accept the following format:
 
 ```javascript
 const car = {
-  make: 'Toyota',
-  model: 'Corolla',
-  year: 2020
+  make: "Toyota",
+  model: "Corolla",
+  year: 2020,
 };
 ```
 
-Pour logguer le modèle de la voiture, vous feriez:
+To log the car's model, you would do:
 
 ```javascript
 console.log(car.model);
 ```
 
-Mais non seulement vous devez rappeler la structure de l’objet voiture, mais vous devez également vous rappeler le type de chaque propriété.
-Cela complique la maintenance et la compréhension du code.
+But not only do you have to remember the car object's structure, you also need to remember the type of each property.
+This makes code maintenance and understanding more complicated.
 
-Dans TypeScript, vous pouvez définir une interface **Car** comme celle-ci :
+In TypeScript, you can define a **Car** interface like this:
 
 ```typescript
 export interface Car {
@@ -50,48 +57,48 @@ export interface Car {
 }
 ```
 
-Le type est un ensemble d'éléments uiq permettent de catégoriser l'information.
-Dans cet exemple, non seulement nous lions les différentes caractéristiques d'une voiture comme son modèle ou son constructeur, mais nous définissons également le type même de chaque propriété.
-Nous manipulerons donc des strings pour le modèle et le constructeur mais un nombre pour l'année.
+A type is a set of elements that allow us to categorize information.
+In this example, not only do we bind different characteristics of a car like its model or manufacturer, but we also define the actual type of each property.
+We will therefore handle strings for the model and manufacturer but a number for the year.
 
-Et puis vous pouvez l'utiliser comme ceci :
+And then you can use it like this:
 
 ```typescript
 const car: Car = {
-  make: 'Toyota',
-  model: 'Corolla',
-  year: 2020
+  make: "Toyota",
+  model: "Corolla",
+  year: 2020,
 };
 ```
 
 :::note
-Le format de création Typescript est composé ainsi:
+The TypeScript creation format is composed as follows:
 
 ```typescript
 <property>: <type> = <value>;
 ```
 
-`[]` est utilisé pour définir un tableau, comme dans `tasks: Task[]`.
+`[]` is used to define an array, as in `tasks: Task[]`.
 :::
 
-## Quels sont les avantages de l'utilisation de TypeScript ?
+## What are the benefits of using TypeScript?
 
-### Auto-complétion
+### Auto-completion
 
-Lorsque vous définissez un type pour une variable, vous obtenez la saisie semi-automatique pour les propriétés de ce type.
+When you define a type for a variable, you get auto-completion for that type's properties.
 
-### Vérification des types
+### Type checking
 
-TypeScript vérifiera si vous utilisez le bon type pour une variable.
+TypeScript will check if you're using the correct type for a variable.
 
-### Prise en charge de l'IDE
+### IDE Support
 
-Votre IDE vous avertira si vous utilisez le mauvais type pour une variable.
+Your IDE will warn you if you use the wrong type for a variable.
 
-### Erreurs de compilation
+### Compilation Errors
 
-TypeScript détectera les erreurs au moment de la compilation.
+TypeScript will detect errors at compile time.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you've learned
 
-Dans ce chapitre, vous avez appris à créer votre premier modèle TypeScript. Vous avez appris à définir une interface TypeScript et à l'utiliser pour créer un nouvel objet.
+In this chapter, you learned how to create your first TypeScript model. You learned how to define a TypeScript interface and use it to create a new object.

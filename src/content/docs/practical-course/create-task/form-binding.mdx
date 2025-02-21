@@ -1,168 +1,183 @@
 ---
-title: Liaison du formulaire
-description: Apprenez à lier un formulaire à une variable dans Angular
+title: Form Binding
+description: Learn how to bind a form to a variable in Angular
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Liaison de votre formulaire HTML', description: 'Apprenez à lier un formulaire à une variable dans Angular.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Binding your HTML form",
+      description: "Learn how to bind a form to a variable in Angular.",
+    },
+  ]}
+/>
 
-Pour l'instant, la saisie du formulaire est réalisable. Il vous faut, maintenant, récupérer les données du formulaire pour créer une nouvelle tâche et l'ajouter à la liste existante.
+Currently, the form input is possible. Now, you need to retrieve the form data to create a new task and add it to the existing list.
 
-## API Forms Angular
+## Angular Forms API
 
-Angular fournit 2 API différentes pour travailler avec des formulaires :
+Angular provides 2 different APIs for working with forms:
 
 - Template-driven Forms
 - Reactive Forms
 
-Dans ce cours, vous utiliserez l'API Template-driven Forms pour lier le formulaire.
+In this course, you will use the Template-driven Forms API to bind the form.
 
 ## Template-driven Forms
 
-Que veut dire **piloté par le Template HTML** ?
+What does **Template-driven** mean?
 
-La structure du formulaire et les validations sont définies dans la vue (Template HTML). Les formulaires basés sur des Template HTML sont faciles à utiliser et adaptés aux formulaires simples.
-Côté Angular, notre objectif est de lier chaque champ à une propriété pour récupérer sa valeur actuelle.
+The form structure and validations are defined in the view (HTML Template). Template-driven forms are easy to use and suitable for simple forms.
+On the Angular side, our goal is to bind each field to a property to get its current value.
 
-## Type TaskForm
+## TaskForm Type
 
-Vous allez créer un nouveau type **TaskForm** pour représenter le formulaire d'une tâche. Le type **TaskForm** aura deux propriétés : **title** et **description**.
-Sa forme est différente de l'interface **Task** que vous avez créée précédemment. Vous allez en créer une nouvelle dérivée à partir de l'interface **Task** existante.
+You will create a new **TaskForm** type to represent a task form. The **TaskForm** type will have two properties: **title** and **description**.
+Its shape is different from the **Task** interface you created earlier. You will create a new one derived from the existing **Task** interface.
 
-### Choisissez le type d'utilitaire TypeScript
+### Choose the TypeScript Utility Type
 
-Le type d'utilitaire TypeScript **Pick** vous permet de créer un nouveau type en sélectionnant certaines propriétés d'un type existant.
-L'avantage d'utiliser le type d'utilitaire  **Pick** est qu'il vous aide à éviter de dupliquer les propriétés du type existant.
+The TypeScript utility type **Pick** allows you to create a new type by selecting certain properties from an existing type.
+The advantage of using the **Pick** utility type is that it helps you avoid duplicating properties from the existing type.
 
-Vous lui transmettez le type d'origine et les propriétés que vous souhaitez sélectionner.
+You pass it the original type and the properties you want to select.
 
 ```ts
 // task.model.ts
-export type TaskForm = Pick<Task, 'title' | 'description'>;
-
+export type TaskForm = Pick<Task, "title" | "description">;
 ```
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Ouvrez le fichier `src/app/models/task.model.ts`.
+1. Open the file `src/app/models/task.model.ts`.
 
-2. Ajoutez le code suivant en dessous de l'existant:
+2. Add the following code below the existing one:
 
-    ```typescript
-    // task.model.ts
-    export type TaskForm = Pick<Task, 'title' | 'description'>;
-    ```
+   ```typescript
+   // task.model.ts
+   export type TaskForm = Pick<Task, "title" | "description">;
+   ```
 
-3. Importer la fonctionnalité de formulaires dans Angular avec le module **FormsModule**
+3. Import the forms functionality in Angular with the **FormsModule**
 
-    ```typescript ins={"Importer FormsModule": 3-4} ins={"Ajouter FormsModule dans le tableau des imports": 16-17}
-    // app.module.ts
-    import { NgModule } from '@angular/core';
+   ```typescript ins={"Import FormsModule": 3-4} ins={"Add FormsModule to the imports array": 16-17}
+   // app.module.ts
+   import { NgModule } from "@angular/core";
 
-    import {FormsModule} from "@angular/forms";
+   import { FormsModule } from "@angular/forms";
 
-    @NgModule({
-    declarations: [
-    AppComponent,
-    TaskListComponent,
-    TaskFormComponent
-    ],
-    imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
+   @NgModule({
+     declarations: [AppComponent, TaskListComponent, TaskFormComponent],
+     imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
+     providers: [],
+     bootstrap: [AppComponent],
+   })
+   export class AppModule {}
+   ```
 
-    FormsModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
-    })
-    export class AppModule { }
+4. Modify the file `src/app/task-form/task-form.component.ts`.
 
-    ```
+   ```typescript ins={"Import the new TaskForm type": 3-4} ins={"Add the task variable with empty values": 12-16}
+   // task-form.component.ts
+   import { Component } from "@angular/core";
 
-4. Modifiez le fichier `src/app/task-form/task-form.component.ts`.
+   import { TaskForm } from "../model/task.model";
 
-    ```typescript ins={"Importez le nouveau type TaskForm": 3-4} ins={"Ajoutez la variable task avec des valeurs vides": 12-16}
-    // task-form.component.ts
-    import { Component } from '@angular/core';
-
-    import {TaskForm} from '../model/task.model';
-
-    @Component({
-      selector: 'app-task-form',
-      templateUrl: './task-form.component.html',
-      styleUrls: ['./task-form.component.css']
-    })
-    export class TaskFormComponent {
-
-      task: TaskForm = {
-        title: '',
-        description: ''
-      };
-    }
-    ```
+   @Component({
+     selector: "app-task-form",
+     templateUrl: "./task-form.component.html",
+     styleUrls: ["./task-form.component.css"],
+   })
+   export class TaskFormComponent {
+     task: TaskForm = {
+       title: "",
+       description: "",
+     };
+   }
+   ```
 
 </Steps>
 
-## Liaison du formulaire
+## Form Binding
 
-Pour lier un formulaire à votre nouvelle variable **task** dans Angular, vous pouvez utiliser la directive `[ngModel]`.
-La directive `[ngModel]` est une directive intégrée qui vous permet de lier une entrée de formulaire à une variable.
-Mais cela ne suffira pas pour votre cas d'utilisation : cela vous permet uniquement de lier la valeur de la propriété au champ, et non de mettre à jour la variable en fonction des saisies de l'utilisateur.
+To bind a form to your new **task** variable in Angular, you can use the `[ngModel]` directive.
+The `[ngModel]` directive is a built-in directive that allows you to bind a form input to a variable.
+But this won't be enough for your use case: it only allows you to bind the property value to the field, not update the variable based on user input.
 
-### Liaison de données bidirectionnelle
+### Two-way Data Binding
 
-Pour mettre à jour votre variable **task** lorsque le formulaire est mis à jour, vous devez utiliser le format `[(ngModel)]`.
-Cette syntaxe nous permet de :
+To update your **task** variable when the form is updated, you need to use the `[(ngModel)]` format.
+This syntax allows us to:
 
-- lier la valeur de la tâche au champ du formulaire;
-- mettre à jour la valeur de la tâche en fonction de la saisie de l'utilisateur.
+- bind the task value to the form field;
+- update the task value based on user input.
 
 :::tip
-`[(ngModel)]` 🤔 `([ngModel])` ? Pour se rappeler de l'ordre des parenthèses et des crochets ? 
+`[(ngModel)]` 🤔 `([ngModel])` ? To remember the order of parentheses and brackets?
 
-Pensez **banana in a box** [()] 
+Think **banana in a box** [()]
 
 `[(ngModel)]` ✅
 :::
 
-A présent, il faut lier l'input **title** à la propriété **task.title** et le textarea **description** à la propriété **task.description**.
+Now, you need to bind the **title** input to the **task.title** property and the **description** textarea to the **task.description** property.
 
 ### 🎓 Instructions
 
-1. Ouvrez le fichier `src/app/task-form/task-form.component.html`.
+1. Open the file `src/app/task-form/task-form.component.html`.
 
-2. Remplacez le contenu du fichier par le code suivant :
+2. Replace the file content with the following code:
 
-```html ins={"Liez le titre avec la directive ngModel": 4-5} ins="[(ngModel)]="task.title"" ins={"Liez la description avec la directive ngModel": 8-9} ins="[(ngModel)]="task.description""
+```html ins={"Bind the title with ngModel directive": 4-5} ins="[(ngModel)]="task.title"" ins={"Bind the description with ngModel directive": 8-9} ins="[(ngModel)]="task.description""
 // task-form.component.html
 <form>
-  <label for="title" class="form-label">Titre</label>
-    
-  <input type="text" id="title" name="title" class="form-control" [(ngModel)]="task.title"/>
-    
+  <label for="title" class="form-label">Title</label>
+
+  <input
+    type="text"
+    id="title"
+    name="title"
+    class="form-control"
+    [(ngModel)]="task.title"
+  />
+
   <label for="description" class="form-label">Description</label>
-    
-  <textarea id="description" name="description" class="form-control" [(ngModel)]="task.description"></textarea>
-  
-  <button type="submit" class="btn btn-primary">Soumettre</button>
+
+  <textarea
+    id="description"
+    name="description"
+    class="form-control"
+    [(ngModel)]="task.description"
+  ></textarea>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 ```
 
-En étant lié au formulaire, la variable **task** sera mis à jour lorsque le formulaire sera mis à jour.
+By being bound to the form, the **task** variable will be updated when the form is updated.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Dans ce chapitre, vous avez appris à lier un formulaire à une variable dans Angular. Vous avez appris à créer une variable **task** pour représenter une tâche. Vous avez également appris à utiliser la directive `[(ngModel)]` pour lier une entrée de formulaire à un modèle.
+In this chapter, you learned how to bind a form to a variable in Angular. You learned how to create a **task** variable to represent a task. You also learned how to use the `[(ngModel)]` directive to bind a form input to a model.
 
-## 🔗 Ressources
+## 🔗 Resources
 
-- <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html" target="_blank">Documentation TypeScript: types d'utilitaires</a>
-- <a href="https://angular.dev/guide/directives#displaying-and-updating-properties-with-ngmodel" target="_blank">Documentation Angular: ngModel</a>
+- <a
+    href="https://www.typescriptlang.org/docs/handbook/utility-types.html"
+    target="_blank"
+  >
+    TypeScript Documentation: Utility Types
+  </a>
+- <a
+    href="https://angular.dev/guide/directives#displaying-and-updating-properties-with-ngmodel"
+    target="_blank"
+  >
+    Angular Documentation: ngModel
+  </a>

@@ -1,27 +1,35 @@
 ---
-title: Modifiez la mise à jour de la tâche avec HTTP Client
-description: Découvrez comment mettre à jour une tâche de la liste à l'aide de HTTP Client dans une application Angular.
+title: Modify Task Update with HTTP Client
+description: Learn how to update a task in the list using HTTP Client in an Angular application.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-    {mainTitle: 'Objectifs de ce chapitre', title: 'Modifiez la mise à jour de la tâche avec HTTP Client', description: 'Apprenez comment mettre à jour une tâche de la liste en utilisant HTTP Client dans une application Angular.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Modify Task Update with HTTP Client",
+      description:
+        "Learn how to update a task in the list using HTTP Client in an Angular application.",
+    },
+  ]}
+/>
 
-En plus de cibler la mise à jour d'une tâche plutôt que sa création, cette leçon sera assez similaire à la précédente :
+In addition to targeting task updates rather than creation, this lesson will be quite similar to the previous one:
 
-- Vous mettrez à jour **TaskService**;
-- Vous mettrez à jour **TaskFormComponent** en faisant attention à la requête HTTP asynchrone.
+- You will update **TaskService**
+- You will update **TaskFormComponent** while paying attention to the asynchronous HTTP request.
 
 ## TaskService
 
-Basé sur le protocole HTTP, vous utiliserez la fonction **put** pour ajouter une tâche à la liste : **http.put()**.
-Cette fonction attend 2 paramètres :
+Based on the HTTP protocol, you will use the **put** function to add a task to the list: **http.put()**.
+This function expects 2 parameters:
 
-1. L'URL du serveur API; Cette URL inclura l'identifiant de la tâche à mettre à jour : `http://localhost:3000/tasks/${task.id}`
-2. L'objet de la tâche à envoyer au serveur
+1. The API server URL; This URL will include the ID of the task to update: `http://localhost:3000/tasks/${task.id}`
+2. The task object to send to the server
 
 ```typescript
 updateTask(task: Partial<Task>, id: string) {
@@ -33,37 +41,36 @@ updateTask(task: Partial<Task>, id: string) {
 
 <Steps>
 
-1. Modifiez le fichier **task.service.ts**.
+1. Modify the **task.service.ts** file.
 
-    ```typescript ins={"Remplacez la fonction getTask": 10-13} ins={"Remplacez la fonction updateTask": 14-17}
-    import { Injectable } from '@angular/core';
-    import { HttpClient } from '@angular/common/http';
-    import { Task, TaskForm } from './task.model';
+   ```typescript ins={"Replace the getTask function": 10-13} ins={"Replace the updateTask function": 14-17}
+   import { Injectable } from "@angular/core";
+   import { HttpClient } from "@angular/common/http";
+   import { Task, TaskForm } from "./task.model";
 
-    @Injectable({
-        providedIn: 'root'
-    })
-    export class TaskService {
-        constructor(private http: HttpClient) { }
+   @Injectable({
+     providedIn: "root",
+   })
+   export class TaskService {
+     constructor(private http: HttpClient) {}
 
-        getTask(id: string) {
-            return this.http.get<Task>(`http://localhost:3000/tasks/${id}`);
-        }
+     getTask(id: string) {
+       return this.http.get<Task>(`http://localhost:3000/tasks/${id}`);
+     }
 
-        updateTask(task: Partial<Task>, id: string) {
-            return this.http.patch<Task>(`http://localhost:3000/tasks/${id}`, task);
-        }
-    }
-    ```
+     updateTask(task: Partial<Task>, id: string) {
+       return this.http.patch<Task>(`http://localhost:3000/tasks/${id}`, task);
+     }
+   }
+   ```
 
 </Steps>
 
-## Récupérer la tâche à mettre à jour
+## Retrieving the Task to Update
 
-Vous venez de mettre à jour la fonction **getTask** pour récupérer une tâche spécifique.
-Tout comme les fonctions changées précédemment pour communiquer avec l'API, cette fonction va donc altérer le code existant dans le composant **TaskFormComponent**.
-Si le nom de la fonction ne change pas, il va désormais falloir **subscribe** pour en récupérer la valeur.
-
+You just updated the **getTask** function to retrieve a specific task.
+Like the previously changed functions to communicate with the API, this function will now alter the existing code in the **TaskFormComponent**.
+While the function name doesn't change, you'll now need to **subscribe** to get its value.
 
 ```typescript
 ngOnInit() {
@@ -81,49 +88,48 @@ ngOnInit() {
 
 <Steps>
 
-1. Modifiez le fichier **task-form.component.ts**.
+1.  Modify the **task-form.component.ts** file.
 
-    ```typescript ins={"Remplacez la fonction getTask": 20-24}
-    import { Component, OnInit } from '@angular/core';
-    import { ActivatedRoute, Router } from '@angular/router';
-    import { TaskForm } from '../task.model';
-    import { TaskService } from '../task.service';
+        ```typescript ins={"Replace the getTask function": 20-24}
+        import { Component, OnInit } from '@angular/core';
+        import { ActivatedRoute, Router } from '@angular/router';
+        import { TaskForm } from '../task.model';
+        import { TaskService } from '../task.service';
 
-    @Component({
-        selector: 'app-task-form',
-        templateUrl: './task-form.component.html',
-        styleUrls: ['./task-form.component.css']
-    })
-    export class TaskFormComponent implements OnInit {
-        task: TaskForm = { id: '', title: '', description: '' };
+        @Component({
+            selector: 'app-task-form',
+            templateUrl: './task-form.component.html',
+            styleUrls: ['./task-form.component.css']
+        })
+        export class TaskFormComponent implements OnInit {
+            task: TaskForm = { id: '', title: '', description: '' };
 
-        constructor(private taskService: TaskService, private router: Router, private route: ActivatedRoute) { }
+            constructor(private taskService: TaskService, private router: Router, private route: ActivatedRoute) { }
 
-        ngOnInit() {
-            const id = this.route.snapshot.paramMap.get('id');
+            ngOnInit() {
+                const id = this.route.snapshot.paramMap.get('id');
 
-            if (id) {
-
-                this.taskService.getTask(id).subscribe(task => {
-                    this.task = task;
-                });
+                if (id) {
+                    this.taskService.getTask(id).subscribe(task => {
+                        this.task = task;
+                    });
+                }
             }
         }
-    }
-    ```
-</Steps>
+        ```
+
+    </Steps>
 
 ## TaskFormComponent
 
-Modifiez **TaskFormComponent** pour qu'il utilise la nouvelle fonction.
-Le moyen le plus simple de le faire serait d'appliquer la même logique que dans la leçon précédente, en mettant à jour la fonction **submit** pour effectuer un appel API et accéder à la page de liste.
+Modify **TaskFormComponent** to use the new function.
+The simplest way would be to apply the same logic as in the previous lesson, updating the **submit** function to make an API call and navigate to the list page.
 
-Cela donnerait le code suivant :
+This would give the following code:
 
-```typescript ins={"Modifiez la partie update": 3-6}
+```typescript ins={"Modify the update part": 3-6}
 submit() {
     if (task.id) {
-
         this.taskService.updateTask(this.task, id).subscribe(() => {
             this.router.navigate(['/']);
         });
@@ -135,45 +141,47 @@ submit() {
 }
 ```
 
-Cela fonctionne mais ce n'est pas la meilleure façon de procéder car nous dupliquons la logique de navigation. Si le chemin de la page de liste change, nous devrons le mettre à jour à deux endroits.
-Gérez-le en modifiant la fonction **submit** :
+This works but it's not the best way to proceed as we're duplicating the navigation logic. If the list page path changes, we would need to update it in two places.
+Handle it by modifying the **submit** function:
 
-- Créez une variable dont la valeur sera soit la fonction **updateTask** ou **addTask**. Sa valeur sera donc une **Observable** auquelle vous pourrez vous abonner.
-- Abonnez-vous à cette variable et accédez à la page de la liste.
+- Create a variable whose value will be either the **updateTask** or **addTask** function. Its value will therefore be an **Observable** that you can subscribe to.
+- Subscribe to this variable and navigate to the list page.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier **task-form.component.ts**.
+1. Modify the **task-form.component.ts** file.
 
-    ```typescript ins={"Update the submit function": 13-21}
-    import { Component } from '@angular/core';
-    import { Router } from '@angular/router';
-    import { TaskForm } from '../task.model';
-    import { TaskService } from '../task.service';
+   ```typescript ins={"Update the submit function": 13-21}
+   import { Component } from "@angular/core";
+   import { Router } from "@angular/router";
+   import { TaskForm } from "../task.model";
+   import { TaskService } from "../task.service";
 
-    @Component({
-        selector: 'app-task-form',
-        templateUrl: './task-form.component.html',
-        styleUrls: ['./task-form.component.css']
-    })
-    export class TaskFormComponent {
-        constructor(private taskService: TaskService, private router: Router) { }
+   @Component({
+     selector: "app-task-form",
+     templateUrl: "./task-form.component.html",
+     styleUrls: ["./task-form.component.css"],
+   })
+   export class TaskFormComponent {
+     constructor(private taskService: TaskService, private router: Router) {}
 
-        submit() {
-            const id = this.route.snapshot.paramMap.get('id');
-            const taskObservable = id ? this.taskService.updateTask(task, id) : this.taskService.addTask(task);
+     submit() {
+       const id = this.route.snapshot.paramMap.get("id");
+       const taskObservable = id
+         ? this.taskService.updateTask(task, id)
+         : this.taskService.addTask(task);
 
-            taskObservable.subscribe(() => {
-                this.router.navigate(['/']);
-            });
-        }
-    }
-    ```
+       taskObservable.subscribe(() => {
+         this.router.navigate(["/"]);
+       });
+     }
+   }
+   ```
 
 </Steps>
 
-## ✔️ Ce que vous avez appris
+## ✔️ What You Have Learned
 
-Vous avez appris à envoyer une requête **PUT** avec HttpClient pour mettre à jour une tâche dans une application Angular.
+You have learned how to send a **PUT** request with HttpClient to update a task in an Angular application.

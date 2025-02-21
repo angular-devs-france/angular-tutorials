@@ -1,129 +1,145 @@
 ---
-title: Afficher une liste de tâches
-description: Découvrez comment afficher une liste d'éléments dans une application Angular.
+title: Display a Task List
+description: Learn how to display a list of items in an Angular application.
 ---
 
-import { Image } from 'astro:assets';
-import staticImg from '../../../../../assets/display-list_static.png';
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Image } from "astro:assets";
+import staticImg from "../../../../../assets/display-list_static.png";
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-    {mainTitle: 'Objectifs de ce chapitre', title: 'Découvrez la directive structurelle *ngFor', description: 'Découvrez comment itérer sur une liste d\'éléments dans un Template HTML à l\'aide de la directive *ngFor.'}
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Discover the *ngFor structural directive",
+      description:
+        "Learn how to iterate over a list of items in an HTML Template using the *ngFor directive.",
+    },
+  ]}
+/>
 
-## Structure HTML
+## HTML Structure
 
-Pour afficher un tableau d'éléments, la structure HTML attendue est :
+To display an array of elements, the expected HTML structure is:
 
 ```html
 <table class="table">
   <thead>
     <tr>
-        <th>Nom</th>
-        <th>Date</th>
-        <th>Actions</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-        <td>Suivre le cours</td>
-        <td>24/05/2024</td>
-        <td></td>
+      <td>Follow the course</td>
+      <td>05/24/2024</td>
+      <td></td>
     </tr>
     <tr>
-        <td>Suivre le cours</td>
-        <td>24/05/2024</td>
-        <td></td>
+      <td>Follow the course</td>
+      <td>05/24/2024</td>
+      <td></td>
     </tr>
   </tbody>
 </table>
 ```
 
-<Image class="shadow-xl rounded-xl" src={staticImg} alt="Un oiseau posé sur un nid d’œufs."/>
+<Image
+  class="shadow-xl rounded-xl"
+  src={staticImg}
+  alt="A bird sitting on a nest of eggs."
+/>
 
-Cependant, que se passe-t-il si vous souhaitez afficher un tableau dynamique d’éléments évoluant au fil du temps ?
-Et si une nouvelle tâche est ajoutée ?
+However, what happens if you want to display a dynamic array of elements that changes over time?
+What if a new task is added?
 
-Vous voudrez vous appuyer sur la variable **tasks** pour afficher la bonne liste de tâches.
-Si les tâches sont mises à jour, la vue (Template HTML) doit également être mise à jour.
+You'll want to rely on the **tasks** variable to display the correct list of tasks.
+If the tasks are updated, the view (HTML Template) should be updated as well.
 
-## Directives Angular
+## Angular Directives
 
-Les Composants Angular sont des Directives Angular possédant un fichier HTML.
-Le but d'une Directive n'est pas d'afficher du contenu mais de manipuler le Template HTML d'un autre composant Angular.
-Ils peuvent aider à masquer/afficher dynamiquement certains contenus, à modifier leur style ou à affecter le nombre de fois qu'un contenu est affiché.
+Angular Components are Angular Directives that have an HTML file.
+The purpose of a Directive is not to display content but to manipulate the HTML Template of another Angular component.
+They can help dynamically hide/show certain content, modify their style, or affect how many times content is displayed.
 
-### Directive structurelle *ngFor
+### \*ngFor Structural Directive
 
-Le nom ***ngFor** fait référence à **for loop**: son objectif est d'afficher une balise HTML donnée autant de fois qu'il y a d'éléments dans une liste fournie.
-Vous pouvez l'appliquer sur n'importe quelle balise HTML. Cela affectera cette balise et ses enfants.
+The name **\*ngFor** refers to **for loop**: its purpose is to display a given HTML tag as many times as there are elements in a provided list.
+You can apply it to any HTML tag. It will affect that tag and its children.
 
-Pour l'utiliser, nous ajoutons ce ***ngFor** sur la balise HTML. Elle attend une syntaxe arbitraire qui définit à la fois la liste et une référence à chaque élément de la liste.
-Cette syntaxe est `let task of tasks` :
+To use it, we add this **\*ngFor** on the HTML tag. It expects an arbitrary syntax that defines both the list and a reference to each list item.
+This syntax is `let task of tasks`:
 
-- **tasks** fait référence à la liste définie dans votre fichier `composant.ts`.
-- **task** est la référence pour utiliser la valeur de chaque élément de la liste (vous pouvez le nommer comme vous le souhaitez).
+- **tasks** refers to the list defined in your `component.ts` file.
+- **task** is the reference to use the value of each list item (you can name it whatever you want).
 
-    ```html
-    <table class="table">
-      <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Date</th>
-            <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <tr *ngFor="let task of tasks">
-            <td>Suivre le cours</td>
-            <td>24/05/2024</td>
-            <td></td>
-        </tr>
-      </tbody>
-    </table>
-    ```
+  ```html
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>Follow the course</td>
+        <td>05/24/2024</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  ```
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-list.component.html`.
+1. Modify the `src/app/task-list.component.html` file.
 
-    ```html
-    // task-list.component.html
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Date</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let task of tasks">
-        <td>Suivre le cours</td>
-        <td>24/05/2024</td>
-        <td></td>
-        </tr>
-    </tbody>
-    </table>
-    ```
+   ```html
+   // task-list.component.html
+   <table class="table">
+     <thead>
+       <tr>
+         <th scope="col">Name</th>
+         <th scope="col">Date</th>
+         <th scope="col">Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let task of tasks">
+         <td>Follow the course</td>
+         <td>05/24/2024</td>
+         <td></td>
+       </tr>
+     </tbody>
+   </table>
+   ```
 
-2. Revenez à votre navigateur et consultez la page suivante :
+2. Go back to your browser and check the following page:
 
 </Steps>
 
-Votre liste est maintenant affichée dans le navigateur.
-Vous devriez voir `Task` répétée autant de fois (2) qu'il y a de tâches dans la liste.
+Your list is now displayed in the browser.
+You should see `Task` repeated as many times (2) as there are tasks in the list.
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you've learned
 
-Dans ce chapitre, vous avez appris à utiliser une liste d'éléments définis dans votre fichier `composant.ts` vers le fichier `composant.html`.
-Vous avez utilisé la directive structurelle ***ngFor** pour parcourir la liste des éléments et les afficher dans la vue (Template HTML).
-Une telle action est assez courante dans le développement Web et vous l'utiliserez probablement dans plusieurs de vos applications Angular.
+In this chapter, you learned how to use a list of elements defined in your `component.ts` file in the `component.html` file.
+You used the **\*ngFor** structural directive to iterate through the list of elements and display them in the view (HTML Template).
+Such an action is quite common in Web development, and you'll likely use it in several of your Angular applications.
 
-## 🔗 Ressources
+## 🔗 Resources
 
-- <a href="https://angular.dev/guide/directives#listing-items-with-ngfor" target="_blank">Documentation officielle Angular: `*ngFor`</a>
+- <a
+    href="https://angular.dev/guide/directives#listing-items-with-ngfor"
+    target="_blank"
+  >
+    Official Angular Documentation: `*ngFor`
+  </a>

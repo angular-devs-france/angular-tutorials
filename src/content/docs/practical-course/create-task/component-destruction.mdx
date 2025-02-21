@@ -1,45 +1,53 @@
 ---
-title: Destruction du composant
-description: Découvrez ce qui se passe lorsque vous quittez un composant dans une application Angular.
+title: Component Destruction
+description: Learn what happens when you leave a component in an Angular application.
 ---
 
-import Objective from '../../../../../components/learning-objective.astro';
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Apprenez le fonctionnement de destruction un composant', description: 'Comprenez ce qui se passe lorsque vous quittez un composant dans une application Angular.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Learn how component destruction works",
+      description:
+        "Understand what happens when you leave a component in an Angular application.",
+    },
+  ]}
+/>
 
-Au moment où vous soumettez le formulaire, la propriété **task** du **TaskFormComponent** est renseignée avec les valeurs que vous avez saisies dans le formulaire.
-Par exemple, étant donné que vous avez rempli les champs nom et description, la propriété **task** sera :
-
-```typescript
-task = {
-  title: 'Ma nouvelle tâche',
-  description: 'Votre belle description.'
-};
-```
-
-En soumettant le formulaire et naviguant vers une nouvelle page, vous quittez également le composant **TaskFormComponent**.
-Lorsque vous quittez un composant, celui-ci est détruit.
-
-Ainsi, en naviguant à nouveau vers ce formulaire, la propriété **task** sera vide :
+When you submit the form, the **task** property of **TaskFormComponent** is populated with the values you entered in the form.
+For example, given that you filled in the name and description fields, the **task** property will be:
 
 ```typescript
 task = {
-  title: '',
-  description: ''
+  title: "My new task",
+  description: "Your nice description.",
 };
 ```
 
-Une nouvelle instance du composant **TaskFormComponent** est créée à chaque fois que vous y accédez.
-Ainsi, tout état local que vous définissez dans le composant est perdu lorsque vous naviguez sur une autre route.
+By submitting the form and navigating to a new page, you also leave the **TaskFormComponent**.
+When you leave a component, it is destroyed.
+
+Thus, when navigating back to this form, the **task** property will be empty:
+
+```typescript
+task = {
+  title: "",
+  description: "",
+};
+```
+
+A new instance of the **TaskFormComponent** is created each time you access it.
+Therefore, any local state you define in the component is lost when you navigate to another route.
 
 :::tip
-C'est pourquoi vous utilisez le service **TaskService** pour stocker la nouvelle tâche.
-Le service est un singleton, ce qui signifie qu'il s'agit d'une instance unique partagée dans l'application.
-Sauf si vous forcez le rechargement de l'application dans le navigateur, les tâches que vous avez ajoutées seront conservées.
+This is why you use the **TaskService** to store the new task.
+The service is a singleton, meaning it's a unique instance shared across the application.
+Unless you force the application to reload in the browser, the tasks you've added will be preserved.
 :::
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you've learned
 
-Dans ce chapitre, vous avez appris le fonctionnement de destruction de composants dans une application Angular.
+In this chapter, you learned how component destruction works in an Angular application.

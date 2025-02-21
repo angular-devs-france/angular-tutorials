@@ -1,61 +1,68 @@
 ---
-title: Soumettez le formulaire de mise à jour
-description: Découvrez comment soumettre un formulaire de mise à jour dans une application Angular.
+title: Submit the Update Form
+description: Learn how to submit an update form in an Angular application.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Soumettez le formulaire de mise à jour', description: 'Découvrez comment soumettre un formulaire de mise à jour dans une application Angular.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Submit the Update Form",
+      description:
+        "Learn how to submit an update form in an Angular application.",
+    },
+  ]}
+/>
 
-## Mettre à jour la tâche avec le TaskService
+## Update the Task with TaskService
 
-Le service **TaskService** inclut déjà une fonction permettant d'ajouter une nouvelle tâche à la liste.
-Ajoutons une nouvelle fonction pour mettre à jour une tâche existante de la liste.
+The **TaskService** already includes a function to add a new task to the list.
+Let's add a new function to update an existing task in the list.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Mettez à jour le fichier `src/app/task-service.ts`.
+1. Update the file `src/app/task-service.ts`.
 
-   ```typescript ins={"Ajoutez la fonction de mise à jour de la tâche": 32-36}
-   import { Injectable } from '@angular/core';
-   import { Task } from './task.model';
+   ```typescript ins={"Add the task update function": 32-36}
+   import { Injectable } from "@angular/core";
+   import { Task } from "./task.model";
 
    @Injectable({
-     providedIn: 'root'
+     providedIn: "root",
    })
    export class TaskService {
-       tasks: Task[] = [
-           {
-               title: 'Tâche 1',
-               description: 'Description de la tâche 1',
-               createdAt: new Date()
-           },
-           {
-               title: 'Tâche 2',
-               description: 'Description de la tâche 2',
-               createdAt: new Date()
-           }
-       ];
+     tasks: Task[] = [
+       {
+         title: "Task 1",
+         description: "Description of task 1",
+         createdAt: new Date(),
+       },
+       {
+         title: "Task 2",
+         description: "Description of task 2",
+         createdAt: new Date(),
+       },
+     ];
 
-       addTask(task: Task) {
-           this.tasks.push({
-               ...task,
-               createdAt: new Date()
-           });
-       }
-
-     getTask(id: string) {
-       return this.tasks.find(task => task.id === id);
+     addTask(task: Task) {
+       this.tasks.push({
+         ...task,
+         createdAt: new Date(),
+       });
      }
 
+     getTask(id: string) {
+       return this.tasks.find((task) => task.id === id);
+     }
 
      updateTask(task: Task) {
-       const index = this.tasks.findIndex(t => t.id === task.id);
+       const index = this.tasks.findIndex((t) => t.id === task.id);
        this.tasks[index] = task;
      }
    }
@@ -63,17 +70,17 @@ Ajoutons une nouvelle fonction pour mettre à jour une tâche existante de la li
 
 </Steps>
 
-## Mettez à jour le TaskFormComponent
+## Update the TaskFormComponent
 
-Le composant **TaskFormComponent** est actuellement utilisé pour ajouter une nouvelle tâche à la liste.
+The **TaskFormComponent** is currently used to add a new task to the list.
 
-Gérez l'action de mise à jour via le formulaire sans créer une nouvelle tâche.
-Pour ce faire, conservez la même fonction **submit** mais mettez-la à jour pour utiliser la fonction **updateTask** du service **TaskService**.
+Handle the update action through the form without creating a new task.
+To do this, keep the same **submit** function but update it to use the **updateTask** function from the **TaskService**.
 
-Quand?
+When?
 
-- Si la tâche a un **id**, appelez la fonction **updateTask**.
-- Si la tâche n'a pas d'**id**, appelez la fonction **addTask**.
+- If the task has an **id**, call the **updateTask** function.
+- If the task doesn't have an **id**, call the **addTask** function.
 
 ```typescript
 submit() {
@@ -92,30 +99,30 @@ submit() {
   }
 ```
 
-Dans les deux cas, revenez à la liste des tâches.
+In both cases, return to the task list.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Mettez à jour le fichier `src/app/task-form/task-form.component.ts`.
+1. Update the file `src/app/task-form/task-form.component.ts`.
 
-   ```typescript ins={"Ajoutez la fonction updateTask": 28-42}
-   import { Component, OnInit } from '@angular/core';
-   import { ActivatedRoute } from '@angular/router';
-   import { TaskService } from '../task.service';
-   import { Task } from '../task.model';
+   ```typescript ins={"Add the updateTask function": 28-42}
+   import { Component, OnInit } from "@angular/core";
+   import { ActivatedRoute } from "@angular/router";
+   import { TaskService } from "../task.service";
+   import { Task } from "../task.model";
 
    @Component({
-     selector: 'app-task-form',
-     templateUrl: './task-form.component.html',
-     styleUrls: ['./task-form.component.css']
+     selector: "app-task-form",
+     templateUrl: "./task-form.component.html",
+     styleUrls: ["./task-form.component.css"],
    })
    export class TaskFormComponent implements OnInit {
-       task: TaskForm = {
-           title: '',
-           description: ''
-       };
+     task: TaskForm = {
+       title: "",
+       description: "",
+     };
 
      constructor(
        private route: ActivatedRoute,
@@ -123,42 +130,42 @@ Dans les deux cas, revenez à la liste des tâches.
      ) {}
 
      ngOnInit() {
-         const id = this.route.snapshot.paramMap.get('id');
-         if (id) {
-             this.task = this.taskService.getTask(id);
-         }
+       const id = this.route.snapshot.paramMap.get("id");
+       if (id) {
+         this.task = this.taskService.getTask(id);
+       }
      }
 
-        submit() {
-            const id = this.route.snapshot.paramMap.get('id');
+     submit() {
+       const id = this.route.snapshot.paramMap.get("id");
 
-            if (id) {
-                const existingTask = this.taskService.getTask(id);
-                this.taskService.updateTask({
-                    ...existingTask,
-                    ...this.task
-                });
-            } else {
-                this.taskService.addTask(this.task);
-            }
-            this.router.navigate(['/']);
-        }
+       if (id) {
+         const existingTask = this.taskService.getTask(id);
+         this.taskService.updateTask({
+           ...existingTask,
+           ...this.task,
+         });
+       } else {
+         this.taskService.addTask(this.task);
+       }
+       this.router.navigate(["/"]);
+     }
    }
    ```
 
 </Steps>
 
-## Testez-le
+## Test it
 
 <Steps>
 
-1. Cliquez sur le bouton `Mettre à jour` à côté d'une tâche dans la liste.
-2. Mettez à jour le formulaire avec les nouveaux détails de la tâche.
-3. Cliquez sur le bouton `Mettre à jour la tâche`.
-4. La tâche doit être mise à jour dans la liste.
+1. Click the `Update` button next to a task in the list.
+2. Update the form with the new task details.
+3. Click the `Update Task` button.
+4. The task should be updated in the list.
 
 </Steps>
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you've learned
 
-Dans ce chapitre, vous avez appris à mettre à jour **TaskFormComponent** pour gérer à la fois la mise à jour et la création de tâches.
+In this chapter, you learned how to update the **TaskFormComponent** to handle both updating and creating tasks.

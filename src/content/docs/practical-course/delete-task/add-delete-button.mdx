@@ -1,65 +1,79 @@
 ---
-title: Ajouter un bouton supprimer dans le TaskListComponent
-description: Découvrez comment ajouter un bouton supprimer dans la classe TaskListComponent dans une application Angular.
+title: Add a delete button in TaskListComponent
+description: Learn how to add a delete button in the TaskListComponent class in an Angular application.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../../components/learning-objective.astro';
+import { Steps } from "@astrojs/starlight/components";
+import Objective from "../../../../../components/learning-objective.astro";
 
-<Objective class="drop-shadow-xl" objectives={[
-{mainTitle: 'Objectifs de ce chapitre', title: 'Supprimez une tâche', description: 'Ajoutez un bouton supprimer dans le TaskListComponent pour supprimer la tâche dans la liste.'},
-]} />
+<Objective
+  class="drop-shadow-xl"
+  objectives={[
+    {
+      mainTitle: "Chapter Objectives",
+      title: "Delete a task",
+      description:
+        "Add a delete button in the TaskListComponent to remove the task from the list.",
+    },
+  ]}
+/>
 
-## Le bouton supprimer
+## The delete button
 
-Modifions le **TaskListComponent** pour ajouter un bouton supprimer à côté de chaque tâche de la liste.
-Quand l\'utilisateur clique sur ce bouton, la tâche sera supprimée de la liste.
+Let's modify the **TaskListComponent** to add a delete button next to each task in the list.
+When the user clicks this button, the task will be removed from the list.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-list/task-list.component.html`.
+1. Modify the file `src/app/task-list/task-list.component.html`.
 
-   ```html ins={"1. Ajouter un bouton supprimer": 7-8}
+   ```html ins={"1. Add a delete button": 7-8}
    // task-list.component.html
-    <tr *ngFor="let task of tasks">
-        <td>{{ task.title }}</td>
-        <td>{{ task.createdAt | date }}</td>
-        <td>
-            <a class="btn btn-primary" [routerLink]="['/update', task.id]">Mettre à jour</a>
+   <tr *ngFor="let task of tasks">
+     <td>{{ task.title }}</td>
+     <td>{{ task.createdAt | date }}</td>
+     <td>
+       <a class="btn btn-primary" [routerLink]="['/update', task.id]">Update</a>
 
-            <button class="btn btn-danger" type="button" (click)="deleteTask(task.id)">Supprimer</button>
-        </td>
-    </tr>
+       <button
+         class="btn btn-danger"
+         type="button"
+         (click)="deleteTask(task.id)"
+       >
+         Delete
+       </button>
+     </td>
+   </tr>
    ```
 
 </Steps>
 
-## La fonction deleteTask
+## The deleteTask function
 
-Créons une fonction **deleteTask** dans le **TaskListComponent** pour supprimer une tâche de la liste.
-Cette fonction appelera la fonction **deleteTask** de **TaskService** crée dans le chapitre précédent pour supprimer une tâche de la liste.
+Let's create a **deleteTask** function in the **TaskListComponent** to remove a task from the list.
+This function will call the **deleteTask** function of **TaskService** created in the previous chapter to remove a task from the list.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Modifiez le fichier `src/app/task-list/task-list.component.ts`.
+1. Modify the file `src/app/task-list/task-list.component.ts`.
 
-   ```typescript ins={"Ajoutez la fonction deleteTask et appeler deleteTask du TaskService": 13-16}
-   import { Component } from '@angular/core';
-   import { TaskService } from '../task.service';
+   ```typescript ins={"Add the deleteTask function and call deleteTask from TaskService": 13-16}
+   import { Component } from "@angular/core";
+   import { TaskService } from "../task.service";
 
    @Component({
-     selector: 'app-task-list',
-     templateUrl: './task-list.component.html',
-     styleUrls: ['./task-list.component.css']
+     selector: "app-task-list",
+     templateUrl: "./task-list.component.html",
+     styleUrls: ["./task-list.component.css"],
    })
    export class TaskListComponent {
      tasks: Task[] = this.taskService.tasks;
 
-     constructor(private taskService: TaskService) { }
+     constructor(private taskService: TaskService) {}
 
      deleteTask(id: string): void {
        this.taskService.deleteTask(id);
@@ -69,13 +83,13 @@ Cette fonction appelera la fonction **deleteTask** de **TaskService** crée dans
 
 </Steps>
 
-## Testons le !
+## Let's test it!
 
 <Steps>
-1. Cliquez sur le bouton supprimer à côté d'une tâche dans la liste.
-2. Cette tâche devrait être supprimée de la liste.
+  1. Click the delete button next to a task in the list. 2. This task should be
+  removed from the list.
 </Steps>
 
-## ✔️ Ce que vous avez appris
+## ✔️ What you have learned
 
-Dans ce chapitre, vous avez ajouté une fonction pour supprimer une tâche.
+In this chapter, you added a function to delete a task.
