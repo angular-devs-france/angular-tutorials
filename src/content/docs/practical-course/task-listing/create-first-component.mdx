@@ -1,51 +1,59 @@
 ---
-title: Create your first component
-description: Create a task list component in Angular
+title: Créez votre premier composant
+description: Créez un composant de liste de tâches dans Angular
 ---
 
 import { Image } from 'astro:assets';
-import creationImg from '../../../../assets/first-component_creation.png';
+import creationImg from '../../../../../assets/first-component_creation.png';
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-    {title: 'Generate a component', description: 'Learn how to create a new component using the Angular CLI.'},
-    {title: 'Display the component', description: 'Learn how to display the component HTML content in the application.'},
+    {mainTitle: 'Objectifs de ce chapitre', title: 'Générer un composant', description: 'Découvrez comment créer un nouveau composant à l\'aide de la CLI d\'Angular.'},
+    {title: 'Afficher le composant', description: 'Découvrez comment afficher le contenu HTML du composant dans l\'application.'},
 ]} />
 
-## Angular CLI
+## CLI d'Angular
 
-You already used the CLI to serve the application locally with the `ng serve` command in the <a href="/practical-course/getting-started/#running-the-application" target="_blank">Getting Started</a> step. Now let's use it to create a new component!
+Vous avez déjà utilisé la CLI pour lancer notre application localement avec la commande `ng serve` dans la section <a href="/practical-course/getting-started/#running-the-application" target="_blank">Mise en route</a>. Utilisez-le maintenant pour créer un nouveau composant !
 
-The Angular CLI provides a command to generate a new component with the `ng generate component component-name` command.
+La CLI d'Angular fournit une commande pour générer un nouveau composant avec la commande `ng generate component nom-du-composant`.
+Vous pouvez aussi utiliser la commande raccourcie `ng g c nom-du-composant`.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Run the following command in a terminal to generate a new component called **task-list**.
+1. Exécutez la commande suivante dans un terminal pour générer un nouveau composant appelé `task-list`
 
     ```bash
     ng generate component task-list
     ```
 
-2. Check for a new folder called **task-list** in the `src/app` folder.
+    ou
+
+    ```bash
+    ng g c task-list
+    ```
+
+2. Recherchez un nouveau dossier appelé `task-list` dans le dossier `src/app`.
 
 </Steps>
 
+
 :::note
-This new folder contains the three following files:
+Ce nouveau dossier contient les trois fichiers suivants :
 
-- `task-list.component.ts`
-- `task-list.component.html`
-- `task-list.component.css`
+- `task-list.component.ts` (modèle)
+- `task-list.component.html` (vue)
+- `task-list.component.css` (style)
 
-That's the same structure as the AppComponent component.
+C'est la même structure que le composant AppComponent.
 :::
 
-## Component metadata
+## Métadonnées des composants
 
-By opening the `task-list.component.ts` file, you can see the following code:
+En ouvrant le fichier `task-list.component.ts`, vous pouvez voir le code suivant :
 
 ```typescript
 // task-list.component.ts
@@ -54,96 +62,67 @@ By opening the `task-list.component.ts` file, you can see the following code:
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
-export class TaskListComponent implements OnInit {
-
-  ngOnInit() {}
+export class TaskListComponent {
 }
 ```
 
-The **@Component** decorator defines the metadata for the component.
+Le décorateur **@Component** définit les métadonnées de configuration du composant.
+C'est ici qu'on détermine comment le composant doit être traité, instancié et utilisé au moment de son exécution.
 
-The **selector** property defines the component's CSS element selector.
-By using this selector in a template HTML file, Angular creates and displays an instance of the component.
+La propriété **selector** définit le nom balise HTML du composant.
+En utilisant ce sélecteur dans un Template HTML (vue), Angular crée et affiche une instance du composant.
 
-The **templateUrl** property defines the HTML template file for the component.
-That's the HTML template that will be displayed when the css selector is used in another HTML file.
+La propriété **templateUrl** définit l'emplacement du Template HTML (de sa vue) pour le composant.
+C'est la vue qui sera affichée lorsque le sélecteur CSS **selector** sera utilisé dans un autre Template HTML.
 
-The **styleUrls** property defines the CSS files for the component.
-These styles will be applied to the component HTML template.
+La propriété **styleUrls** définit les emplacements des fichiers CSS du composant.
+Ces styles seront appliqués au modèle du composant.
 
+:::note
+Un décorateur est une façon de faire de la méta-programmation. Ils peuvent modifier leur cible (classes, méthodes, ...), appeler d'autres méthodes quand la cible est appelée ou ajouter des métadonnées destinées à un framework. Ce dernier point correspond à l'utilisation que l'ont fait dans Angular.
+:::
 
-## Display the component
+## Affichez le composant
 
-So far the application only displays the **app** component HTML content in the browser.
-You generated the new component but you need to display its HTML content by using its selector.
+Jusqu'à présent, l'application affiche uniquement le contenu HTML du composant **app** dans le navigateur.
+Vous avez généré le nouveau composant mais vous devez afficher son contenu HTML en utilisant son sélecteur.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/app.component.html` file.
+1. Ouvrez le fichier `src/app/app.component.html`.
 
-    ```html ins={"Add the task list selector (and the main tag for styling and semantic purposes)": 5-8}
+2. Ajoutez le sélecteur du composant de la liste de tâches comme suit :
+
+    ```html ins={"Ajoutez le sélecteur du composant (et la balise <main> pour garantir une bonne sémantique HTML et gestion CSS)": 5-8}
     // app.component.html
-    <header>
-        <h1>Angular Practical course</h1>
+    <header class="navbar bg-body-tertiary px-4">
+        <h1 class="navbar-brand fw-bold">Angular Practical course</h1>
     </header>
 
     <main class="container pt-4">
-        <app-task-list />
+      <app-task-list />
     </main>
     ```
 
-2. Check out the changes in your browser.
+3. Vérifiez les modifications dans votre navigateur.
 
-    <Image class="shadow-xl rounded-xl" src={creationImg} alt="A bird sitting on a nest of eggs."/>
+    <Image class="shadow-xl rounded-xl" src={creationImg} alt="Un oiseau posé sur un nid d’œufs."/>
 
 </Steps>
 
 :::tip
-`task-list works!` is displayed in the browser.
-That's the default content generated by the Angular CLI in the component HTML file. You'll update it in the upcoming chapters.
+`task-list works!` s'affiche dans le navigateur.
+C'est le contenu généré par défaut par la CLI d'Angular dans le Template HTML du composant. Vous le mettrez à jour dans les prochains chapitres.
 :::
 
-// TODO add mention about appModule update
+## ✔️ Ce que vous avez appris
 
-## ✔️ What you learned
+Dans ce chapitre, vous avez appris à créer un nouveau composant à l'aide de la CLI d'Angular et à l'utiliser dans votre application.
 
-In this chapter, you learned how to create a new component using the Angular CLI and how to use it in your application.
+Vous avez également mémorisé que la **vue** du composant est son Template HTML et le **modèle** du composant est son fichier TypeScript.
 
-## 🚦 Quiz
+## 🔗 Ressources
 
-What is the command to create a new component using the Angular CLI?
-
-1. `ng generate component task-list`
-2. `ng new task-list`
-3. `ng create component task-list`
-4. `ng component task-list`
-
-What is the property used to define the component 'app-task-list'?
-
-1. `name`
-2. `selector`
-3. `title`
-4. `tag`
-
-is Angular CLI meant to only create components?
-
-1. Yes
-2. No
-
-Given the component is generated with the command `ng generate component task-list`, what is the name of the selector component?
-
-1. `app-task-list`
-2. `task-list`
-3. `app-task`
-4. `task list`
-
-What the **template** term refers to in Angular?
-
-1. The component.ts file?
-2. The component.html file?
-
-## 🔗 Resources
-
-- <a href="https://angular.dev/cli/generate/component" target="_blank">Angular CLI component generation documentation</a>
+- <a href="https://angular.dev/cli/generate/component" target="_blank">Documentation CLI d'Angular: générer un composant</a>

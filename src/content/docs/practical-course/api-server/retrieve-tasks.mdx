@@ -1,49 +1,50 @@
 ---
-title: Retrieve the task list
-description: Learn how to query the task list from the API server in an Angular application.
+title: Récupérez la liste des tâches
+description: Découvrez comment interroger la liste des tâches à partir du serveur API dans une application Angular.
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-    {title: 'Retrieve tasks', description: 'Retrieve the list of tasks from the fake API server'},
+    {mainTitle: 'Objectifs de ce chapitre', title: 'Récupérez la liste des tâches', description: 'Récupérez la liste des tâches du faux serveur API.'},
 ]} />
 
-## Update the TaskService
+## Mettez à jour TaskService
 
-The **HttpClient** service exposes multiple functions to make HTTP requests to a server. In this chapter, we will use its **get** function to query the task list from the API server.
+Le service **HttpClient** expose plusieurs fonctions qui vous permettent de réaliser des requêtes HTTP à un serveur. Dans ce chapitre, vous utiliserez la méthode **get** pour récupérer la liste des tâches depuis le serveur API.
 
 :::note
-**get** refers to **GET** requests in the HTTP protocol.
+**get** fait référence aux requêtes **GET** dans le protocole HTTP.
 :::
 
-This function takes the API server endpoint as a parameter: `http://localhost:3000/tasks`.
-That's the URL it'll query to get the task list.
+Cette fonction prend le chemin de la route du serveur API comme paramètre : `http://localhost:3000/tasks`.
+C'est l'URL qu'il interrogera pour obtenir la liste des tâches.
 
 ```typescript
-getTasks() {
+getTasks(): Observable<Task[]> {
   return this.http.get<Task[]>('http://localhost:3000/tasks');
 }
 ```
 
-This new **getTasks** defines the contract with the API server:
+Cette nouvelle méthode **getTasks** définit la communication avec le serveur API :
 
-- it makes a **GET** request
-- it expects an array of **Task** objects as a response
-- it communicates with the API server at `http://localhost:3000/tasks` URL.
+- Il fait une requête **GET**;
+- Il attend un tableau d'objets **Task** en réponse;
+- Il communique avec le serveur API à l'URL `http://localhost:3000/tasks`.
 
 :::caution
-As we are now querying the task list from the API server, the **tasks** variable is no longer needed in the **TaskService** class.
-However as some code still depends on it, we will keep it for now.
+L'API sera responsable de récupérer la liste des tâches et vous n'aurez plus besoin de la variable **tasks** du **TaskService**.
+Néanmoins, du code dépendant encore de cette variable, vous devrez la conserver pour le moment.
+:::
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task.service.ts` file.
+1. Mettez à jour le fichier `src/app/task.service.ts`.
 
-    ```typescript ins={"Add the getTasks function": 24-27}
+    ```typescript ins={"Ajoutez la fonction getTasks": 24-27}
     import { Injectable } from '@angular/core';
     import { HttpClient } from '@angular/common/http';
     import { Task } from './task.model';
@@ -53,9 +54,22 @@ However as some code still depends on it, we will keep it for now.
     })
     export class TaskService {
 
+        tasks: Task[] = [
+            {
+                id: '1',
+                title: 'Première tâche',
+                description: 'Voici la première tâche de ta to-do liste.'
+            },
+            {
+                id: '2',
+                title: 'Seconde tâche',
+                description: 'Voici la seconde tâche de ta to-do liste.'
+            }
+        ];
+
         constructor(private http: HttpClient) { }
 
-        getTasks() {
+        getTasks(): Observable<Task[]> {
             return this.http.get<Task[]>('http://localhost:3000/tasks');
         }
     }
@@ -63,33 +77,33 @@ However as some code still depends on it, we will keep it for now.
 
 </Steps>
 
-## Update the TaskListComponent
+## Mettez à jour TaskListComponent
 
-Let's update the **TaskListComponent** to use this new **getTasks** function and rename the **tasks** variable to **tasks$** to reflect the fact that it is now an Observable.
+Réalisez la mise à jour de **TaskListComponent** pour qu'il utilise la nouvelle méthode **getTasks** et renommez la variable **tasks** en **tasks$**. Ajouter `$` permet de signaler qu'il s'agit d'une Observable.
 
 ```typescript
 tasks$ = this.taskService.getTasks();
 ```
 
-Why so? What's an Observable?
+Pourquoi ? Qu'est-ce qu'une observable ?
 
-**tasks** was an array of **Task** objects. Now, **tasks$** is an Observable of an array of **Task** objects.
+**tasks** était un tableau d'objets **Task**. Désormais, **tasks$** est une observable d'un tableau d'objets **Task**.
 
-By calling the **getTasks** function, we get an Observable that will emit the list of tasks once received from the API server.
-To differentiate a value from the observable, the Angular community commonly use the `$` suffix in Angular applications.
+En appelant la fonction **getTasks**, on obtient une Observable qui émettra la liste des tâches une fois reçue du serveur API.
+Pour différencier une valeur de l'observable, la communauté Angular utilise couramment le suffixe `$` dans les applications Angular.
 
 :::note
-An Observable **observes** a stream of data.
+Une Observable **observe** un flux de données.
 :::
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the the `src/app/task-list/task-list.component.ts` file.
+1. Mettez à jour le fichier `src/app/task-list/task-list.component.ts`.
 
-    ```typescript del={"Remove the task variable": 11-12} ins={"Replace it with the tasks$ variable": 13-14}
-    import { Component, OnInit } from '@angular/core';
+    ```typescript del={"Supprimez la variable task": 11-12} ins={"Remplacez-la avec la variable tasks$": 13-14}
+    import { Component } from '@angular/core';
     import { TaskService } from '../task.service';
     import { Task } from '../task.model';
 
@@ -110,42 +124,42 @@ An Observable **observes** a stream of data.
 
 </Steps>
 
-## Subscription
+## Abonnement
 
-Calling the **getTasks** function won't trigger the API request immediately and as it's not trigger yet, the observable won't emit any value.
-Let's trigger what we call a subscription to the observable to start the request.
+L'appel de la fonction **getTasks** ne déclenchera pas la requête API immédiatement. Comme elle ne se déclenche pas encore, l'observable n'émettra aucune valeur.
+Déclenchez ce que nous appelons un abonnement à l'observable pour lancer la requête.
 
 :::tip
-We **subscribe** like we would subscribe to a newspaper.
-We request the last issue of the newspaper and only once it's available, it's delivered and we can read it.
+Vous vous **abonnez** à une observable comme vous vous abonneriez à un journal.
+Vous demandez le dernier numéro du journal. Seulement une fois qu'il est disponible, il vous est livré et vous pouvez le lire.
 :::
 
-### How to subscribe
+### Comment s'abonner ?
 
-There are multiple ways to subscribe to an observable.
-For the given situation, Let's use the **async** pipe in the HTML template.
+Il existe plusieurs façons de s'abonner à une observable.
+Pour la situation donnée, utilisez le pipe **async** dans le Template HTML.
 
-Like the **date** pipe used earlier, the **async** pipe role is to transform the data before displaying it.
-Here it's role will be to subscribe to the observable and returns the list of tasks once available.
+Comme le pipe **date** utilisé précédemment, le rôle du pipe **async** est de transformer les données avant de les afficher.
+Ici son rôle sera de s'abonner à l'observable et de renvoyer la liste des tâches une fois disponible.
 
 :::tip
-While there are alternatives, the **async** pipe is the recommended way to subscribe to an observable in the HTML template.
-You'll discover the alternative at the end of this page.
+Bien qu'il existe des alternatives, le pipe **async** est le moyen recommandé pour s'abonner à une observable dans le Template HTML.
+Vous découvrirez l'alternative à la fin de cette page.
 :::
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the the `src/app/task-list/task-list.component.html` file.
+1. Modifiez le fichier `src/app/task-list/task-list.component.html`.
 
     ```html ins="tasks$ | async"
     <tr *ngFor="let task of tasks$ | async">
-        <td>{{ task.title }}</td>
-        <td>{{ task.createdAt | date }}</td>
-        <td>
-            <a class="btn btn-primary" [routerLink]="['/update', task.id]">Mettre à jour</a>
-            <button class="btn btn-danger" type="button" (click)="deleteTask(task.id)">Supprimer</button>
+    <td>{{ task.title }}</td>
+    <td>{{ task.createdAt | date }}</td>
+    <td>
+        <a class="btn btn-primary" [routerLink]="['/update', task.id]">Mettre à jour</a>
+    <button class="btn btn-danger" type="button" (click)="deleteTask(task.id)">Supprimer</button>
         </td>
     </tr>
     ```
@@ -154,18 +168,18 @@ You'll discover the alternative at the end of this page.
 
 ### Alternative
 
-The alternative to using the **async** pipe is to subscribe to the observable in the component.
+L'alternative à l'utilisation du pipe **async** consiste à s'abonner à l'observable dans le composant.
 
-This is done by calling the **subscribe** function on the observable and passing a function as a callback parameter.
-This callback will be called once the data is available.
+Cela se fait en appelant la fonction **subscribe** sur l'observable et en passant une fonction comme paramètre de rappel.
+Ce rappel sera fait une fois que les données seront disponibles.
 
-This subscription will be used in the **ngOnInit** function of the **TaskListComponent** class.
+Cet abonnement sera utilisé dans la fonction **ngOnInit** de la classe **TaskListComponent**.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the the `src/app/task-list/task-list.component.ts` file.
+1. Modifiez le fichier `src/app/task-list/task-list.component.ts`.
 
     ```typescript ins={"Subscribe to the observable": 14-17}
     import { Component, OnInit } from '@angular/core';
@@ -190,14 +204,14 @@ This subscription will be used in the **ngOnInit** function of the **TaskListCom
 
 </Steps>
 
-### Pitfalls
+### Pièges
 
-While subscribing to the observable in the component is a valid solution, it misses some optimizations that the **async** pipe provides.
-It also requires more code for the same result.
+Bien que l'abonnement à l'observable dans le composant soit une solution valable, il manque certaines optimisations fournies par le pipe **async**.
+Cela nécessite également plus de code pour le même résultat.
 
+Effectivement, dans le cas où vous utilisez la souscription à l'observable dans le composant, vous devez penser à vous **désabonner**.
+Nous ne verrons pas cette action pour le moment. Vous pouvez échanger avec votre mentor pour plus de détails.
 
-## ✔️ What you learned
+## ✔️ Ce que vous avez appris
 
-In this chapter, you learned one of the key features of Angular: how to query data from an API server!
-
-
+Dans ce chapitre, vous avez appris l'une des fonctionnalités clés d'Angular : comment interroger les données d'un serveur API !

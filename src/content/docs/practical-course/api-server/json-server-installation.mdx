@@ -1,54 +1,54 @@
 ---
-title: Install JSON Server
-description: Learn how to install JSON Server to create a fake API.
+title: Installez JSON Server
+description: Découvrez comment installer JSON Server pour créer une fausse API.
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-    {title: 'Add json-server', description: 'Install and configure json-server as a fake API server.'},
+    {mainTitle: 'Objectifs de ce chapitre', title: 'Ajoutez JSON Server', description: 'Installez et configurez json-server en tant que faux serveur API.'},
 ]} />
 
-## What is json-server?
+## Qu'est-ce que le JSON server ?
 
-json-server is a small package that helps you to create an API with zero coding in less than 30 seconds.
-It's a full fake API with zero coding that allows you to create, read, update and delete tasks.
+json-server est un petit package qui vous aide à créer une API sans code en moins de 30 secondes.
+Il s'agit d'une fausse API complète sans code qui vous permet de créer, lire, mettre à jour et supprimer des tâches.
 
-It won't provide us a real API server, but it's a great tool to focus on the Angular part of the application.
+Cela ne nous fournira pas un véritable serveur API, mais c'est un excellent outil pour se concentrer sur la partie Angular de l'application.
 
-Let's install it and create a fake database.
+Installons-le et créons une fausse base de données.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Run the following command in a terminal to Install json-server.
+1. Exécutez la commande suivante dans un terminal pour installer json-server.
 
     ```bash
     npm install json-server
     ```
-2. Create a `db.json` file at the project root and populate it with a list of tasks.
+2. Créez un fichier `db.json` à la racine du projet et remplissez-le avec une liste de tâches.
 
     ```json
     {
       "tasks": [
         {
           "id": 1,
-          "title": "First task",
-          "description": "This is the first task",
+          "title": "Première tâche",
+          "description": "Voici la première tâche de ta to-do liste.",
           "createdAt": "2021-09-01T12:00:00"
         },
         {
           "id": 2,
-          "title": "Second task",
-          "description": "This is the second task",
+          "title": "Seconde tâche",
+          "description": "Voici la seconde tâche de ta to-do liste.",
           "createdAt": "2021-09-01T12:00:00"
         }
       ]
     }
     ```
-3. Create a `start-server` script in your `package.json` file.
+3. Créez un script `start-server` dans votre fichier `package.json`.
 
     ```json
     {
@@ -57,23 +57,17 @@ Let's install it and create a fake database.
       }
     }
     ```
-4. Run the following command to start json-server.
+4. Exécutez la commande suivante pour démarrer json-server.
 
     ```bash
     npm run start-server
     ```
-5. Open your browser and go to `http://localhost:3000/tasks`.
+5. Ouvrez votre navigateur et accédez à `http://localhost:3000/tasks`.
 
 </Steps>
 
 
-## ✔️ What you learned
+## ✔️ Ce que vous avez appris
 
-In this chapter, you learned how to add json-server and configure it to create a fake API server.
-It'll be use in next chapters to create, read, update and delete tasks as if you were interacting with a real API server.
-
-
-
-
-
-
+Dans ce chapitre, vous avez appris comment ajouter json-server et le configurer pour créer un faux serveur API.
+Il sera utilisé dans les prochains chapitres pour créer, lire, mettre à jour et supprimer des tâches comme si vous intérargissez avec un véritable serveur API.

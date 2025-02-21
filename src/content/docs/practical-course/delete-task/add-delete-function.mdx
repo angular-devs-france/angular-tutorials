@@ -1,27 +1,27 @@
 ---
-title: Add delete function in the TaskService
-description: Learn how to delete a task from the list in an Angular application.
+title: Ajoutez une fonction delete dans le TaskService
+description: Découvrez comment supprimer une tâche de la liste dans votre application Angular
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-{title: 'Handle task deletion', description: 'Learn how to delete a task from the task list.'},
+{mainTitle: 'Objectifs de ce chapitre', title: 'Gérez la suppression', description: 'Découvrez comment supprimer une tâche de la liste.'},
 ]} />
 
-## The deleteTask function
+## La fonction deleteTask
 
-To delete a task from the list, let's create a **deleteTask** function in the **TaskService** service.
-It'll remove the task from the list based on its **uuid**.
+Pour supprimer une tâche de la liste, créons une fonction **deleteTask** dans le service **TaskService**.
+Cette fonction supprimera la tâche de la liste en se basant sur son **id**.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task.service.ts` file.
+1. Modifiez le fichier `src/app/task.service.ts`.
 
-   ```typescript ins={"Add the deleteTask function": 20-23}
+   ```typescript ins={"Ajoutez de la fonction deleteTask": 22-26}
    import { Injectable } from '@angular/core';
 
    @Injectable({
@@ -30,27 +30,29 @@ It'll remove the task from the list based on its **uuid**.
    export class TaskService {
        tasks: Task[] = [
            {
-               title: 'Task 1',
-               description: 'Description of task 1',
+               id: uuid(),
+               title: 'Tâche 1',
+               description: 'Description de la tâche 1',
                createdAt: new Date()
            },
            {
-               title: 'Task 2',
-               description: 'Description of task 2',
+               id: uuid(),
+               title: 'Tâche 2',
+               description: 'Description de la tâche 2',
                createdAt: new Date()
            }
        ];
 
 
-     deleteTask(id: string) {
-       this.tasks = this.tasks.filter(task => task.id !== id);
-     }
+    deleteTask(id: string): void {
+        const taskIndex = this.tasks.findIndex(task => task.id === id);
+        this.tasks.splice(taskIndex, 1);
+    }
    }
    ```
 
 </Steps>
 
-## ✔️ What you learned
+## ✔️ Ce que vous avez appris
 
-In this chapter, you added a function to remove a task from the list based on its **id** in the **TaskService**.
-
+Dans ce chapitre, vous avez ajouté une fonction qui permet de supprimer une tâche de la liste en se basant sur son **id** dans le **TaskService**.

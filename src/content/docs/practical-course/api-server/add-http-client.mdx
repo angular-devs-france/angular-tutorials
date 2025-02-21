@@ -1,27 +1,27 @@
 ---
-title: Add an HTTP Client
-description: Learn how to add an HTTP Client to an Angular application.
+title: Ajoutez HTTP Client
+description: Découvrez comment ajouter HTTP Client à une application Angular.
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-    {title: 'Add an Http Client', description: 'Learn how to add an HTTP Client to communicate with the fake API server.'},
+    {mainTitle: 'Objectifs de ce chapitre', title: 'Ajoutez HTTP Client', description: 'Découvrez comment ajouter HTTP Client pour communiquer avec le faux serveur API.'},
 ]} />
 
-## The HttpClient module
+## Module HttpClient
 
-The **HttpClientModule** is a built-in Angular module that allows you to make HTTP requests to a server.
-It provides a **HttpClient** service that you can inject in your services to make HTTP requests.
+Le **HttpClientModule** est un module Angular intégré qui vous permet d'envoyer des requêtes HTTP à un serveur.
+Il fournit un service **HttpClient** que vous pouvez injecter dans vos services pour effectuer des requêtes HTTP.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Import the **HttpClientModule** in the `src/app/app.module.ts` file.
+1. Importez **HttpClientModule** dans le fichier `src/app/app.module.ts`.
 
-    ```typescript ins={"Import the HttpClientModule": 3-4} ins={"Add the HttpClientModule to the imports array": 13-14}
+    ```typescript ins={"Importez HttpClientModule": 3-4} ins={"Ajoutez HttpClientModule au tableau d\'imports": 13-14}
     import { BrowserModule } from '@angular/platform-browser';
     import { NgModule } from '@angular/core';
 
@@ -43,9 +43,9 @@ It provides a **HttpClient** service that you can inject in your services to mak
     export class AppModule { }
     ```
 
-2. Inject the HttpClient service in the `src/app/task.service.ts` file.
+2. Injectez le service HttpClient dans le fichier `src/app/task.service.ts`.
 
-    ```typescript ins={"Import the HttpClient service": 2-3} ins={"Inject the HttpClient service": 9-11}
+    ```typescript ins={"Importez le service HttpClient": 2-3} ins={"Injectez le service HttpClient": 9-11}
     import { Injectable } from '@angular/core';
 
     import { HttpClient } from '@angular/common/http';
@@ -61,8 +61,18 @@ It provides a **HttpClient** service that you can inject in your services to mak
 
 </Steps>
 
-## ✔️ What you learned
 
-The **HttpClientModule** is a built-in Angular module that allows you to make HTTP requests to a server.
-That's one of the first module added in a real-world Angular application to communicate with a server.
-In the next chapters, we'll use it to communicate with the fake API server to fetch and update tasks.
+:::tip
+Où placer la ligne du **constructor** dans une class Angular ?
+Les pratiques recommandées pour l'ordre des éléments d'une class Angular sont les suivantes :
+
+1. Variables
+2. Constructeur
+3. Fonctions
+:::
+
+## ✔️ Ce que vous avez appris
+
+**HttpClientModule** est un module Angular intégré qui vous permet d'envoyer des requêtes HTTP à un serveur.
+C'est l'un des premiers modules ajoutés à une application Angular réelle pour communiquer avec un serveur.
+Dans les prochains chapitres, nous l'utiliserons pour communiquer avec le faux serveur API afin de récupérer et de mettre à jour les tâches.

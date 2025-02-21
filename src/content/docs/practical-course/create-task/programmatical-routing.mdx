@@ -1,42 +1,42 @@
 ---
-title: Programmatical routing
-description: Learn how to use programmatical routing in an Angular application
+title: Routing avancé
+description: Apprenez-en un peu plus sur le routing dans une application Angular
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-{title: 'Trigger the route programmatically', description: 'Learn how to trigger a route programmatically in an Angular application.'},
+{mainTitle: 'Objectifs de ce chapitre', title: 'Routing avancé', description: 'Apprenez à utiliser le routing avancé dans une application Angular.'},
 ]} />
 
-In the last step, you tested the form with this scenario:
+Dans la dernière étape, vous avez testé le formulaire avec ce scénario :
 
-1. Click on the `Add a new task` link
-2. Enter a title and a description in the form
-3. Click on the `Create task` button
-4. Click on the `List of tasks` link
+1. Cliquez sur le lien  `Ajoutez une nouvelle tâche`
+2. Saisissez un titre et une description dans le formulaire
+3. Cliquez sur le bouton `Créer une tâche`
+4. Cliquez sur le lien `Liste des tâches`
 
-But what if you want to redirect the user to the list of tasks after the form is submitted?
-That's a common scenario in web applications, and Angular provides a way to do that.
+Mais que se passe-t-il si l'on souhaite rediriger l'utilisateur vers la liste des tâches après la soumission du formulaire ?
+C'est un scénario courant dans les applications Web et Angular fournit un moyen de le faire.
 
-You saw how to trigger a navigation by clicking on a link with the **routerLink** directive.
-But in our situation, you want to trigger a navigation when the **createTask** function is called.
+Vous avez vu comment déclencher une navigation en cliquant sur un lien avec la directive **routerLink**.
+Mais dans cette situation, vous allez déclencher une navigation lorsque la fonction **submit** est appelée.
 
-## Inject the Router
+## Injectez le Router
 
-Your **TaskService** service is not the only element you can inject in the constructor of a component.
-By using the Angular Router feature, you can inject the **Router** service in a component.
+Vos propres services personnalisés ne sont pas les seuls éléments que vous pouvez injecter dans le constructeur d'un composant.
+En utilisant la fonctionnalité Angular Router, vous pouvez injecter le service **Router** dans un composant.
 
-This service provides information about the current route and allows you to navigate to a different one.
+Ce service vous permet de récupérer des informations sur la route actuelle et vous permet de naviguer vers une route différente.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task-form.component.ts` file.
+1. Modifiez le fichier `src/app/task-form.component.ts`.
 
-    ```typescript ins={"1. import the Router": 4-5} ins={"2. Inject the Router in the class constructor": 20-21} ins={"3. Use the navigate function from the Router": 28-29}
+    ```typescript ins={"1. Importez le Router": 4-5} ins={"2. Injectez le Router dans la classe du constructeur": 20-21} ins={"3. Utilisez la fonction de navigation fournit par le Router": 26-27}
     // task-form.component.ts
     import { Component } from '@angular/core';
     import { TaskService } from '../task.service';
@@ -48,7 +48,7 @@ This service provides information about the current route and allows you to navi
         templateUrl: './task-form.component.html',
         styleUrls: ['./task-form.component.css']
     })
-    export class TaskFormComponent implements OnInit {
+    export class TaskFormComponent {
         task = {
             title: '',
             description: ''
@@ -60,9 +60,7 @@ This service provides information about the current route and allows you to navi
             private router: Router
         ) { }
 
-        ngOnInit() {}
-
-        createTask() {
+        submit() {
             this.taskService.addTask(this.task);
 
             this.router.navigate(['/']);
@@ -72,8 +70,8 @@ This service provides information about the current route and allows you to navi
 
 </Steps>
 
-The navigate function expects an array of route segments as a parameter.
-In our case, you want to navigate to the `tasks` route as you defined it in our route definition, so you use `['/']`;
+La fonction de navigation attend un tableau de segments de routes en tant que paramètre.
+Dans notre cas, vous allez naviguer vers la route **tasks** telle que vous l'avez défini dans votre configuration de route. Vous transmettez donc `['/']`.
 
 ```typescript
 const routes: Routes = [
@@ -82,19 +80,20 @@ const routes: Routes = [
 ];
 ```
 
-## Let's test it out
+## Testez-le
 
-Now if you repeat the previous scenario:
+Maintenant, si vous répétez le scénario précédent :
 
-1. Click on the `Add a new task` link
-2. Enter a title and a description in the form
-3. Click on the `Create task` button
+<Steps>
 
-You should be redirected to the list of tasks.
+1. Cliquez sur le lien  `Ajoutez une nouvelle tâche`
+2. Saisissez un titre et une description dans le formulaire
+3. Cliquez sur le bouton `Créer une tâche`
 
-## ✔️ What you learned
+</Steps>
 
-In this chapter, you learned how to use programmatical routing in an Angular application. You learned how to inject the `Router` service in a component and use its `navigate` function to navigate to a different route.
+Vous devriez être redirigé vers la liste des tâches.
 
+## ✔️ Ce que vous avez appris
 
-
+Dans ce chapitre, vous avez appris à utiliser le routage programmatique dans une application Angular. Vous avez appris à injecter le service **Router** dans un composant et à utiliser sa fonction **navigate** pour naviguer vers un itinéraire différent.

@@ -1,99 +1,129 @@
 ---
-title: Display a list of tasks
-description: Learn how to display a list of items in an Angular application.
+title: Afficher une liste de tâches
+description: Découvrez comment afficher une liste d'éléments dans une application Angular.
 ---
 
 import { Image } from 'astro:assets';
-import staticImg from '../../../../assets/display-list_static.png';
+import staticImg from '../../../../../assets/display-list_static.png';
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-    {title: 'Discover *ngFor directive', description: 'Learn how to iterate over a list of items in a HTML template file using the *ngFor directive.'}
+    {mainTitle: 'Objectifs de ce chapitre', title: 'Découvrez la directive structurelle *ngFor', description: 'Découvrez comment itérer sur une liste d\'éléments dans un Template HTML à l\'aide de la directive *ngFor.'}
 ]} />
 
-## HTML structure
+## Structure HTML
 
-To display a list of items, the expected HTML structure is:
-
-```html
-<ul class="list-group">
-  <li class="list-group-item">Item 1</li>
-  <li class="list-group-item">Item 2</li>
-  <li class="list-group-item">Item 3</li>
-</ul>
-```
-
-<Image class="shadow-xl rounded-xl" src={staticImg} alt="A bird sitting on a nest of eggs."/>
-
-However, what happens if you want to display a dynamic list of items changing over time?
-What if a new task is added?
-
-You want to rely on the **tasks** variable to display the proper list of tasks.
-If the tasks is updated, the view should be updated as well.
-
-## Angular Directives
-
-Angular Components are Angular Directives with a HTML template.
-The goal of a Directive is not to display content but to manipulate the html content of an Angular component.
-They can help to dynamically hide/display some content, change their style, or affect how many times a content is displayed.
-
-### *ngFor directive
-
-***ngFor** name refers to **for loop**: its goal is to display a given html tag as many times as there are items in a provided list.
-You can apply it on any html tag. It'll affect this tag and its children.
-
-To use it, add this ***ngFor** on the html tag and provide it an arbitrary syntax to define the list you want to iterate over and a reference to use the value of each item.
-This syntax is `let task of tasks`:
-
-- **tasks** refers to the list defined in your component.ts file.
-- **task** is the reference to use the value of each item in the list (you can name it as you want).
+Pour afficher un tableau d'éléments, la structure HTML attendue est :
 
 ```html
-  <ul>
-    <li *ngFor="let item of items"></li>
-  </ul>
+<table class="table">
+  <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>Suivre le cours</td>
+        <td>24/05/2024</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Suivre le cours</td>
+        <td>24/05/2024</td>
+        <td></td>
+    </tr>
+  </tbody>
+</table>
 ```
+
+<Image class="shadow-xl rounded-xl" src={staticImg} alt="Un oiseau posé sur un nid d’œufs."/>
+
+Cependant, que se passe-t-il si vous souhaitez afficher un tableau dynamique d’éléments évoluant au fil du temps ?
+Et si une nouvelle tâche est ajoutée ?
+
+Vous voudrez vous appuyer sur la variable **tasks** pour afficher la bonne liste de tâches.
+Si les tâches sont mises à jour, la vue (Template HTML) doit également être mise à jour.
+
+## Directives Angular
+
+Les Composants Angular sont des Directives Angular possédant un fichier HTML.
+Le but d'une Directive n'est pas d'afficher du contenu mais de manipuler le Template HTML d'un autre composant Angular.
+Ils peuvent aider à masquer/afficher dynamiquement certains contenus, à modifier leur style ou à affecter le nombre de fois qu'un contenu est affiché.
+
+### Directive structurelle *ngFor
+
+Le nom ***ngFor** fait référence à **for loop**: son objectif est d'afficher une balise HTML donnée autant de fois qu'il y a d'éléments dans une liste fournie.
+Vous pouvez l'appliquer sur n'importe quelle balise HTML. Cela affectera cette balise et ses enfants.
+
+Pour l'utiliser, nous ajoutons ce ***ngFor** sur la balise HTML. Elle attend une syntaxe arbitraire qui définit à la fois la liste et une référence à chaque élément de la liste.
+Cette syntaxe est `let task of tasks` :
+
+- **tasks** fait référence à la liste définie dans votre fichier `composant.ts`.
+- **task** est la référence pour utiliser la valeur de chaque élément de la liste (vous pouvez le nommer comme vous le souhaitez).
+
+    ```html
+    <table class="table">
+      <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let task of tasks">
+            <td>Suivre le cours</td>
+            <td>24/05/2024</td>
+            <td></td>
+        </tr>
+      </tbody>
+    </table>
+    ```
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task-list.component.html` file.
+1. Modifiez le fichier `src/app/task-list.component.html`.
 
     ```html
     // task-list.component.html
-    <ul class="list-group">
-        <li *ngFor="let task of tasks" class="list-group-item">
-        Task
-        </li>
-    </ul>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let task of tasks">
+        <td>Suivre le cours</td>
+        <td>24/05/2024</td>
+        <td></td>
+        </tr>
+    </tbody>
+    </table>
     ```
 
-2. Go back to your browser and see the following page:
-
-    // TODO: Add image
+2. Revenez à votre navigateur et consultez la page suivante :
 
 </Steps>
 
-Your list is now displayed in the browser.
-You should see **Task** repeated as many times (2) as there are tasks in the list.
+Votre liste est maintenant affichée dans le navigateur.
+Vous devriez voir `Task` répétée autant de fois (2) qu'il y a de tâches dans la liste.
 
-## ✔️ What you learned
+## ✔️ Ce que vous avez appris
 
-In this chapter, you learned how to use a list of items defined in your component.ts file towards the component.html file.
-You used the *ngFor directive to loop through the list of items and display them in the view.
-Such a task is quite common in web development, and you'll likely use it in many of your Angular applications.
+Dans ce chapitre, vous avez appris à utiliser une liste d'éléments définis dans votre fichier `composant.ts` vers le fichier `composant.html`.
+Vous avez utilisé la directive structurelle ***ngFor** pour parcourir la liste des éléments et les afficher dans la vue (Template HTML).
+Une telle action est assez courante dans le développement Web et vous l'utiliserez probablement dans plusieurs de vos applications Angular.
 
-## 🚦 Quiz
+## 🔗 Ressources
 
-What is the expected *ngFor directive syntax?
-
-1. *ngFor="let task on tasks"
-2. *ngFor="let task of tasks"
-3. *ngFor="let task in tasks"
-4. *ngFor="task of tasks"
-
-## 🔗 Resources
-
-
+- <a href="https://angular.dev/guide/directives#listing-items-with-ngfor" target="_blank">Documentation officielle Angular: `*ngFor`</a>

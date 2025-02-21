@@ -1,23 +1,20 @@
 ---
-title: Display overview
-description: Learn how to update a task in an Angular application.
+title: Aperçu du chapitre
+description: Découvrez comment mettre à jour une tâche dans notre application Angular.
 ---
 
-## What you will learn in this chapter
+## Ce que vous apprendrez dans ce chapitre
 
-Here is our next scenario:
+Voici notre prochain scénario :
 
-- We want to display a list of tasks in our application.
-- We want to display the details of a task when we click on the list
-- We want to switch content between the list and the details of a task
+- nous souhaitons afficher une liste de tâches dans notre application;
+- nous souhaitons afficher le détail d'une tâche lorsque nous cliquons sur la liste;
+- nous voulons basculer le contenu entre la liste et les détails d'une tâche.
 
-## Technical details
+## Compétences techniques
 
-We will use the following technical details:
+Nous acquérons les compétences techniques suivantes :
 
-- Create components with Angular CLI
-- Add routing to your application
-- TODO : update
-
-
-
+- créer des composants avec Angular CLI;
+- ajouter du routage à notre application;
+- TODO : mise à jour.

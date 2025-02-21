@@ -1,25 +1,25 @@
 ---
-title: Add task with the HTTP client
-description: Learn how to add a task to a list using the HTTP client in an Angular application.
+title: Ajoutez une tâche avec HTTP Client
+description: Découvrez comment ajouter une tâche à une liste à l'aide du HTTP Client dans une application Angular.
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-    {title: 'Create tasks with the HTTP client', description: 'Add task to the list with an API call to the fake API'},
+    {mainTitle: 'Objectifs de ce chapitre', title: 'Créez une tâche en utilisant HTTP Client', description: 'Ajoutez une tâche dans la liste en réalisant un appel PI au faux serveur.'},
 ]} />
 
-## The TaskService
+## TaskService
 
-You just communicated with the API server to retrieve a list of tasks.
-Let's update the API server list by adding a new task.
+Vous venez de communiquer avec le serveur API pour récupérer une liste de tâches.
+Mettez à jour la liste stockée dans la fausse API en ajoutant une nouvelle tâche.
 
-Based on the HTTP protocol, you will use the **post** function to add a task to the list: **http.post()**.
-This function expects 2 parameters:
+Basé sur le protocole HTTP, vous utiliserez la fonction **post** pour ajouter une tâche à la liste : **http.post()**.
+Cette fonction attend 2 paramètres :
 
-1. The URL of the API server
-2. The task to send to the server
+1. L'URL du serveur API
+2. Les données de la tâche à envoyer au serveur
 
 ```typescript
 addTask(task: TaskForm) {
@@ -30,21 +30,21 @@ addTask(task: TaskForm) {
 }
 ```
 
-As JSON-server is able to generate an **id** for us, you won't use the **uuid** package to generate an **id** for the task.
+Comme JSON-server est capable de générer un **id** pour nous, vous n'utiliserez pas le package **uuid** pour générer un **id** pour la tâche.
 
-This new **addTask** function defines the contract with the API server:
+Cette nouvelle fonction **addTask** définit l'échange avec le serveur API :
 
-- it makes a **POST** request
-- it sends a **TaskForm** object as a request body
-- it communicates with the API server at `http://localhost:3000/tasks`
+- Il fait une requête **POST**;
+- Il envoie un objet **TaskForm** comme corps de requête;
+- Il communique avec le serveur API à l'adresse `http://localhost:3000/tasks`.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task.service.ts` file.
+1. Modifiez le fichier `src/app/task.service.ts`.
 
-    ```typescript ins={"Add the addTask function": 10-16}
+    ```typescript ins={"Remplacez la fonction addTask": 10-16}
     import { Injectable } from '@angular/core';
     import { HttpClient } from '@angular/common/http';
     import { Task, TaskForm } from './task.model';
@@ -66,23 +66,23 @@ This new **addTask** function defines the contract with the API server:
 
 </Steps>
 
-## Update the TaskFormComponent
+## Modifiez TaskFormComponent
 
-In the previous step, you were explained Observables need to be subscribed to in order to execute the request.
-You were able to use the **async** pipe in the HTML template to subscribe to the observable.
+À l'étape précédente, on vous a expliqué que les observables doivent être abonnées pour exécuter la requête.
+Vous avez pu utiliser le pipe **async** dans le Template HTML pour vous abonner à l'observable.
 
-But in the current situation, the request does happen in the component.ts file.
+Mais dans la situation actuelle, la requête se produit dans le fichier `component.ts`.
 
-Let's subscribe to the observable by using the `subscribe` function.
+Abonnez-nous à l'observable en utilisant la fonction `subscribe`.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task-form/task-form.component.ts` file.
+1. Modifiez le fichier `src/app/task-form/task-form.component.ts`.
 
-    ```typescript ins={"Update the submit function": 19-23} ins="this.taskService.addTask(task).subscribe();"
-    import { Component, OnInit } from '@angular/core';
+    ```typescript ins={"Mettez à jour la fonction de soumission du formulaire": 28-29} ins="this.taskService.addTask(task).subscribe();"
+    import { Component } from '@angular/core';
     import { TaskService } from '../task.service';
     import { TaskForm } from '../task.model';
 
@@ -97,79 +97,90 @@ Let's subscribe to the observable by using the `subscribe` function.
         description: ''
       };
 
-      constructor(private taskService: TaskService) { }
+    constructor(private taskService: TaskService) { }
 
-      submit(task: TaskForm) {
-        if (task.id) {
-            this.taskService.updateTask(task);
+    submit() {
+        const id = this.route.snapshot.paramMap.get('id');
+
+        if (id) {
+            const existingTask = this.taskService.getTask(id);
+            this.taskService.updateTask({
+                ...existingTask,
+                ...this.task
+            });
         } else {
-            this.taskService.addTask(task).subscribe();
+
+            this.taskService.addTask(this.task).subscribe();
         }
         this.router.navigate(['/']);
-      }
+        }
     }
     ```
-
 </Steps>
 
-It now works, but not exactly as you should expect...
+Cela fonctionne maintenant, mais pas exactement comme vous le souhaiteriez...
 
+## Programmation asynchrone
 
-## Asynchronous programming
+Vous vous souvenez de l'exemple du journal du chapitre précédent ?
+Étant donné qu’il s’agit d’un journal physique, sa livraison dans votre boîte aux lettres prend du temps.
+Un certain temps s'écoule entre le moment où vous vous inscrivez et le moment où vous recevez le journal.
 
-Remember the newsletter example from the previous chapter?
-Given that's a physical newsletter, it takes time to be delivered to your mailbox.
-Some time happens between the moment you subscribe and the moment you receive the newsletter.
+C'est la même chose dans notre situation.
+En envoyant une requête avec la fonction **subscribe()**, vous demandez au serveur d'ajouter une tâche à la liste.
+Mais la navigation vers l'itinéraire **"/"** aura lieu immédiatement après l'envoi de la demande, et non une fois la demande terminée.
 
-That's the same in our situation.
-By sending a request with the **subscribe()** function, you're asking the server to add a task to the list.
-But the navigation to the **"/"** route will happen immediately after the request is sent, not after the request is completed.
-
-Let's review the code you just changed in the `submit` function of the `TaskFormComponent`:
+Passons en revue le code que vous venez de modifier dans la fonction `submit` de `TaskFormComponent` :
 
 ```typescript
-submit(task: TaskForm) {
-    if (task.id) {
-        this.taskService.updateTask(task);
+submit() {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+        const existingTask = this.taskService.getTask(id);
+        this.taskService.updateTask({
+                ...existingTask,
+                ...this.task
+        });
     } else {
-        this.taskService.addTask(task).subscribe();
+        this.taskService.addTask(this.task).subscribe();
     }
     this.router.navigate(['/']);
 }
 ```
 
-1. you call the **addTask** function from the **TaskService** to add a task to the API server.
-2. you navigate to the **"/"** route.
+1. Vous appelez la fonction **addTask** depuis **TaskService** pour ajouter une tâche au serveur API.
+2. Vous naviguez vers l'itinéraire **"/"**.
 
 :::danger
-This code won't run in the expected order
+Ce code ne s'exécutera pas dans l'ordre attendu.
 :::
 
-API communication is asynchronous, meaning that the action of **addTask** function might not be resolved yet when the **router.navigate** function is called.
-Our server is served locally, so the request will be fast, but it's still asynchronous.
+La communication API est asynchrone, ce qui signifie que l'action de la fonction **addTask** peut ne pas encore être résolue lorsque la fonction **router.navigate** est appelée.
+Notre serveur est tourne en locale, donc la requête sera rapide, mais elle reste asynchrone.
 
-A request to the server can take a long time if the server or the network is slow for any reason.
-In this situation, While the request is still being processed, the **router.navigate** function will be executed.
+Une requête adressée au serveur peut prendre beaucoup de temps si le serveur ou le réseau est lent pour une raison quelconque.
+Dans cette situation, pendant que la demande est toujours en cours de traitement, la fonction **router.navigate** sera exécutée.
 
-That's not what you want as by navigating, you want to display the updated task list.
+Ce n'est pas ce que vous souhaitez car en naviguant, vous allez afficher la liste des tâches mise à jour.
 
-You need to wait for the response from the server before navigating to the **"/"** route.
+Vous devez attendre la réponse du serveur avant de naviguer vers la route **"/"**.
 
-## The Subscription
+## L'abonnement
 
-The subscribe function accepts a callback function as a parameter.
-This callback function will be executed when the observable emits a value.
+La fonction d'abonnement accepte une fonction de rappel comme paramètre.
+Cette fonction de rappel sera exécutée lorsque l'observable émettra une valeur.
 
-Let's use this callback function to navigate to the **"/"** route.
+Utilisez cette fonction de rappel pour naviguer vers la route **"/"**.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task-form/task-form.component.ts` file.
+1. Modifiez le fichier `src/app/task-form/task-form.component.ts`.
 
-    ```typescript ins={"Update the submit function": 20-25}
-    import { Component, OnInit } from '@angular/core';
+    ```typescript ins={"Mettez à jour la fonction de soumission du formulaire": 29-32}
+    import { Component } from '@angular/core';
     import { Router } from '@angular/router';
     import { TaskService } from '../task.service';
     import { TaskForm } from '../task.model';
@@ -187,26 +198,31 @@ Let's use this callback function to navigate to the **"/"** route.
 
       constructor(private taskService: TaskService, private router: Router) { }
 
-      submit(task: TaskForm) {
-        if (task.id) {
-            this.taskService.updateTask(task);
-        } else {
-            this.taskService.addTask(task).subscribe(() => {
-              this.router.navigate(['/']);
-            });
-        }
+      submit() {
+          const id = this.route.snapshot.paramMap.get('id');
+
+            if (id) {
+                const existingTask = this.taskService.getTask(id);
+                this.taskService.updateTask({
+                    ...existingTask,
+                    ...this.task
+                });
+            } else {
+
+                this.taskService.addTask(this.task).subscribe(() => {
+                    this.router.navigate(['/']);
+                });
+            }
       }
     }
     ```
     :::caution
-    This change temporarily introduces a regression in the application.
-    Updating a task does no longer trigger the router navigation.
-    We'll fix it in the next lesson.
+    Ce changement introduit temporairement une régression dans l'application.
+    La mise à jour d'une tâche ne déclenche plus la navigation du routeur.
+    Vous y remédierez dans le prochain chapitre.
     :::
-
 </Steps>
 
-## ✔️ What you learned
+## ✔️ Ce que vous avez appris
 
-In this chapter, you learned how to use the **HttpClient** to add a task to the list. As the API communication is asynchronous, you learned how to use the **subscribe** function to wait for the response from the server before navigating to the **"/"** route.
-
+Dans ce chapitre, vous avez appris à utiliser **HttpClient** pour ajouter une tâche à la liste. La communication API étant asynchrone, vous avez appris à utiliser la fonction **subscribe** pour attendre la réponse du serveur avant de naviguer vers la route **"/"**.

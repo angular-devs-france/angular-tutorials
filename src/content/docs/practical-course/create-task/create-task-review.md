@@ -22,11 +22,11 @@ We create a HTML form structure in the `TaskFormComponent` class.
 <form>
   <label for="title">Title:</label>
   
-  <input type="text" id="title" name="title" [(ngModel)]="task.title">
+  <input type="text" id="title" name="title" [(ngModel)]="task.title"/>
   <label for="description">Description:</label>
   <textarea id="description" name="description" [(ngModel)]="task.description"></textarea>
   
-  <button type="submit" (click)="createTask()">Create task</button>
+  <button type="submit" (click)="submit()">Create task</button>
 </form>
 ```
 
@@ -43,7 +43,7 @@ import { Router } from '@angular/router';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
-export class TaskFormComponent implements OnInit {
+export class TaskFormComponent {
     
     
   task = {
@@ -56,12 +56,10 @@ export class TaskFormComponent implements OnInit {
       private taskService: TaskService,
       private router: Router
   ) { }
-  
-  ngOnInit() {}  
     
-  createTask() {
+  submit() {
     this.taskService.addTask(this.task);
-    this.router.navigate(['/tasks']);
+    this.router.navigate(['/']);
   }
 }
 ```
@@ -107,13 +105,11 @@ import { TaskService } from '../task.service';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent {
     
   tasks: Task[] = this.taskService.tasks;
   
   constructor(private taskService: TaskService) { }
-    
-  ngOnInit() {}  
 }
 ```
 

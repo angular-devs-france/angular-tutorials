@@ -1,33 +1,33 @@
 ---
-title: Discover Angular
-description: Learn Angular in a practical way
+title: Découvrez Angular
+description : Apprenez Angular en pratiquant
 ---
 
-![Angular](../../../assets/extended-angular-logo.png)
+![Angular](../../../../assets/extended-angular-logo.png)
 
-## What is Angular?
+## Qu'est-ce qu'Angular ?
 
-> Angular is a web framework that empowers developers to build fast, reliable applications.
-Maintained by a dedicated team at Google, Angular provides a broad suite of tools, APIs, and libraries to simplify and streamline your development workflow. Angular gives you a solid platform on which to build fast, reliable applications that scale with both the size of your team and the size of your codebase.
+> Angular est un framework Web qui permet aux développeurs de créer des applications rapides et fiables.
+Géré par une équipe dédiée chez Google, Angular fournit une large suite d'outils, d'API et de librairies pour simplifier et rationaliser votre flux de travail de développement. Angular vous offre une plate-forme solide sur laquelle créer des applications rapides et fiables qui s'adaptent à la fois à la taille de votre équipe et à la taille de votre base de code.
 
-source: <a href="https://angular.dev/overview" target="_blank">Angular documentation</a>
+source: <a href="https://angular.dev/overview" target="_blank">Documentation Angular</a>
 
-## What will you learn?
+## Qu'allez-vous apprendre ?
 
-In this practical course, you will learn how to build a complete Angular application from scratch. You will learn how to create components, services, and routes. You will also learn how to build, manage the local state of your application and communicate with a REST API.
+Dans ce cours pratique, vous apprendrez à créer une application Angular complète à partir de zéro. Vous apprendrez à créer des composants, des services et des routes. Vous apprendrez également à créer, gérer l'état local de votre application et à communiquer avec une API REST.
 
-## What will you build?
+## Qu'allez-vous réaliser ?
 
-You will build a simple application that will allow you to manage a list of items. You will be able to read, add, edit, and delete items.
+Vous construirez une application simple qui vous permettra de gérer une liste d'éléments. Vous pourrez lire, ajouter, modifier et supprimer des éléments.
 
-## Who is this course for?
+## A qui est destiné ce cours ?
 
-This course is designed for developers who have some basic knowledge of HTML, CSS and JavaScript and want to discover Angular.
+Ce cours s'adresse aux développeurs ayant des connaissances de base en HTML, CSS et JavaScript et souhaitant découvrir Angular.
 
 :::caution
-This course has been crafted for **Angular v14** and doesn't cover the latest versions.
-It's intended to help beginners onboarded to old Angular projects. Great features have been added to Angular since v14 but impacts the way to create applications in a different way.
-Our goal is to help you being comfortable onboarding on older projects.
+Ce cours a été conçu avec **Angular v14** et ne couvre pas les dernières versions.
+Il est destiné à aider les débutants à intégrer d'anciens projets Angular. D'excellentes fonctionnalités ont été ajoutées à Angular depuis la v14, mais ont un impact différent sur la manière de créer des applications.
+Notre objectif est de vous aider à vous sentir à l'aise pour intégrer des projets plus anciens.
 
-**We'll release a new course for the latest Angular version soon.**
+**Nous publierons bientôt un nouveau cours pour la dernière version d'Angular.**
 :::

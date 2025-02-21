@@ -1,39 +1,43 @@
 ---
-title: Components introduction
-description: Components are the building blocks of Angular applications
+title: Introduction sur les composants
+description: Les composants sont les éléments constitutifs des applications Angular.
 ---
 
-Components are the building blocks of Angular applications.
-They help to organize an application into smaller, reusable pieces for a more maintainable codebase.
+Les composants sont les piliers des applications Angular.
+Ils aident à organiser une application en éléments plus petits et réutilisables pour une base de code plus maintenable.
 
-Components are used to:
+Les composants sont utilisés pour :
 
-- Break up the application into smaller components.
-- Reuse the same block in different parts of the application.
-- as dedicated routes with their own URL.
+- Diviser l'application en composants plus petits;
+- Réutiliser le même bloc dans différentes parties de l'application;
+- Dédier leur contenu à une route avec leur propre URL.
 
 :::note
-If you are familiar with **components** with another frontend framework, the concept is the same.
+Si vous êtes familié avec les **composants** dans un autre framework, le concept est le même.
 :::
 
-## Our first component
+## Votre premier composant
 
-Our project already has a default component called **app**.
+Votre projet a déjà un composant par défaut appelé `app`.
 
-It's made of 3 files:
+Il est composé de 3 fichiers :
 
-- `app.component.ts`: The component class code, written in TypeScript.
-- `app.component.html`: The component template, written in HTML.
-- `app.component.css`: The component's private CSS styles.
+- `app.component.ts`: Le code de la classe du composant écrit en TypeScript;
+- `app.component.html`: Le Template du composant écrit en HTML;
+- `app.component.css`: Les styles CSS dédiés au composant.
 
-Think about the human body:
-- The HTML file is the bones, the structure,
-- The TypeScript file is the brain and muscles, the logic,
-- The CSS file is the skin, how it'll look like.
+Pensez au corps humain :
 
-Each of these files is a part of the component.
+- Le fichier HTML représente les os: c'est la structure;
+- Le fichier TypeScript représente le cerveau et les muscles: c'est la logique;
+- Le fichier CSS est l'apparence de la personne: à quoi il ressemblera.
 
-Enterprise applications are made of many components. Each component is a piece of the application that controls a portion of the screen.
-You'll learn how to create a new component in the next step.
+Chacun de ces fichiers fait partie du composant.
 
+:::note
+Il y a souvent une incompréhension sur le terme Template. Le fichier HTML est le Template HTML de votre composant. Il représente la **vue** de votre composant.
+Le fichier TypeScript représente quant à lui le modèle de votre composant.
+:::
 
+Les applications d'entreprise sont constituées de nombreux composants. Chaque composant est un élément de l'application qui contrôle une partie de l'écran.
+Vous apprendrez comment créer un nouveau composant à l'étape suivante.

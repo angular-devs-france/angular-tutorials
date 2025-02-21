@@ -1,19 +1,19 @@
 ---
-title: Update TaskFormComponent
-description: Learn how to update the `TaskFormComponent` to populate the form with the task to update.
+title: Mettez à jour TaskFormComponent
+description: Découvrez comment mettre à jour le `TaskFormComponent` pour l'utiliser pour la mise à jour de la tâche.
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import Objective from '../../../../components/learning-objective.astro';
+import Objective from '../../../../../components/learning-objective.astro';
 
 <Objective class="drop-shadow-xl" objectives={[
-{title: 'Populate a form', description: 'Learn how to populate a form with the task to update.'},
+{mainTitle: 'Objectifs de ce chapitre', title: 'Remplissez le formulaire avec les données existantes', description: 'Découvrez comment remplir un formulaire avec les données existantes de la tâche.'},
 ]} />
 
-You are now able to land on the **TaskFormComponent**  by clicking on the 'Update' link.
-This path includes a dynamic value to pass the **id** of the task to update.
+Vous pouvez désormais accéder au **TaskFormComponent** en cliquant sur le lien `Mettre à jour`.
+Ce chemin inclut une valeur dynamique pour transmettre l'**id** de la tâche à mettre à jour.
 
-The **TaskFormComponent** form is currently empty as it was created to add a new task, initialized as an empty form.
+Le formulaire **TaskFormComponent** est actuellement vide car il a été créé pour ajouter une nouvelle tâche et il est donc initialisé comme formulaire vide.
 
 ```typescript
 // task-form.component.ts
@@ -24,21 +24,21 @@ task = {
 };
 ```
 
-Let's update it to use the form both to create and update a task.
+Mettez-le à jour pour utiliser le formulaire à la fois pour créer et mettre à jour une tâche.
 
-## Retrieve the task to update with the TaskService
+## Récupérer les informations de la tâche à mettre à jour avec le TaskService
 
-Before retrieving the id from the route, let's prepare the logic to identify the task to update.
-As the list of tasks is stored in the **TaskService**, you'll add a new function to retrieve a task based on its **id**.
-From this id, you will retrieve the task to fill the form.
+Avant de récupérer l'identifiant de la route, préparons la logique pour identifier la tâche à mettre à jour.
+Comme la liste des tâches est stockée dans **TaskService**, vous allez ajouter une nouvelle fonction pour récupérer une tâche en fonction de son **id**.
+A partir de cet identifiant, vous récupérerez la tâche pour remplir le formulaire.
 
 ### 🎓 Instructions
 
 <Steps>
 
-1. Update the `src/app/task-service.ts` file.
+1. Mettez à jour le fichier `src/app/task-service.ts`.
 
-   ```typescript ins={"Add a function to retrieve a taks based on its id": 28-31}
+   ```typescript ins={"Ajoutez une fonction pour récupérer une tâche par rapport à son identifiant": 28-31}
    import { Injectable } from '@angular/core';
    import { Task } from './task.model';
 
@@ -48,13 +48,13 @@ From this id, you will retrieve the task to fill the form.
    export class TaskService {
        tasks: Task[] = [
            {
-               title: 'Task 1',
-               description: 'Description of task 1',
+               title: 'Tâche 1',
+               description: 'Description de la tâche 1',
                createdAt: new Date()
            },
            {
-               title: 'Task 2',
-               description: 'Description of task 2',
+               title: 'Tâche 2',
+               description: 'Description de la tâche 2',
                createdAt: new Date()
            }
        ];
@@ -68,26 +68,26 @@ From this id, you will retrieve the task to fill the form.
 
 
      getTask(id: string): Task {
-       return this.tasks.find(task => task.id === id);
+       return this.tasks.find(task => task.id === id)!;
      }
    }
    ```
 
 </Steps>
 
-## Retrieve the task id from the route
+## Récupérer l'identifiant de la tâche de la route
 
-The **id** is present in the route path, you need to retrieve it in the **TaskFormComponent** component.
-Use the **ActivatedRoute** service to retrieve the **id** from the route.
+L'**id** est présent dans le chemin de la route, vous devez le récupérer dans le composant **TaskFormComponent**.
+Utilisez le service **ActivatedRoute** pour récupérer l'**id** de la route.
 
-This service provides access to information about the current route.
-Like you did with the **Router**, you'll inject it in the constructor of the **TaskFormComponent**.
+Ce service donne accès à des informations sur l'itinéraire actuel.
+Comme vous l'avez fait avec le **Router**, vous l'injecterez dans le constructeur du **TaskFormComponent**.
 
-### Angular lifecycle hooks
+### Hooks: cycle de vie Angular
 
-So far you initialized class properties when declaring them.
+Jusqu'à présent, vous avez initialisé les propriétés de classe lors de leur déclaration.
 
-For example, you initialized the **task** property with an empty object:
+Par exemple, vous avez initialisé la propriété **task** avec un objet vide :
 
 ```typescript
 task = {
@@ -97,21 +97,21 @@ task = {
 };
 ```
 
-You cannot use such a logic to initialize the **task** property with the task to update because this `id`is not yet available when the Component class is created.
+Vous ne pouvez pas utiliser une telle logique pour initialiser la propriété **task** avec la tâche à mettre à jour car cet `id` n'est pas encore disponible lors de la création de la classe Component.
 
-Why so?
+Pourquoi ?
 
-From its creation to its destruction, a component goes through several stages.  
-At the class creation of the Component stage, the route information is not available yet.
+De sa création à sa destruction, un composant passe par plusieurs étapes.
+Lors de la création de la classe de l'étape Component, les informations de la route ne sont pas encore disponibles.
 
-To handle such a case, Angular provides lifecycle hooks.
-Lifecycle hooks are methods that Angular calls on components and directives as it creates, changes, and destroys them.
+Pour gérer un tel cas, Angular fournit des hooks de cycle de vie.
+Les hooks de cycle de vie sont des méthodes qu'Angular appelle dans les composants et directives lorsqu'il les crée, les modifie et les détruit.
 
-One of the most used lifecycle hooks is **ngOnInit**, it's already present in all the created Components of the application.
-This hook is called just after Angular instantiated the Component class.
-And at that time, the component is able to read the route information.
+L'un des hooks de cycle de vie les plus utilisés est **ngOnInit**, il est déjà présent dans tous les composants créés de l'application.
+Ce hook est appelé juste après qu'Angular ait instancié la classe Component.
+Et à ce moment-là, le composant est capable de lire les informations de la route.
 
-Inside this hook, start by retrieving the id from the route.
+À l’intérieur de ce hook, commencez par récupérer l’identifiant de la route.
 
 ```typescript
 ngOnInit() {
@@ -119,12 +119,12 @@ ngOnInit() {
 }
 ```
 
-The **route.snapshot** is a static image of the route information and it exposes a **paramMap** property.
+**route.snapshot** est une image statique des informations d'itinéraire et expose une propriété **paramMap**.
 
-This **paramMap** is a map of the required and optional parameters specific to the route, including dynamic route path parameters.
-The **get** method of the **paramMap** object allows us to retrieve the value of a parameter based on the name you used in the route path definition: **id**.
+Ce **paramMap** est une carte des paramètres obligatoires et facultatifs spécifiques à l'itinéraire, y compris les paramètres de chemin de la route dynamique.
+La méthode **get** de l'objet **paramMap** nous permet de récupérer la valeur d'un paramètre en fonction du nom que vous avez utilisé dans la définition du chemin de route : **id**.
 
-Next, you'll retrieve the task to update from the **TaskService** based on the **id** available in the route.
+Ensuite, vous récupérerez la tâche à mettre à jour à partir du **TaskService** en fonction de l'**id** disponible dans la route.
 
 ```typescript
 ngOnInit() {
@@ -134,9 +134,9 @@ ngOnInit() {
 ```
 
 :::tip
-The **TaskFormComponent** is used both to create and update a task.
-You need to test if the **id** is available in the route before retrieving the task to update.
-It will avoid an error when the **id** is not available in the route.
+Le **TaskFormComponent** est utilisé à la fois pour créer et mettre à jour une tâche.
+Vous devez tester si l'**id** est disponible dans la route avant de récupérer la tâche à mettre à jour.
+Cela évitera une erreur lorsque l'**id** n'est pas disponible dans la route.
 :::
 
 ```typescript
@@ -153,9 +153,9 @@ ngOnInit() {
 
 <Steps>
 
-1. Update the `src/app/task-form/task-form.component.ts` file.
+1. Mettez à jour le fichier `src/app/task-form/task-form.component.ts`.
 
-   ```typescript ins={"Retrieve the task id from the route": 19-26}
+   ```typescript ins={"inecter ActivatedRoute": 20-21} ins={"Récupérez l'identifiant de la tâche à partir de la route": 23-30}
    import { Component, OnInit } from '@angular/core';
    import { ActivatedRoute } from '@angular/router';
    import { TaskService } from '../task.service';
@@ -172,7 +172,11 @@ ngOnInit() {
        description: ''
      };
 
-     constructor(private taskService: TaskService, private route: ActivatedRoute) {
+     constructor(
+         private taskService: TaskService,
+         private router: Router,
+
+         private route: ActivatedRoute) {
      }
 
      ngOnInit() {
@@ -187,16 +191,16 @@ ngOnInit() {
 
 </Steps>
 
-## Let's test it out
+## Testez-le
 
 <Steps>
-1. Click on the 'Update' button next to a task in the list.
-2. The form should be populated with the task to update.
+1. Cliquez sur le bouton `Mettre à jour` à côté d'une tâche dans la liste.
+2. Le formulaire doit être rempli avec la tâche à mettre à jour.
 </Steps>
 
-## ✔️ What you learned
+## ✔️ Ce que vous avez appris
 
-In this chapter, you learned how to update the **TaskFormComponent** to populate the form with the task to update. You learned how to retrieve the task to update from the **TaskService** based on the **id** available in the route.
+Dans ce chapitre, vous avez appris à mettre à jour **TaskFormComponent** pour remplir le formulaire avec la tâche à mettre à jour. Vous avez appris à récupérer la tâche à partir du **TaskService** en fonction du **id** disponible dans la route.
 
 
 
