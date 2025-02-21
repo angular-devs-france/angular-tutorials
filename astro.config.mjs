@@ -27,26 +27,26 @@ export default defineConfig({
           items: [
             {
               label: "Introduction",
-              link: "/practical-course/introduction",
+              link: "/legacy-course/introduction",
             },
             {
               label: "Learning process",
-              link: "/practical-course/learning-process",
+              link: "/legacy-course/learning-process",
               translations: { fr: "Processus d'apprentissage" },
             },
             {
               label: "Prerequisites",
-              link: "/practical-course/prerequisites",
+              link: "/legacy-course/prerequisites",
               translations: { fr: "Pré-requis" },
             },
             {
               label: "TypeScript introduction",
-              link: "/practical-course/typescript-introduction",
+              link: "/legacy-course/typescript-introduction",
               translations: { fr: "Introduction à TypeScript" },
             },
             {
               label: "Getting started",
-              link: "/practical-course/getting-started",
+              link: "/legacy-course/getting-started",
               translations: { fr: "C'est parti !" },
             },
             {
@@ -58,46 +58,46 @@ export default defineConfig({
               items: [
                 {
                   label: "Add an UI Library",
-                  link: "/practical-course/task-listing/add-ui-library",
+                  link: "/legacy-course/task-listing/add-ui-library",
                   translations: {
                     fr: "Ajout d'une librairie UI",
                   },
                 },
                 {
                   label: "Components introduction",
-                  link: "/practical-course/task-listing/components-introduction",
+                  link: "/legacy-course/task-listing/components-introduction",
                   translations: {
                     fr: "Introduction sur les composants",
                   },
                 },
                 {
                   label: "Create your first component",
-                  link: "/practical-course/task-listing/create-first-component",
+                  link: "/legacy-course/task-listing/create-first-component",
                   translations: {
                     fr: "Créez votre premier composant",
                   },
                 },
                 {
                   label: "Create the task interface",
-                  link: "/practical-course/task-listing/task-interface",
+                  link: "/legacy-course/task-listing/task-interface",
                   translations: {
                     fr: "Créez l'interface des tâches",
                   },
                 },
                 {
                   label: "Display the list",
-                  link: "/practical-course/task-listing/display-list",
+                  link: "/legacy-course/task-listing/display-list",
                   translations: {
                     fr: "Afficher la liste",
                   },
                 },
                 {
                   label: "Interpolation",
-                  link: "/practical-course/task-listing/interpolation",
+                  link: "/legacy-course/task-listing/interpolation",
                 },
                 {
                   label: "Pipes",
-                  link: "/practical-course/task-listing/pipes",
+                  link: "/legacy-course/task-listing/pipes",
                 },
               ],
             },
@@ -110,77 +110,77 @@ export default defineConfig({
               items: [
                 {
                   label: "Create form component",
-                  link: "/practical-course/create-task/create-form-component",
+                  link: "/legacy-course/create-task/create-form-component",
                   translations: {
                     fr: "Créez un composant dédié",
                   },
                 },
                 {
                   label: "Routing introduction",
-                  link: "/practical-course/create-task/routing-introduction",
+                  link: "/legacy-course/create-task/routing-introduction",
                   translations: {
                     fr: "Introduction au routage",
                   },
                 },
                 {
                   label: "HTML form",
-                  link: "/practical-course/create-task/html-form",
+                  link: "/legacy-course/create-task/html-form",
                   translations: {
                     fr: "Formulaire HTML",
                   },
                 },
                 {
                   label: "Form binding",
-                  link: "/practical-course/create-task/form-binding",
+                  link: "/legacy-course/create-task/form-binding",
                   translations: {
                     fr: "Liaison du formulaire",
                   },
                 },
                 {
                   label: "Event binding",
-                  link: "/practical-course/create-task/event-binding",
+                  link: "/legacy-course/create-task/event-binding",
                   translations: {
                     fr: "Liaison d'évènements",
                   },
                 },
                 {
                   label: "Angular service",
-                  link: "/practical-course/create-task/angular-service",
+                  link: "/legacy-course/create-task/angular-service",
                   translations: {
                     fr: "Service Angular",
                   },
                 },
                 {
                   label: "Dependency injection",
-                  link: "/practical-course/create-task/dependency-injection",
+                  link: "/legacy-course/create-task/dependency-injection",
                   translations: {
                     fr: "Injection de dépendances",
                   },
                 },
                 {
                   label: "Add task in service",
-                  link: "/practical-course/create-task/add-task-service",
+                  link: "/legacy-course/create-task/add-task-service",
                   translations: {
                     fr: "Ajoutez une tâche via le service",
                   },
                 },
                 {
                   label: "Inject service in form",
-                  link: "/practical-course/create-task/inject-service-form",
+                  link: "/legacy-course/create-task/inject-service-form",
                   translations: {
                     fr: "Injectez le service",
                   },
                 },
                 {
                   label: "Programmatical routing",
-                  link: "/practical-course/create-task/programmatical-routing",
+                  link: "/legacy-course/create-task/programmatical-routing",
                   translations: {
                     fr: "Routage avancé",
                   },
                 },
                 {
                   label: "Component destruction",
-                  link: "/practical-course/create-task/component-destruction",
+                  link: "/legacy-course/create-task/component-destruction",
                   translations: {
                     fr: "Destruction du composant",
                   },
@@ -194,17 +194,17 @@ export default defineConfig({
               items: [
                 {
                   label: "Update task route",
-                  link: "/practical-course/update-task/update-task-route",
+                  link: "/legacy-course/update-task/update-task-route",
                   translations: { fr: "Naviguez avec panache !" },
                 },
                 {
                   label: "Update form",
-                  link: "/practical-course/update-task/update-task-form",
+                  link: "/legacy-course/update-task/update-task-form",
                   translations: { fr: "Formulaire de mise à jour" },
                 },
                 {
                   label: "Submit update form",
-                  link: "/practical-course/update-task/submit-update-form",
+                  link: "/legacy-course/update-task/submit-update-form",
                   translations: {
                     fr: "Soumettez le formulaire de mise à jour",
                   },
@@ -220,21 +220,21 @@ export default defineConfig({
               items: [
                 {
                   label: "Add delete function",
-                  link: "/practical-course/delete-task/add-delete-function",
+                  link: "/legacy-course/delete-task/add-delete-function",
                   translations: {
                     fr: "Ajouter la fonction supprimer",
                   },
                 },
                 {
                   label: "Add delete button",
-                  link: "/practical-course/delete-task/add-delete-button",
+                  link: "/legacy-course/delete-task/add-delete-button",
                   translations: {
                     fr: "Ajouter le bouton supprimer",
                   },
                 },
                 {
                   label: "Add empty list",
-                  link: "/practical-course/delete-task/add-empty-list",
+                  link: "/legacy-course/delete-task/add-empty-list",
                   translations: {
                     fr: "Si liste vide",
                   },
@@ -248,32 +248,32 @@ export default defineConfig({
               items: [
                 {
                   label: "JSON server installation",
-                  link: "/practical-course/api-server/json-server-installation",
+                  link: "/legacy-course/api-server/json-server-installation",
                   translations: { fr: "Installation de JSON server" },
                 },
                 {
                   label: "Add HTTP client",
-                  link: "/practical-course/api-server/add-http-client",
+                  link: "/legacy-course/api-server/add-http-client",
                   translations: { fr: "Ajoutez HTTP Client" },
                 },
                 {
                   label: "Retrieve tasks",
-                  link: "/practical-course/api-server/retrieve-tasks",
+                  link: "/legacy-course/api-server/retrieve-tasks",
                   translations: { fr: "Récupérez la liste des tâches" },
                 },
                 {
                   label: "Create task",
-                  link: "/practical-course/api-server/create-task",
+                  link: "/legacy-course/api-server/create-task",
                   translations: { fr: "Modifiez la création" },
                 },
                 {
                   label: "Update task",
-                  link: "/practical-course/api-server/update-task",
+                  link: "/legacy-course/api-server/update-task",
                   translations: { fr: "Modifiez la mise à jour" },
                 },
                 {
                   label: "Delete task",
-                  link: "/practical-course/api-server/delete-task",
+                  link: "/legacy-course/api-server/delete-task",
                   translations: { fr: "Modifiez la suppression" },
                 },
               ],
