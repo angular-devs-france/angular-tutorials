@@ -109,13 +109,6 @@ export default defineConfig({
                   label: "Pipes",
                   link: "/practical-course/task-listing/pipes",
                 },
-                // {
-                //   label: '🏁 Display review',
-                //   link: '/practical-course/task-listing/read-interlude',
-                //   attrs: {
-                //     style: 'font-weight: bold'
-                //   }
-                // }
               ],
             },
             {
