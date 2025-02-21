@@ -10,57 +10,8 @@ hero:
   actions:
     - text: Introduction Course
       link: /legacy-course/introduction
-      icon: right-arrow
       variant: primary
     - text: Introduction Course
       link: /legacy-course/introduction
-      icon: legacy-arrow
       variant: primary
 ---
-
-import { Icon } from "@astrojs/starlight/components";
-import { Image } from "astro:assets";
-import oldAngularLogo from "../../../assets/angular-logo-old.png";
-import angularLogo from "../../../assets/angular-logo.png";
-
-<ul class="flex flex-col md:flex-row md:items-stretch items-center gap-12 list-none !p-0 md:!mt-16">
-  <li class="flex flex-col justify-start items-center gap-4 p-6 max-w-80 !m-0 w-full">
-    <Image src={oldAngularLogo} alt="Legacy Angular" height={200} width={200} />
-    <h4 class="text-center !mt-0">Legacy Angular introduction course</h4>
-    <span class="rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">
-      Free
-    </span>
-    <p class="text-center flex-1">
-      Crafted for people learning Angular to{" "}
-      <span class="font-bold">onboard on professionals projects</span> using v14
-      or below
-    </p>
-    <a
-      class="!bg-zinc-300 !text-black font-bold px-4 py-2 rounded-xl uppercase no-underline"
-      href="foo"
-    >
-      Upcoming
-    </a>
-  </li>
-  <hr
-    style="border: 1px solid gray !important "
-    class="!h-0 md:!h-60 !w-60 md:!w-0"
-  />
-  <li class="flex flex-col justify-start items-center gap-4 p-6 max-w-80 !m-0 w-full">
-    <Image src={angularLogo} alt="Legacy Angular" height={200} width={200} />
-    <h4 class="text-center !mt-0">Modern Angular introduction course</h4>
-    <span class="rounded border border-accent-900 dark:border-accent-400 text-accent-900 dark:text-accent-400 px-2">
-      Free
-    </span>
-    <p class="text-center flex-1">
-      Discover Angular with <span class="font-bold">latest released</span>{" "}
-      features. Maintained to keep you up to date!
-    </p>
-    <a
-      class="!bg-zinc-300 !text-black font-bold px-4 py-2 rounded-xl uppercase no-underline"
-      href="foo"
-    >
-      Upcoming
-    </a>
-  </li>
-</ul>

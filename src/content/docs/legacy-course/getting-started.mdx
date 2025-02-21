@@ -4,10 +4,10 @@ description: How to get started with Angular
 ---
 
 import { Image } from "astro:assets";
-import boilerplateImg from "../../../../assets/getting-started_boilerplate.png";
-import headerImg from "../../../../assets/getting-started_header.png";
+import boilerplateImg from "../../../assets/getting-started_boilerplate.png";
+import headerImg from "../../../assets/getting-started_header.png";
 import { Steps } from "@astrojs/starlight/components";
-import Objective from "../../../../components/learning-objective.astro";
+import Objective from "../../../components/learning-objective.astro";
 
 <Objective
   class="drop-shadow-xl"
@@ -45,7 +45,7 @@ Angular provides a Command Line Interface (CLI) to generate a new Angular applic
         npm create @angular/cli@17.0.0 angular-introduction-course --standalone=false --style=css --ssr=false --skip-tests=true
         ```
 
-    </Steps>
+</Steps>
 
 :::tip
 The command includes some options to **facilitate the learning process**.
@@ -81,7 +81,7 @@ The Angular CLI provides a command to launch the application locally.
 
         <Image class="shadow-xl rounded-xl" src={boilerplateImg} alt="A bird sitting on a nest of eggs."/>
 
-    </Steps>
+</Steps>
 
 ## Hot Reloading
 
@@ -104,4 +104,4 @@ Hot reloading is a feature that allows you to see the changes you make to your c
 
         <Image class="shadow-xl rounded-xl" src={headerImg} alt="A bird sitting on a nest of eggs."/>
 
-    </Steps>
+</Steps>
