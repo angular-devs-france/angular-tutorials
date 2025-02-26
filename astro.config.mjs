@@ -19,6 +19,7 @@ export default defineConfig({
       social: {
         linkedin: "https://www.linkedin.com/company/98390019",
         twitter: "https://x.com/AngularDevsFr",
+        github: "https://github.com/angular-devs-france/angular-tutorials",
       },
       sidebar: [
         {
