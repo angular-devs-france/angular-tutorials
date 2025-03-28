@@ -18,10 +18,7 @@ Angular features will be introduced as needed.
 - <a href="/fr/legacy-course/task-listing/display-overview" target="_blank">
     Create a task list
   </a>
-- <a
-    href="/fr/legacy-course/create-task/create-task-overview"
-    target="_blank"
-  >
+- <a href="/fr/legacy-course/create-task/create-task-overview" target="_blank">
     Add a task
   </a>
 - <a href="/fr/legacy-course/update-task/update-overview" target="_blank">
@@ -87,7 +84,7 @@ In Visual Studio Code, you can open a terminal by clicking on the `Terminal` men
 Most lessons contain code snippets as examples to help you accomplish the action.
 The course content uses a specific style to highlight code changes, for example:
 
-```html ins={"Add the event binding to create the task": 8-9} ins="(click)="createTask()""
+```html ins={"Add the event binding to create the task": 9-10} ins="(click)="createTask()""
 // task-form.component.html
 <form>
   <label for="title" class="form-label">Title:</label>
@@ -96,6 +93,7 @@ The course content uses a specific style to highlight code changes, for example:
     id="title"
     name="title"
     class="form-control"
+
     [(ngModel)]="task.title"
   />
 

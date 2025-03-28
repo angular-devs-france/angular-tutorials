@@ -30,7 +30,7 @@ Think of the human body:
 
 - The HTML file represents the bones: it's the structure;
 - The TypeScript file represents the brain and muscles: it's the logic;
-- The CSS file is the person's appearance: how it will look.
+- The CSS file is the person's appearance: it'll look handsome if you're good at it!
 
 Each of these files is part of the component.
 

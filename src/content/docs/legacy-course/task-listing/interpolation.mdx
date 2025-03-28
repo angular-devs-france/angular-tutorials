@@ -19,15 +19,13 @@ import Objective from "../../../../components/learning-objective.astro";
 />
 
 You are now iterating through the **tasks** array but displaying a static **Task** value.
-Now what? You want to dynamically display the latest version of the task instead.
+Now what? You want to dynamically display the content of each single task instead.
 
 ## What is interpolation?
 
 Interpolation is the solution for evaluating a JavaScript expression in the HTML Template.
-While some of your HTML content may be static, you might want to display dynamic data in your view.
+While some of your HTML content may be static, you'll have to display dynamic data in your view in some situations.
 This allows us to display the value of a property defined in the `component.ts` file in the HTML Template.
-
-Here's your desired situation: display the details of each task!
 
 You'll use the `{{ }}` delimiters to identify the expression to evaluate.
 You can use any valid TypeScript expression between these interpolation delimiters.
@@ -58,6 +56,7 @@ You can use any valid TypeScript expression between these interpolation delimite
      </thead>
      <tbody>
        <tr *ngFor="let task of tasks">
+       
          <td>{{ task.title }}</td>
          <td>{{ task.createdAt }}</td>
          <td></td>

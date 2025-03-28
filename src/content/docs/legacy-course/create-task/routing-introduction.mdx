@@ -24,15 +24,17 @@ import Objective from "../../../../components/learning-objective.astro";
 ## What is routing?
 
 Routing is the process of determining what content to display based on the browser's URL.
-Angular is a Single Page Application (SPA) framework. By changing the URL, the application can display different content without reloading the page.
-It provides a **Router** API to modify content based on the URL.
+Angular is a Single Page Application (SPA) framework. By using the Router API, the application can display different content without completely reloading the page.
 
-The project currently displays a list of tasks.
-In order to add a new task to this list, you need to be able to switch from the list view to the form view.
+The project currently only displays the **TaskListComponent**.
+The Router will enable switching between this component and the new **TaskFormComponent**.
+
+The Router API is provided by the `@angular/forms` package.
+It's installed in any new Angular project by default and you cand find it in the pckage.json file.
 
 ## Router-outlet directive
 
-The **RouterModule** provides a directive called `router-outlet`. This directive is used to display the content of the current route. When the user navigates to a different route, the content of the `router-outlet` is replaced with the content of the new route.
+The **Router** API provides a directive called `router-outlet`. outed content will be displayed. When the user navigates to a different route, the content of the `router-outlet` is replaced with the content of the new route.
 The `router-outlet` directive's only role is to mark the location in the HTML Template where the content corresponding to the URL you defined will be displayed.
 
 ### 🎓 Instructions
@@ -45,11 +47,12 @@ The `router-outlet` directive's only role is to mark the location in the HTML Te
    </header>
 
    <main class="container pt-4">
+
      <router-outlet />
    </main>
    ```
 
-In the above case, the `router-outlet` is placed between the `<main>` tags. This means that you will continue to have the `<header>` on all pages and the configured content will change based on the URL you navigate to.
+In the above case, the `router-outlet` is placed between the `<main>` tags. This means that you will continue to display the `<header>` on top of all pages and the configured content will change based on the URL you navigate to.
 
 ## Define routes
 

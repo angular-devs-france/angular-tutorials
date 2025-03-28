@@ -26,7 +26,7 @@ This course is for developers with basic knowledge of HTML, CSS, and JavaScript 
 
 :::caution
 This course was designed with **Angular v14** and does not cover the latest versions.
-It is intended to help beginners integrate into older Angular projects. Excellent features have been added to Angular since v14, but they have a different impact on how applications are built.
+It is intended to help beginners onboarded on older Angular projects. Awesome features have been added to Angular since v14, but they impact applications in a way a dedicated course will be more appropriate.
 Our goal is to help you feel comfortable integrating into older projects.
 
 **We will soon publish a new course for the latest version of Angular.**
